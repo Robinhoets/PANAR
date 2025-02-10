@@ -1,6 +1,7 @@
 from sec_api import QueryApi
 import pprint
-queryApi = QueryApi(api_key="b23563a33d441ac011d21261a3683369f5c26cd471d95664e3b35d2ff439e49f")
+from secret import secret
+queryApi = QueryApi(api_key=secret.get_secret())
 
 query = {
   "query": "ticker:TSLA AND filedAt:[2020-01-01 TO 2020-12-31] AND formType:\"10-Q\"",
