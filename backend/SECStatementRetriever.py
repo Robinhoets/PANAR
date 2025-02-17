@@ -39,6 +39,7 @@ class Company():
     def __init__(self, ticker):
         self.ticker = ticker
         self.cik = self.findCik()
+        self.companyFacts = self.getCompanyFacts()
 
     def findCik(self):
         cikRow = tickerDf[tickerDf['Ticker'] == self.ticker]
@@ -47,11 +48,20 @@ class Company():
     
     def getCik(self):
         return self.cik 
+    
+    def findCompanyFacts(self):
+        companyFacts = requests.get(
+            f'https://data.sec.gov/api/xbrl/companyfacts/CIK{self.cik}.json',
+            headers={'User-Agent': self.email})
+        companyFacts = companyFacts.json()
+        return companyFacts
 
 #Main
 #Nesecary data that each instance of company class shares
 email = "anthonytaylor@ufl.edu"
 tickerDf = getCIKs()
 
-#Comapny
+#Company
 intc = Company("INTC")
+
+
