@@ -10,6 +10,7 @@ import unicodedata
 import json
 from matplotlib import pyplot as plt
 from pathlib import Path
+#import ace_tools as tools
 
 email = ""
 
@@ -34,12 +35,11 @@ def getCIKs():
     
 class Company():
     
-    #2023 is the year that the program will start loading in financial reports, this can be changed to any year but it takes a very long time to 
-    #import all the data
+    #Class that represents each comapny which contains raw data and financial statements 
     def __init__(self, ticker):
         self.ticker = ticker
         self.cik = self.findCik()
-        self.companyFacts = self.getCompanyFacts()
+        self.companyFacts = self.retrieveCompanyFacts()
 
     def findCik(self):
         cikRow = tickerDf[tickerDf['Ticker'] == self.ticker]
@@ -49,19 +49,93 @@ class Company():
     def getCik(self):
         return self.cik 
     
-    def findCompanyFacts(self):
+    def retrieveCompanyFacts(self):
+        """
+        This function retrieves the company facts 
+        """
         companyFacts = requests.get(
             f'https://data.sec.gov/api/xbrl/companyfacts/CIK{self.cik}.json',
-            headers={'User-Agent': self.email})
+            headers={'User-Agent': email})
         companyFacts = companyFacts.json()
-        return companyFacts
+        return companyFacts['facts']['us-gaap']
+    
+    def displayLineItemNames(self):
+        for lineItem in self.companyFacts.keys():
+            print(lineItem)
+                              
+def createItemDict(companyFacts, keys):
+    '''
+    use regex to form condensed dictionary of just income statement items 
+    '''
+    dict = {}
+    #Search each possible keyWord with each item in the data until match is found
+    keys = [re.compile(key) for key in keys]
+    for keyWord in keys:
+        for key in companyFacts:
+            if keyWord.search(key):
+                dict[key] = companyFacts[key]
+    return dict
+
+def consolidateDict(revenueDict):
+    '''
+    Consolidate multiple Dictionary entries into one by choosing the longest and most reliable entries
+    '''
+    return revenueDict  
+
+def createItemRow(companyFacts, keys):
+    '''
+    Convert item dict to item row
+    '''
+    itemDict = createItemDict(companyFacts, keys)
+    itemDict = consolidateDict(itemDict)
+    #chnage name to revenue
+    keyWord = list(itemDict.keys())[0]
+    itemList = itemDict[keyWord]['units']['USD']
+    #create start dates, end dates, values lists
+    startList = []
+    endList = []
+    valList = []
+    for i in itemList:
+        startList.append(i['start'])
+        endList.append(i['end'])
+        valList.append(i['val'])
+    #create dataframe
+    itemRow = {
+        'start' : startList,
+        'end' : endList,
+        'Revenue' : valList
+    }
+    itemRow = pd.DataFrame(itemRow)
+    return itemRow.T
 
 #Main
 #Nesecary data that each instance of company class shares
-email = "anthonytaylor@ufl.edu"
+email = "tonytaylor25@yahoo.com"
 tickerDf = getCIKs()
 
 #Company
 intc = Company("INTC")
 
+#list line items
+#intc.displayLineItemNames()
 
+#Line item keywords
+Revenue = [r"Revenues", r"SalesRevenueNet"] 
+COGS = [r"CostOfGoodsSold", r'CostOfRevenue', r'CostOfGoodsAndServicesSold']
+GrossProfit = [r"GrossProfit"]
+OperatingExpenses = [r"[Oo]perating[Ee]xpenses"]
+NetIncome = [r"\b[Nn]et[Ii]ncome[Ll]oss"]
+
+#get item row from companyfacts
+Revenue = createItemRow(intc.companyFacts, Revenue)
+COGS = createItemRow(intc.companyFacts, COGS)
+GrossProfit = createItemRow(intc.companyFacts, GrossProfit)
+OperatingExpenses = createItemRow(intc.companyFacts, OperatingExpenses)
+NetIncome = createItemRow(intc.companyFacts, NetIncome)
+print(Revenue)
+print(COGS)
+print(GrossProfit)
+print(OperatingExpenses)
+print(NetIncome)
+
+Revenue.to_csv('output.csv', index=False)
