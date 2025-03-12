@@ -2,7 +2,7 @@
 beaapi?
 
     -GDP*
-    -GDP by industry*: 
+    -GDP by industry*:          [done]
     -Consumer Spending*: 
     -Personal income*
     -Personal Savings Rate*
@@ -68,9 +68,7 @@ class Bea:
         
         list_of_param_vals = beaapi.get_parameter_values(key, 'GDPbyIndustry', 'Industry')
         industry_code = list_of_param_vals['Key']
-        tmp=industry_code[73:]
-        # for code in industry_code:
-        for code in tmp:
+        for code in industry_code:
             print(code)
             row = [code]
             for year in years:
