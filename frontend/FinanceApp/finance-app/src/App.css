@@ -43,7 +43,8 @@
 
 .header {  
   position: relative;
-  bottom: 350px;
+  bottom: 200px;
+  scale: 1.5
 }
 
 .startBtn{
@@ -55,4 +56,13 @@
   text-decoration: none;
   display: inline-block;
   font-size: 24px;
+}
+
+table, th, td {
+  border: 1px solid;
+  border-collapse: collapse;
+}
+
+p, h3{
+  text-align: left;
 }
