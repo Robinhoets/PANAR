@@ -13,7 +13,10 @@ from pathlib import Path
 #import ace_tools as tools
 
 email = ""
-
+'''
+class year_and_quarter():
+    def __init__(self, year, ) -> None:
+'''
 def getCIKs():
     """
     This function retrieves all the tickers on the SEC website and returns them in a dataframe
@@ -59,7 +62,7 @@ class Company():
         companyFacts = companyFacts.json()
         return companyFacts['facts']['us-gaap']
     
-    def displayLineItemNames(self):
+    def display_all_lineitem_names(self):
         for lineItem in self.companyFacts.keys():
             print(lineItem)
                               
@@ -108,7 +111,6 @@ def createItemRow(companyFacts, keys):
     itemRow = pd.DataFrame(itemRow)
     return itemRow.T
 
-#seperate functions that clean dataframe
 def within_10_days(date1, date2):
     """
     Returns True if date1 and date2 (datetime-like) differ by at most 10 days
@@ -138,18 +140,7 @@ def within_10_days(date1, date2):
     
     return min_diff <= 10
 
-def pop_one_years_worth(df):
-    #min_date has to be the start date of a quarter 1
-    min_date = df['start_date'].min()
-    #Get all entries in the same year
 
-    first_end_date = df.loc[df['start_date'] == min_date, 'end_date'].iloc[0]
-    first_end_date = pd.to_datetime(first_end_date)
-    year = first_end_date.year
-
-    entries_within_year = df[df['end_date'].dt.year == year]
-    df = df[df['end_date'].dt.year != year]
-    return df, entries_within_year
 
 def check_Q_list(df_row):
     if((df_row['start_date'].month == 1 or df_row['start_date'].month == 12)):
@@ -176,6 +167,8 @@ def check_Q_list(df_row):
     elif(df_row['start_date'].month == 9 or df_row['start_date'].month == 10):
         if(df_row['end_date'].month == 12):
             return [4]
+    else:
+        raise ValueError("Non standard quarters")
         
 def index_df_by_q_column(quarter_entries, quarter_list):
     df_out = quarter_entries.iloc[0:0]
@@ -227,8 +220,33 @@ def clear_non_quarters(entries_for_FY):
     entries_for_FY = entries_for_FY[entries_for_FY['quarter_list'].apply(lambda x: len(x) == 1)]
     return entries_for_FY
 
-def drop_duplicates(quarter_entries):
+def drop_duplicates_quarter_entries(quarter_entries):
     df_out = quarter_entries.iloc[0:0]
+    four_quarter_list = [[1], [2], [3], [4]]
+    for q in four_quarter_list:
+        for index in range(0, len(quarter_entries)):
+            if(quarter_entries.iloc[index]['quarter_list'] == q):
+                df_out = pd.concat([df_out, quarter_entries.iloc[index].to_frame().T], ignore_index=True)
+                break
+    return df_out
+
+def drop_duplicate_entries_based_on_qlist(quarter_entries):
+    list_of_qlist_presences = []
+    present = False
+    for index in range(0, len(quarter_entries)):
+        for qlist in list_of_qlist_presences:
+            if(quarter_entries.loc[index, 'quarter_list'] == qlist):
+                present = True
+                break
+        if(not present):
+            list_of_qlist_presences.append(quarter_entries.loc[index, 'quarter_list'])
+        if(present):
+            quarter_entries.drop(index=index, inplace=True)
+            present = False
+            continue
+    return quarter_entries
+        
+
     four_quarter_list = [[1], [2], [3], [4]]
     for q in four_quarter_list:
         for index in range(0, len(quarter_entries)):
@@ -250,7 +268,7 @@ def convert_year_to_quarters(entries_for_FY):
         "value": [avg_item, avg_item, avg_item, avg_item],
         "quarter_list": [[1], [2], [3], [4]]
     }
-    return df_out
+    return pd.DataFrame(df_out)
 
 def convert_two_quaters_to_one(entries_for_FY, q):
     #intialize empty df
@@ -278,13 +296,15 @@ def convert_two_quaters_to_one(entries_for_FY, q):
             df_out = pd.concat([df_out, df_pre_out], ignore_index=True)
             return df_out
 
-def quarterly_df(entries_for_FY):
+def consolidate_one_FY(entries_for_FY):
+    entries_for_FY = entries_for_FY.reset_index(drop=True)
+    entries_for_FY = drop_duplicate_entries_based_on_qlist(entries_for_FY)
     one_quarter_entries = get_n_sized_quarter_entries(entries_for_FY, 1)
     print("one quarter entries")
-    print(one_quarter_entries)
+    print(one_quarter_entries, '\n')
     two_quarter_entries = get_n_sized_quarter_entries(entries_for_FY, 2)
     print("two quarter entries")
-    print(two_quarter_entries)
+    print(two_quarter_entries, '\n')
     if(len(one_quarter_entries) == 0):
         df_out = convert_year_to_quarters(entries_for_FY)
         return df_out
@@ -293,18 +313,21 @@ def quarterly_df(entries_for_FY):
         for i in range(0, len(one_quarter_entries)):
             q = one_quarter_entries['quarter_list'].iloc[i][0]
             df_out = convert_two_quaters_to_one(df_out, q)
-        return quarterly_df(df_out)
-    elif(len(one_quarter_entries) >= 3):
+        return consolidate_one_FY(df_out)
+    elif(len(one_quarter_entries) == 3):
         df_out = entries_for_FY
         year_entry = get_n_sized_quarter_entries(entries_for_FY, 4)
-        year = year_entry["end_date"].values[0].year
+        if(len(year_entry) == 0):
+            return one_quarter_entries
+        else:
+            year = year_entry["end_date"].values[0].year
         new_q_value = year_entry['value'][0]
         #delete year
         df_out = df_out[df_out['value'] != new_q_value]
         #clear non quarters
         df_out = clear_non_quarters(df_out)
         df_out = df_out.drop_duplicates(subset='value')
-        df_out = drop_duplicates(df_out)
+        df_out = drop_duplicates_quarter_entries(df_out)
         four_quarter_list = [[1], [2], [3], [4]]
         for q in df_out['quarter_list']:
             four_quarter_list.remove(q)
@@ -314,53 +337,93 @@ def quarterly_df(entries_for_FY):
         q_entry = create_df_for_quarter(year, new_q, new_q_value)
         df_out = pd.concat([df_out, q_entry], ignore_index=True)
         return df_out.sort_values(by='start_date').reset_index(drop=True)
+    elif(len(one_quarter_entries) == 4):
+        return one_quarter_entries
 
-def consolidate_into_quarters(raw_historical_statements):
+def pop_one_FY(df):
+    #min_date has to be the start date of a quarter 1
+    min_date = df['start_date'].min()
+    #Get all entries in the same year
+
+    first_end_date = df.loc[df['start_date'] == min_date, 'end_date'].iloc[0]
+    first_end_date = pd.to_datetime(first_end_date)
+    year = first_end_date.year
+
+    entries_within_year = df[df['end_date'].dt.year == year]
+    df = df[df['end_date'].dt.year != year]
+    return df, entries_within_year
+
+def consolidate_all_FY(all_entries):
+    '''
+    Function takes dataframe containing all historical quarterly, two-quarterly, three-quarterly, and annual filing entries for a single line item of a company
+    and converts it into a dataframe containing non-redundent quarterly entries of the line item
+    '''
     #Get Dataeframe ready
     #convert to datetime
-    raw_historical_statements['start_date'] = pd.to_datetime(raw_historical_statements['start_date'])
-    raw_historical_statements['end_date']   = pd.to_datetime(raw_historical_statements['end_date'])
-    #Sort
-    raw_historical_statements.drop_duplicates(inplace=True)
-    raw_historical_statements = raw_historical_statements.sort_values(
+    all_entries['start_date'] = pd.to_datetime(all_entries['start_date'])
+    all_entries['end_date']   = pd.to_datetime(all_entries['end_date'])
+    print("All entries")
+    print(all_entries, "\n")
+    #Sort by filing date and drop duplicate entries
+    all_entries.drop_duplicates(inplace=True)
+    all_entries = all_entries.sort_values(
         by=['start_date', 'end_date'],
         ascending=[True, True]
     ).reset_index(drop=True)
-    historical_statements = raw_historical_statements.iloc[0:0]
-    print(raw_historical_statements)
-    raw_historical_statements, entries_for_FY = pop_one_years_worth(raw_historical_statements)
-    while(len(raw_historical_statements) > 4):
-        raw_historical_statements, entries_for_FY = pop_one_years_worth(raw_historical_statements)
-
-        #add qlists
+    #new empty dataframe to put consolidated FY entries into
+    consolidated_entries = all_entries.iloc[0:0]
+        #print all given entries 
+        #print(raw_historical_statements)
+    #pops/removes a FY of entries from all_entries
+        #TODO: this logic needs to be changed as to not waste the first parital/full FY of entries  
+    all_entries, entries_for_FY = pop_one_FY(all_entries)
+    #loop will greater than 4 entries remain in all_entries 
+        #TODO: this logic needs to be changed to include a final FY which is a partial FY 
+    while(len(all_entries) > 4):
+        #pops/removes a FY of entries from all_entries
+        all_entries, entries_for_FY = pop_one_FY(all_entries)
+        #add qlists data struture as a column
         entries_for_FY["quarter_list"] = entries_for_FY.apply(check_Q_list, axis=1)
+        
+        print("pre-consolidated entries for FY ")
+        print(entries_for_FY, '\n')
+        #consolidate FY entries of varying quarter size into 4, 1 quarter entries
+        consolidated_entries_for_FY = consolidate_one_FY(entries_for_FY)
+        print("consolidated entries for FY(4 X 1 quarter entries) for FY ")
+        print(consolidated_entries_for_FY)
+        print("-------------------------------------------------------\n")
+        print("-------------------------------------------------------")
+        
+        #add one FY of consolidated entries to the consolidated entries dataframe
+        consolidated_entries = pd.concat([consolidated_entries, consolidated_entries_for_FY], ignore_index=True)
+        print(consolidated_entries)
+        print(all_entries)
+    #return all consolidated FY's by the loop   
+    return consolidated_entries
 
-    
-        print(entries_for_FY)
-        print("start")
-        entries_for_FY = quarterly_df(entries_for_FY)
-        print("end")
-        print(entries_for_FY)
-
-        historical_statements = pd.concat([historical_statements, entries_for_FY], ignore_index=True)
-    return historical_statements
-
-def merge(statement, lineitem2):
-    value_name = lineitem2.columns[2]
+def add_lineitem_to_statement(statement, lineitem):
+    '''
+    Merges line item into statement
+    '''
+    #create new column in statement for the line item to be added
+    value_name = lineitem.columns[2]
     statement[value_name] = pd.NA
+    #loops through each row of line item value and ensures new line item value is added to correct year and quarter in statement
+        #TODO: fill in empty space as NA
     index1 = 0
     index2 = 0
-
-    while(index1 < len(statement) and index2 < len(lineitem2)):
-        if(statement['end_date'].iloc[index1].year == lineitem2['end_date'].iloc[index2].year):
-            if(statement['quarter_list'].iloc[index1] == lineitem2['quarter_list'].iloc[index2]):
-                statement[value_name].iloc[index1] = lineitem2[value_name].iloc[index2]
+    while(index1 < len(statement) and index2 < len(lineitem)):
+        if(statement.loc[index1, 'end_date'].year == lineitem.loc[index2, 'end_date'].year):
+            if(statement.loc[index1, 'quarter_list'] == lineitem.loc[index2, 'quarter_list']):
+                statement.loc[index1, value_name] = lineitem.loc[index2, value_name]
                 index1 += 1
                 index2 += 1
         else:
             return statement
     return statement
-    #add functionality to add the rest of the values
+
+
+
 #Main
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
@@ -369,10 +432,10 @@ email = "tonytaylor25@yahoo.com"
 tickerDf = getCIKs()
 
 #Company
-intc = Company("INTC")
+company = Company("CAT")
 
 #list line items
-#intc.displayLineItemNames()
+company.display_all_lineitem_names()
 
 #Line item keywords
 Revenue = [r"Revenues", r"SalesRevenueNet"] 
@@ -381,20 +444,30 @@ GrossProfit = [r"GrossProfit"]
 OperatingExpenses = [r"[Oo]perating[Ee]xpenses"]
 NetIncome = [r"\b[Nn]et[Ii]ncome[Ll]oss"]
 
+
+#Revenu for company
+'''
+Revenue = createItemRow(company.companyFacts, Revenue)
+Revenue = consolidate_all_FY(Revenue.T)
+Revenue = Revenue.rename(columns={'value': 'revenue'})
+print(Revenue)
+'''
+
+
 #get item row from companyfacts
-Revenue = createItemRow(intc.companyFacts, Revenue)
-COGS = createItemRow(intc.companyFacts, COGS)
-GrossProfit = createItemRow(intc.companyFacts, GrossProfit)
-OperatingExpenses = createItemRow(intc.companyFacts, OperatingExpenses)
-NetIncome = createItemRow(intc.companyFacts, NetIncome)
+Revenue = createItemRow(company.companyFacts, Revenue)
+COGS = createItemRow(company.companyFacts, COGS)
+GrossProfit = createItemRow(company.companyFacts, GrossProfit)
+OperatingExpenses = createItemRow(company.companyFacts, OperatingExpenses)
+NetIncome = createItemRow(company.companyFacts, NetIncome)
 
 
 
-Revenue = consolidate_into_quarters(Revenue.T)
-COGS = consolidate_into_quarters(COGS.T)
-GrossProfit = consolidate_into_quarters(GrossProfit.T)
-OperatingExpenses = consolidate_into_quarters(OperatingExpenses.T)
-NetIncome = consolidate_into_quarters(NetIncome.T)
+Revenue = consolidate_all_FY(Revenue.T)
+COGS = consolidate_all_FY(COGS.T)
+GrossProfit = consolidate_all_FY(GrossProfit.T)
+OperatingExpenses = consolidate_all_FY(OperatingExpenses.T)
+NetIncome = consolidate_all_FY(NetIncome.T)
 
 #unique item names
 Revenue = Revenue.rename(columns={'value': 'revenue'})
@@ -404,9 +477,39 @@ OperatingExpenses = OperatingExpenses.rename(columns={'value': 'operating_expens
 NetIncome = NetIncome.rename(columns={'value': 'net_income'})
 
 #merge lineitems
-statement = merge(Revenue, COGS)
-statement = merge(statement, GrossProfit)
-statement = merge(statement, OperatingExpenses)
-statement = merge(statement, NetIncome)
+statement = add_lineitem_to_statement(Revenue, COGS)
+statement = add_lineitem_to_statement(statement, GrossProfit)
+statement = add_lineitem_to_statement(statement, OperatingExpenses)
+statement = add_lineitem_to_statement(statement, NetIncome)
 
+statement['Quarter'] = statement.pop('quarter_list').apply(lambda x: x[0])
+
+
+#convert
+statement['start_date'] = pd.to_datetime(statement['start_date'])
+statement['end_date'] = pd.to_datetime(statement['end_date'])
+statement['start_date'] = statement['start_date'].dt.date
+statement['end_date'] = statement['end_date'].dt.date
+
+
+
+
+
+pd.set_option('display.width', None)
 print(statement.T)
+#statement.T.to_csv('statement.csv', index=False)
+
+#send income statement to frontend via json 
+'''
+statement['start_date'] = pd.to_datetime(statement['start_date'])
+statement['end_date'] = pd.to_datetime(statement['end_date'])
+statement['start_date'] = statement['start_date'].dt.strftime('%Y-%m-%d')
+statement['end_date'] = statement['end_date'].dt.strftime('%Y-%m-%d')
+
+json_data = {
+    "ticker": company.ticker,
+    "income_statement": statement.to_dict(orient='records')
+}
+with open('company.json', 'w') as f:
+    json.dump(json_data, f, indent=2)
+'''
