@@ -10,6 +10,7 @@ import unicodedata
 import json
 from matplotlib import pyplot as plt
 from pathlib import Path
+import csv
 #import ace_tools as tools
 
 email = ""
@@ -92,6 +93,8 @@ def createItemRow(companyFacts, keys):
     itemDict = createItemDict(companyFacts, keys)
     itemDict = consolidateDict(itemDict)
     #chnage name to revenue
+    if(itemDict == {}):
+        return pd.DataFrame()
     keyWord = list(itemDict.keys())[0]
     itemList = itemDict[keyWord]['units']['USD']
     #create start dates, end dates, values lists
@@ -358,6 +361,8 @@ def consolidate_all_FY(all_entries):
     Function takes dataframe containing all historical quarterly, two-quarterly, three-quarterly, and annual filing entries for a single line item of a company
     and converts it into a dataframe containing non-redundent quarterly entries of the line item
     '''
+    if(all_entries.empty):
+        return all_entries
     #Get Dataeframe ready
     #convert to datetime
     all_entries['start_date'] = pd.to_datetime(all_entries['start_date'])
@@ -396,8 +401,6 @@ def consolidate_all_FY(all_entries):
         
         #add one FY of consolidated entries to the consolidated entries dataframe
         consolidated_entries = pd.concat([consolidated_entries, consolidated_entries_for_FY], ignore_index=True)
-        print(consolidated_entries)
-        print(all_entries)
     #return all consolidated FY's by the loop   
     return consolidated_entries
 
@@ -405,6 +408,12 @@ def add_lineitem_to_statement(statement, lineitem):
     '''
     Merges line item into statement
     '''
+    print(statement)
+    print(lineitem)
+    if(statement.empty):
+        return lineitem
+    if(lineitem.empty):
+        return statement
     #create new column in statement for the line item to be added
     value_name = lineitem.columns[2]
     statement[value_name] = pd.NA
@@ -412,104 +421,175 @@ def add_lineitem_to_statement(statement, lineitem):
         #TODO: fill in empty space as NA
     index1 = 0
     index2 = 0
+    print(statement)
     while(index1 < len(statement) and index2 < len(lineitem)):
         if(statement.loc[index1, 'end_date'].year == lineitem.loc[index2, 'end_date'].year):
             if(statement.loc[index1, 'quarter_list'] == lineitem.loc[index2, 'quarter_list']):
                 statement.loc[index1, value_name] = lineitem.loc[index2, value_name]
-                index1 += 1
-                index2 += 1
+        if(statement.loc[index1, 'end_date'].year < lineitem.loc[index2, 'end_date'].year):
+            index1 += 1
+        elif(statement.loc[index1, 'end_date'].year > lineitem.loc[index2, 'end_date'].year):
+            index2 += 1
         else:
-            return statement
+            if(statement.loc[index1, 'quarter_list'][0] < lineitem.loc[index2, 'quarter_list'][0]):
+                index1 += 1
+            else:
+                index2 += 1
+       
+    
+    while(index2 < len(lineitem)):
+        #fill in empty space as NA
+        statement.loc[len(statement)] = [np.nan] * len(statement.columns)
+        statement.loc[index2, 'start_date'] = lineitem.loc[index2, 'start_date']
+        statement.loc[index2, 'end_date'] = lineitem.loc[index2, 'end_date']
+        statement.loc[index2, 'quarter_list'] = lineitem.loc[index2, 'quarter_list']
+        statement.loc[index2, value_name] = lineitem.loc[index2, value_name]
+        index2 += 1
     return statement
 
+def get_income_statement(ticker):
+    company = Company(ticker)
+    #list line items
+    company.display_all_lineitem_names()
+
+    #Line item keywords
+    Revenue = [r"Revenues", r"SalesRevenueNet"] 
+    COGS = [r"CostOfGoodsSold", r'CostOfRevenue', r'CostOfGoodsAndServicesSold']
+    GrossProfit = [r"GrossProfit"]
+    OperatingExpenses = [r"[Oo]perating[Ee]xpenses"]
+    NetIncome = [r"\b[Nn]et[Ii]ncome[Ll]oss"]
+
+    #get item row from companyfacts
+    Revenue = createItemRow(company.companyFacts, Revenue)
+    COGS = createItemRow(company.companyFacts, COGS)
+    GrossProfit = createItemRow(company.companyFacts, GrossProfit)
+    OperatingExpenses = createItemRow(company.companyFacts, OperatingExpenses)
+    NetIncome = createItemRow(company.companyFacts, NetIncome)
 
 
-#Main
+
+    Revenue = consolidate_all_FY(Revenue.T)
+    COGS = consolidate_all_FY(COGS.T)
+    GrossProfit = consolidate_all_FY(GrossProfit.T)
+    OperatingExpenses = consolidate_all_FY(OperatingExpenses.T)
+    NetIncome = consolidate_all_FY(NetIncome.T)
+
+    #unique item names
+    Revenue = Revenue.rename(columns={'value': 'revenue'})
+    COGS = COGS.rename(columns={'value': 'cogs'})
+    GrossProfit = GrossProfit.rename(columns={'value': 'gross_profit'})
+    OperatingExpenses = OperatingExpenses.rename(columns={'value': 'operating_expenses'})
+    NetIncome = NetIncome.rename(columns={'value': 'net_income'})
+    
+    statement = add_lineitem_to_statement(Revenue, COGS)
+    statement = add_lineitem_to_statement(statement, GrossProfit)
+    statement = add_lineitem_to_statement(statement, OperatingExpenses)
+    statement = add_lineitem_to_statement(statement, NetIncome)
+
+    statement['Quarter'] = statement.pop('quarter_list').apply(lambda x: x[0])
+    
+    #convert
+    statement['start_date'] = pd.to_datetime(statement['start_date'])
+    statement['end_date'] = pd.to_datetime(statement['end_date'])
+    statement['start_date'] = statement['start_date'].dt.strftime('%Y-%m-%d')
+    statement['end_date'] = statement['end_date'].dt.strftime('%Y-%m-%d')
+    
+    
+    statement["YearAndQuarter"] = statement["end_date"].apply(lambda x: datetime.strptime(x, "%Y-%m-%d").strftime("%Y")) + "Q" + statement["Quarter"].astype(str)
+    
+    return statement
+
+def statement_to_csv(statement):
+        statement.T.to_csv('statement.csv', index=False)
+        
+def statement_to_json(statement):
+    
+
+    json_data = {
+        "ticker": company.ticker,
+        "income_statement": statement.to_dict(orient='records')
+    }
+    with open('company.json', 'w') as f:
+        json.dump(json_data, f, indent=2)    
+
+def test_income_statement(ticker):
+    company = Company(ticker)
+    #list line items
+    company.display_all_lineitem_names()
+
+    #Line item keywords
+    Revenue = [r"Revenues", r"SalesRevenueNet"] 
+    COGS = [r"CostOfGoodsSold", r'CostOfRevenue', r'CostOfGoodsAndServicesSold']
+    GrossProfit = [r"GrossProfit"]
+    OperatingExpenses = [r"[Oo]perating[Ee]xpenses"]
+    NetIncome = [r"\b[Nn]et[Ii]ncome[Ll]oss"]
+
+    #get item row from companyfacts
+    Revenue = createItemRow(company.companyFacts, Revenue)
+    COGS = createItemRow(company.companyFacts, COGS)
+    GrossProfit = createItemRow(company.companyFacts, GrossProfit)
+    OperatingExpenses = createItemRow(company.companyFacts, OperatingExpenses)
+    NetIncome = createItemRow(company.companyFacts, NetIncome)
+
+
+
+    Revenue = consolidate_all_FY(Revenue.T)
+    COGS = consolidate_all_FY(COGS.T)
+    GrossProfit = consolidate_all_FY(GrossProfit.T)
+    OperatingExpenses = consolidate_all_FY(OperatingExpenses.T)
+    NetIncome = consolidate_all_FY(NetIncome.T)
+
+    #unique item names
+    Revenue = Revenue.rename(columns={'value': 'revenue'})
+    COGS = COGS.rename(columns={'value': 'cogs'})
+    GrossProfit = GrossProfit.rename(columns={'value': 'gross_profit'})
+    OperatingExpenses = OperatingExpenses.rename(columns={'value': 'operating_expenses'})
+    NetIncome = NetIncome.rename(columns={'value': 'net_income'})
+    
+    statement = add_lineitem_to_statement(Revenue, COGS)
+    
+    statement = add_lineitem_to_statement(statement, GrossProfit)
+    
+
+    statement = add_lineitem_to_statement(statement, OperatingExpenses)
+    statement = add_lineitem_to_statement(statement, NetIncome)
+
+    statement['Quarter'] = statement.pop('quarter_list').apply(lambda x: x[0])
+    
+    #convert
+    statement['start_date'] = pd.to_datetime(statement['start_date'])
+    statement['end_date'] = pd.to_datetime(statement['end_date'])
+    statement['start_date'] = statement['start_date'].dt.strftime('%Y-%m-%d')
+    statement['end_date'] = statement['end_date'].dt.strftime('%Y-%m-%d')
+    return statement
+    
+def ticker_csv_to_statements():
+    with open("tickers.csv", newline='') as csvfile:
+        reader = csv.reader(csvfile)
+        for row in reader:
+            ticker = row[0]
+            statement = get_income_statement("LLY")
+            
+
+
+    
+
+#Main     \
+pd.set_option('display.width', None)   
 pd.set_option('display.max_rows', None)
 pd.set_option('display.max_columns', None)
 #Nesecary data that each instance of company class shares
 email = "tonytaylor25@yahoo.com"
 tickerDf = getCIKs()
 
-#Company
-company = Company("CAT")
-
-#list line items
-company.display_all_lineitem_names()
-
-#Line item keywords
-Revenue = [r"Revenues", r"SalesRevenueNet"] 
-COGS = [r"CostOfGoodsSold", r'CostOfRevenue', r'CostOfGoodsAndServicesSold']
-GrossProfit = [r"GrossProfit"]
-OperatingExpenses = [r"[Oo]perating[Ee]xpenses"]
-NetIncome = [r"\b[Nn]et[Ii]ncome[Ll]oss"]
-
-
-#Revenu for company
-'''
-Revenue = createItemRow(company.companyFacts, Revenue)
-Revenue = consolidate_all_FY(Revenue.T)
-Revenue = Revenue.rename(columns={'value': 'revenue'})
-print(Revenue)
-'''
-
-
-#get item row from companyfacts
-Revenue = createItemRow(company.companyFacts, Revenue)
-COGS = createItemRow(company.companyFacts, COGS)
-GrossProfit = createItemRow(company.companyFacts, GrossProfit)
-OperatingExpenses = createItemRow(company.companyFacts, OperatingExpenses)
-NetIncome = createItemRow(company.companyFacts, NetIncome)
-
-
-
-Revenue = consolidate_all_FY(Revenue.T)
-COGS = consolidate_all_FY(COGS.T)
-GrossProfit = consolidate_all_FY(GrossProfit.T)
-OperatingExpenses = consolidate_all_FY(OperatingExpenses.T)
-NetIncome = consolidate_all_FY(NetIncome.T)
-
-#unique item names
-Revenue = Revenue.rename(columns={'value': 'revenue'})
-COGS = COGS.rename(columns={'value': 'cogs'})
-GrossProfit = GrossProfit.rename(columns={'value': 'gross_profit'})
-OperatingExpenses = OperatingExpenses.rename(columns={'value': 'operating_expenses'})
-NetIncome = NetIncome.rename(columns={'value': 'net_income'})
-
-#merge lineitems
-statement = add_lineitem_to_statement(Revenue, COGS)
-statement = add_lineitem_to_statement(statement, GrossProfit)
-statement = add_lineitem_to_statement(statement, OperatingExpenses)
-statement = add_lineitem_to_statement(statement, NetIncome)
-
-statement['Quarter'] = statement.pop('quarter_list').apply(lambda x: x[0])
-
-
-#convert
-statement['start_date'] = pd.to_datetime(statement['start_date'])
-statement['end_date'] = pd.to_datetime(statement['end_date'])
-statement['start_date'] = statement['start_date'].dt.date
-statement['end_date'] = statement['end_date'].dt.date
+statement = get_income_statement("INTC")
+statement_to_csv(statement)
+print(statement)
 
 
 
 
 
-pd.set_option('display.width', None)
-print(statement.T)
-#statement.T.to_csv('statement.csv', index=False)
 
-#send income statement to frontend via json 
-'''
-statement['start_date'] = pd.to_datetime(statement['start_date'])
-statement['end_date'] = pd.to_datetime(statement['end_date'])
-statement['start_date'] = statement['start_date'].dt.strftime('%Y-%m-%d')
-statement['end_date'] = statement['end_date'].dt.strftime('%Y-%m-%d')
 
-json_data = {
-    "ticker": company.ticker,
-    "income_statement": statement.to_dict(orient='records')
-}
-with open('company.json', 'w') as f:
-    json.dump(json_data, f, indent=2)
-'''
+
