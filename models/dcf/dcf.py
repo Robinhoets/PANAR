@@ -42,33 +42,40 @@ shares_outstanding = 10000
 #Market price per share, from yahoo
 market_price = 100
 
-print("Future Free Cash Flows:")
-print(fcf)
-print("Discount Rate (Cost of Equity):", COE*100, "%")
-print("Perpetual Growth Rate:", PGR*100, "%")
-print("----------------------------------------------------")
-quarterly_COE = (1 + COE) ** (1/4) - 1
-quarterly_PGR = (1 + PGR) ** (1/4) - 1
+def COE(risk_free_rate, beta, equity_risk_premium):
+    # Calculate the cost of equity using the Capital Asset Pricing Model (CAPM)
+    return risk_free_rate + beta * equity_risk_premium
 
-last_quarter = fcf.iloc[0, len(fcf.columns) - 1]
-for i in range(0,len(fcf.columns)):
-    fcf.iloc[0,i] = int(fcf.iloc[0,i] / (1 + quarterly_COE) ** (i + 1))
-discount_fcf = fcf
-print("Discounted Free Cash Flows:")
-print(discount_fcf)
+def dcf(future_net_income, discount_rate, PGR, shares_outstanding, market_price):
+    #TODO: use formula to get from net income to fcf
+    fcf = future_net_income
+    print("Future Free Cash Flows:")
+    print(fcf)
+    print("Discount Rate (Cost of Equity):", COE*100, "%")
+    print("Perpetual Growth Rate:", PGR*100, "%")
+    print("----------------------------------------------------")
+    quarterly_COE = (1 + COE) ** (1/4) - 1
+    quarterly_PGR = (1 + PGR) ** (1/4) - 1
 
-terminal_value = int(last_quarter * (1 + quarterly_PGR) / (quarterly_COE - quarterly_PGR))
-print("Terminal value at", PGR*100, "% growth per year and discounting by", COE * 100, "% per year: ",terminal_value)
-pv_of_tv = int(terminal_value / (1 + quarterly_COE) ** (len(fcf.columns) + 1))
-print("Present value of terminal value: ", pv_of_tv)
-pv_of_cf = int(discount_fcf.iloc[0].sum())
-print("Present value of cash flows: ", pv_of_cf)
-presant_value = int(pv_of_cf + pv_of_tv)
-print("Total present value of cash flows and terminal value: ", presant_value)
+    last_quarter = fcf.iloc[0, len(fcf.columns) - 1]
+    for i in range(0,len(fcf.columns)):
+        fcf.iloc[0,i] = int(fcf.iloc[0,i] / (1 + quarterly_COE) ** (i + 1))
+    discount_fcf = fcf
+    print("Discounted Free Cash Flows:")
+    print(discount_fcf)
 
-price_per_share = presant_value / shares_outstanding
-print("Estimated Price per share: ", price_per_share)
-print("Actual Price per share: ", market_price)
+    terminal_value = int(last_quarter * (1 + quarterly_PGR) / (quarterly_COE - quarterly_PGR))
+    print("Terminal value at", PGR*100, "% growth per year and discounting by", COE * 100, "% per year: ",terminal_value)
+    pv_of_tv = int(terminal_value / (1 + quarterly_COE) ** (len(fcf.columns) + 1))
+    print("Present value of terminal value: ", pv_of_tv)
+    pv_of_cf = int(discount_fcf.iloc[0].sum())
+    print("Present value of cash flows: ", pv_of_cf)
+    presant_value = int(pv_of_cf + pv_of_tv)
+    print("Total present value of cash flows and terminal value: ", presant_value)
 
-percent_return = (price_per_share - market_price) / market_price * 100
-print("Implied Premium/discount: ", percent_return, "%")
+    price_per_share = presant_value / shares_outstanding
+    print("Estimated Price per share: ", price_per_share)
+    print("Actual Price per share: ", market_price)
+
+    percent_return = (price_per_share - market_price) / market_price * 100
+    print("Implied Premium/discount: ", percent_return, "%")

@@ -445,6 +445,9 @@ def add_lineitem_to_statement(statement, lineitem):
     return statement
 
 def get_income_statement(ticker):
+    #pre
+    email = "tonytaylor25@yahoo.com"
+    tickerDf = getCIKs()
     company = Company(ticker)
     #list line items
     company.display_all_lineitem_names()
