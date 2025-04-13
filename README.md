@@ -4,5 +4,7 @@ Model - Machine learning models create cash flow estimates for DCF model. DCF mo
 Frontend - Frontend will recieve jsons from server and display to user. Occasionally send back json containing user input
 
 Instructions:
+
 -Commit all working changes to dev when ready
+
 -Dev will be occasionally merged with main 
