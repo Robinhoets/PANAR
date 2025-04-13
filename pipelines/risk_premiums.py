@@ -29,3 +29,6 @@ def get_equity_risk_premium():
     else:
         print("United States data not found in the dataset.")
     return equity_risk_premium
+
+num = get_equity_risk_premium()
+print(num)
