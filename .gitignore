@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# VS-specific
+.vs/
+*.suo
+
 # C extensions
 *.so
 
