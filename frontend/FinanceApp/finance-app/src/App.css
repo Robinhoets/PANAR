@@ -63,6 +63,11 @@ table, th, td {
   border-collapse: collapse;
 }
 
+#table_div{
+  Width: 100%;
+  overflow: scroll;
+}
+
 p, h3{
   text-align: left;
 }

@@ -499,11 +499,11 @@ def get_income_statement(ticker):
 def statement_to_csv(statement):
         statement.T.to_csv('statement.csv', index=False)
         
-def statement_to_json(statement):
+def statement_to_json(statement, ticker):
     
 
     json_data = {
-        "ticker": company.ticker,
+        "ticker": ticker,
         "income_statement": statement.to_dict(orient='records')
     }
     with open('company.json', 'w') as f:
@@ -579,8 +579,9 @@ pd.set_option('display.max_columns', None)
 email = "tonytaylor25@yahoo.com"
 tickerDf = getCIKs()
 
-statement = get_income_statement("PM")
+statement = get_income_statement("AMD")
 statement_to_csv(statement)
+statement_to_json(statement, "AMD")
 print(statement)
 
 
