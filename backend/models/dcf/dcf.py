@@ -28,8 +28,6 @@ values = [
 ]
 fcf = pd.DataFrame([values], columns=columns)
 fcf.to_csv('fcf.csv', index=False)
-COE = 0.10
-PGR = 0.02
 
 #Estimated future free cash flows from machine learning model
 fcf = pd.read_csv('fcf.csv')
@@ -42,7 +40,7 @@ shares_outstanding = 10000
 #Market price per share, from yahoo
 market_price = 100
 
-def COE(risk_free_rate, beta, equity_risk_premium):
+def coe(risk_free_rate, beta, equity_risk_premium):
     # Calculate the cost of equity using the Capital Asset Pricing Model (CAPM)
     return risk_free_rate + beta * equity_risk_premium
 
@@ -79,3 +77,19 @@ def dcf(future_net_income, discount_rate, PGR, shares_outstanding, market_price)
 
     percent_return = (price_per_share - market_price) / market_price * 100
     print("Implied Premium/discount: ", percent_return, "%")
+    dcf_dictionary = {
+        "discount_rate": COE,
+        "perpetual_growth_rate": PGR,
+        "terminal_value": terminal_value,
+        "present_value_of_terminal_value": pv_of_tv,
+        "present_value_of_cash_flows": pv_of_cf,
+        "present_value": presant_value,
+        "value_per_share": price_per_share,
+        "market_price": market_price,
+        "implied_premium": percent_return,
+    }
+    return dcf_dictionary
+
+#main test
+
+dcf(fcf, COE, PGR, shares_outstanding, market_price)

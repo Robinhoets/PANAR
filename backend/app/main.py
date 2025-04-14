@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from fastapi.responses import JSONResponse
 from pipelines.sec.sec import get_income_statement
 from pipelines.yahoo.yahoo import *
 from pipelines.risk_premiums import get_equity_risk_premium
