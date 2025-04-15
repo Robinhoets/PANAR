@@ -585,9 +585,9 @@ ticker_csv_to_statements()
 
 '''
 statement = get_income_statement("PM")
-statement_to_csv(statement)
 print(statement)
 '''
+
 
 
 
