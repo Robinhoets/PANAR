@@ -100,10 +100,18 @@ function App() {
                 <div>
                     <div className="header">
                         <h1>DCF Output</h1>
-                        <h3>About</h3>
-                        <p>
-                            dcf output goes here
-                        </p>
+                        <h3>Model Results</h3>
+                        {dcfOutput ? (
+                            <div>
+                                {Object.entries(dcfOutput).map(([key, value]) => (
+                                    <p key={key}>
+                                        <strong>{key.replace(/_/g, ' ').toUpperCase()}:</strong> {typeof value === 'number' ? value.toFixed(2) : value}
+                                    </p>
+                                ))}
+                            </div>
+                        ) : (
+                            <p>No output available.</p>
+                        )}
                     </div>
                 </div>
             );

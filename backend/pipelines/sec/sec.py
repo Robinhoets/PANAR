@@ -562,11 +562,12 @@ def test_income_statement(ticker):
     return statement
     
 def ticker_csv_to_statements():
-    with open("tickers.csv", newline='') as csvfile:
+    with open("backend/tickers.csv", newline='') as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
             ticker = row[0]
-            statement = get_income_statement("LLY")
+            statement = get_income_statement(ticker)
+            print(statement)
             
 
 
@@ -579,6 +580,8 @@ pd.set_option('display.max_columns', None)
 #Nesecary data that each instance of company class shares
 email = "tonytaylor25@yahoo.com"
 tickerDf = getCIKs()
+
+ticker_csv_to_statements()
 
 '''
 statement = get_income_statement("PM")
