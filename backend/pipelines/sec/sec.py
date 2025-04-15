@@ -581,7 +581,7 @@ pd.set_option('display.max_columns', None)
 email = "tonytaylor25@yahoo.com"
 tickerDf = getCIKs()
 
-ticker_csv_to_statements()
+#ticker_csv_to_statements()
 
 '''
 statement = get_income_statement("PM")

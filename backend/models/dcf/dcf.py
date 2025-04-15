@@ -26,11 +26,11 @@ values = [
      10000, 10000, 10000, 10000,
      10000, 10000, 10000, 10000
 ]
-fcf = pd.DataFrame([values], columns=columns)
+#fcf = pd.DataFrame([values], columns=columns)
 #fcf.to_csv('fcf.csv', index=False)
 
 #Estimated future free cash flows from machine learning model
-fcf = pd.read_csv('fcf.csv')
+#fcf = pd.read_csv('fcf.csv')
 #Retrieve from this model, includes stock beta, ERP, and 10 year treasury yield
 COE = 0.10
 #Needs formula
@@ -92,4 +92,4 @@ def dcf(future_net_income, discount_rate, PGR, shares_outstanding, market_price)
 
 #main test
 
-dcf(fcf, COE, PGR, shares_outstanding, market_price)
+#dcf(fcf, COE, PGR, shares_outstanding, market_price)

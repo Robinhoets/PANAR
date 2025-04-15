@@ -33,6 +33,7 @@ function Ticker_Enter_Page_Form({ setPageIndex, setDcfOutput }) {
             const data = await response.json();
             console.log("Backend response:", data);
 
+            setDcfOutput(data);
             // Navigate to the model output page
             setPageIndex(1);
         } catch (error) {

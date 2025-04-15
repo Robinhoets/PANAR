@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 from pipelines.sec.sec import get_income_statement
 from pipelines.yahoo.yahoo import *
 #from pipelines.risk_premiums import get_equity_risk_premium
-from models.dcf.dcf import *
+from models.dcf.dcf import dcf
 from models.sample_model import run_model
 #from pipelines.bls import get_bls_data
 from fastapi.middleware.cors import CORSMiddleware
