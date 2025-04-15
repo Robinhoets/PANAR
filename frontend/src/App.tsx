@@ -70,7 +70,6 @@ function Ticker_Enter_Page_Form({ setPageIndex, setDcfOutput, setTicker }) {
         </div>
     )
 }
-
 function FinancialStatementTable() {
     const [statementData, setStatementData] = useState<any[]>([]);
 
@@ -85,29 +84,35 @@ function FinancialStatementTable() {
         return <p>Loading statement...</p>;
     }
 
+    const metrics = [
+        { key: "revenue", label: "Revenue" },
+        { key: "cogs", label: "COGS" },
+        { key: "gross_profit", label: "Gross Profit" },
+        { key: "operating_expenses", label: "Operating Expenses" },
+        { key: "net_income", label: "Net Income" },
+    ];
+
     return (
         <div>
             <h2>Financial Statement</h2>
             <table border={1} cellPadding={8}>
                 <thead>
                     <tr>
-                        <th>Year/Quarter</th>
-                        <th>Revenue</th>
-                        <th>COGS</th>
-                        <th>Gross Profit</th>
-                        <th>Operating Expenses</th>
-                        <th>Net Income</th>
+                        <th>Metric</th>
+                        {statementData.map((row, index) => (
+                            <th key={index}>{row.YearAndQuarter}</th>
+                        ))}
                     </tr>
                 </thead>
                 <tbody>
-                    {statementData.map((row, index) => (
-                        <tr key={index}>
-                            <td>{row.YearAndQuarter}</td>
-                            <td>{(row.revenue / 1e9).toFixed(2)}B</td>
-                            <td>{(row.cogs / 1e9).toFixed(2)}B</td>
-                            <td>{(row.gross_profit / 1e9).toFixed(2)}B</td>
-                            <td>{(row.operating_expenses / 1e9).toFixed(2)}B</td>
-                            <td>{(row.net_income / 1e9).toFixed(2)}B</td>
+                    {metrics.map((metric) => (
+                        <tr key={metric.key}>
+                            <td>{metric.label}</td>
+                            {statementData.map((row, idx) => (
+                                <td key={idx}>
+                                    {(row[metric.key] / 1e9).toFixed(2)}B
+                                </td>
+                            ))}
                         </tr>
                     ))}
                 </tbody>
@@ -115,6 +120,7 @@ function FinancialStatementTable() {
         </div>
     );
 }
+
 
 function App() {
     const [pageIndex, setPageIndex] = useState<number>(0);
@@ -148,7 +154,6 @@ function App() {
             return (
                 <div>
                     <div className="header">
-                        <h1> T </h1>
                         <h1> {ticker} </h1>
 
                         <div style={{ marginBottom: '1rem' }}>
