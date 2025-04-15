@@ -1,7 +1,7 @@
 import './App.css'
 import { useState, useEffect } from 'react';
 
-function Ticker_Enter_Page_Form({ setPageIndex, setDcfOutput }) {
+function Ticker_Enter_Page_Form({ setPageIndex, setDcfOutput, setTicker }) {
     const [inputs, setInputs] = useState({
         tick: "",
         model: "",
@@ -33,6 +33,7 @@ function Ticker_Enter_Page_Form({ setPageIndex, setDcfOutput }) {
             const data = await response.json();
             console.log("Backend response:", data);
 
+            setTicker(inputs.tick);
             setDcfOutput(data);
             // Navigate to the model output page
             setPageIndex(1);
@@ -70,8 +71,54 @@ function Ticker_Enter_Page_Form({ setPageIndex, setDcfOutput }) {
     )
 }
 
+function FinancialStatementTable() {
+    const [statementData, setStatementData] = useState<any[]>([]);
+
+    useEffect(() => {
+        fetch("http://localhost:8000/financial-statement")
+            .then((res) => res.json())
+            .then((data) => setStatementData(data))
+            .catch((err) => console.error("Failed to load financial statement", err));
+    }, []);
+
+    if (statementData.length === 0) {
+        return <p>Loading statement...</p>;
+    }
+
+    return (
+        <div>
+            <h2>Financial Statement</h2>
+            <table border={1} cellPadding={8}>
+                <thead>
+                    <tr>
+                        <th>Year/Quarter</th>
+                        <th>Revenue</th>
+                        <th>COGS</th>
+                        <th>Gross Profit</th>
+                        <th>Operating Expenses</th>
+                        <th>Net Income</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {statementData.map((row, index) => (
+                        <tr key={index}>
+                            <td>{row.YearAndQuarter}</td>
+                            <td>{(row.revenue / 1e9).toFixed(2)}B</td>
+                            <td>{(row.cogs / 1e9).toFixed(2)}B</td>
+                            <td>{(row.gross_profit / 1e9).toFixed(2)}B</td>
+                            <td>{(row.operating_expenses / 1e9).toFixed(2)}B</td>
+                            <td>{(row.net_income / 1e9).toFixed(2)}B</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
+}
+
 function App() {
     const [pageIndex, setPageIndex] = useState<number>(0);
+    const [ticker, setTicker] = useState<string>("");
     const [dcfOutput, setDcfOutput] = useState<any>(null);
     const [selectedTable, setSelectedTable] = useState<"dcf" | "income">("dcf");
 
@@ -93,7 +140,7 @@ function App() {
             return (
                 <div>
                     <div>
-                        <Ticker_Enter_Page_Form setPageIndex={setPageIndex} setDcfOutput={setDcfOutput} />
+                        <Ticker_Enter_Page_Form setPageIndex={setPageIndex} setDcfOutput={setDcfOutput} setTicker={setTicker} />
                     </div>
                 </div>
             );
@@ -102,11 +149,11 @@ function App() {
                 <div>
                     <div className="header">
                         <h1> T </h1>
-                        <h1> Ticker </h1>
+                        <h1> {ticker} </h1>
 
                         <div style={{ marginBottom: '1rem' }}>
-                            <button onClick={() => setSelectedTable("dcf")}>DCF Table</button>
                             <button onClick={() => setSelectedTable("income")}>Income Statement</button>
+                            <button onClick={() => setSelectedTable("dcf")}>DCF Table</button>
                         </div>
 
                         {selectedTable === "dcf" && dcfOutput ? (
@@ -132,15 +179,7 @@ function App() {
                             </div>
                         ) : selectedTable === "income" ? (
                             <div>
-                                <table>
-                                    <thead>
-                                        <tr><th>Year</th><th>Revenue</th><th>Net Income</th></tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr><td>2023</td><td>$50,000,000</td><td>$5,000,000</td></tr>
-                                        <tr><td>2024</td><td>$55,000,000</td><td>$6,000,000</td></tr>
-                                    </tbody>
-                                </table>
+                                    <FinancialStatementTable />
                             </div>
                         ) : (
                             <p>No data available</p>

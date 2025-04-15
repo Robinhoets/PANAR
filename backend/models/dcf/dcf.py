@@ -78,15 +78,15 @@ def dcf(future_net_income, discount_rate, PGR, shares_outstanding, market_price)
     percent_return = (price_per_share - market_price) / market_price * 100
     print("Implied Premium/discount: ", percent_return, "%")
     dcf_dictionary = {
-        "discount_rate": COE,
-        "perpetual_growth_rate": PGR,
-        "terminal_value": terminal_value,
-        "present_value_of_terminal_value": pv_of_tv,
-        "present_value_of_cash_flows": pv_of_cf,
-        "present_value": presant_value,
+        "discount_rate": str(COE * 100) + "%",
+        "perpetual_growth_rate": str(PGR * 100) + "%",
+        "terminal_value": "$"+ str(int(terminal_value)),
+        "present_value_of_terminal_value": "$" + str(int(pv_of_tv)),
+        "present_value_of_cash_flows": "$" + str(int(pv_of_cf)),
+        "present_value": "$" + str(int(presant_value)),
         "value_per_share": price_per_share,
         "market_price": market_price,
-        "implied_premium": percent_return,
+        "implied_premium": str(round(percent_return,2)) + "%",
     }
     return dcf_dictionary
 

@@ -19,16 +19,34 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+current_ticker = ""
+
 class Ticker(BaseModel):
     tick: str
     model : str
 
 @app.post("/test")
 async def test(ticker: Ticker):
-    company_income_statement = get_income_statement(ticker.tick)
+    global current_ticker 
+    current_ticker = ticker.tick
+    company_income_statement = get_income_statement(current_ticker)
+    print(company_income_statement)
     future_net_income = run_model(company_income_statement)
     dcf_model_output = dcf(future_net_income, .10, .02, 10000, 50)
     return dcf_model_output
+
+@app.get("/financial-statement")
+async def get_financial_statement():
+    if not current_ticker:
+        return JSONResponse(
+            content={"error": "Ticker has not been set."},
+            status_code=400
+        )
+    company_income_statement = get_income_statement(current_ticker)
+    dictionary = {
+        "discount_rate": "10%"
+    }
+    return company_income_statement
 
 '''
 @app.post("/test")
@@ -84,7 +102,7 @@ async def price_chart(ticker: Ticker):
 
 #ideal statements function
 '''
-@app.post("/finanical-statement")
+@app.get("/finanical-statement")
 async def get_financial_statement(ticker: Ticker):
     all_income_statements = get_all_income_statement(ticker.chars)
     all_balance_sheets = get_all_balance_sheets(ticker.chars)

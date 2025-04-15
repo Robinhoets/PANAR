@@ -494,14 +494,18 @@ def get_income_statement(ticker):
     
     
     statement["YearAndQuarter"] = statement["end_date"].apply(lambda x: datetime.strptime(x, "%Y-%m-%d").strftime("%Y")) + "Q" + statement["Quarter"].astype(str)
-    
-    return statement
+    #drop dates
+    statement = statement.drop('end_date', axis=1)
+    statement = statement.drop('start_date', axis=1)
+    statement = statement.replace({np.nan: None})
+    #print(statement)
+    return statement.to_dict(orient='records')
 
 def statement_to_csv(statement):
         statement.T.to_csv('statement.csv', index=False)
         
 def statement_to_json(statement, company):
-    
+    statement = statement.replace({np.nan: None})
 
     json_data = {
         "ticker": company.ticker,
@@ -583,10 +587,10 @@ tickerDf = getCIKs()
 
 #ticker_csv_to_statements()
 
-'''
-statement = get_income_statement("PM")
-print(statement)
-'''
+
+#statement = get_income_statement("PM")
+#print(statement)
+
 
 
 
