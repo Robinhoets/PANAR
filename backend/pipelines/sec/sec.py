@@ -300,11 +300,11 @@ def consolidate_one_FY(entries_for_FY):
     entries_for_FY = entries_for_FY.reset_index(drop=True)
     entries_for_FY = drop_duplicate_entries_based_on_qlist(entries_for_FY)
     one_quarter_entries = get_n_sized_quarter_entries(entries_for_FY, 1)
-    print("one quarter entries")
-    print(one_quarter_entries, '\n')
+    #print("one quarter entries")
+    #print(one_quarter_entries, '\n')
     two_quarter_entries = get_n_sized_quarter_entries(entries_for_FY, 2)
-    print("two quarter entries")
-    print(two_quarter_entries, '\n')
+    #print("two quarter entries")
+    #print(two_quarter_entries, '\n')
     if(len(one_quarter_entries) == 0):
         df_out = convert_year_to_quarters(entries_for_FY)
         return df_out
@@ -364,8 +364,8 @@ def consolidate_all_FY(all_entries):
     #convert to datetime
     all_entries['start_date'] = pd.to_datetime(all_entries['start_date'])
     all_entries['end_date']   = pd.to_datetime(all_entries['end_date'])
-    print("All entries")
-    print(all_entries, "\n")
+    #print("All entries")
+    #print(all_entries, "\n")
     #Sort by filing date and drop duplicate entries
     all_entries.drop_duplicates(inplace=True)
     all_entries = all_entries.sort_values(
@@ -387,14 +387,14 @@ def consolidate_all_FY(all_entries):
         #add qlists data struture as a column
         entries_for_FY["quarter_list"] = entries_for_FY.apply(check_Q_list, axis=1)
         
-        print("pre-consolidated entries for FY ")
-        print(entries_for_FY, '\n')
+        #print("pre-consolidated entries for FY ")
+        #print(entries_for_FY, '\n')
         #consolidate FY entries of varying quarter size into 4, 1 quarter entries
         consolidated_entries_for_FY = consolidate_one_FY(entries_for_FY)
-        print("consolidated entries for FY(4 X 1 quarter entries) for FY ")
-        print(consolidated_entries_for_FY)
-        print("-------------------------------------------------------\n")
-        print("-------------------------------------------------------")
+        #print("consolidated entries for FY(4 X 1 quarter entries) for FY ")
+        #print(consolidated_entries_for_FY)
+        #print("-------------------------------------------------------\n")
+        #print("-------------------------------------------------------")
         
         #add one FY of consolidated entries to the consolidated entries dataframe
         consolidated_entries = pd.concat([consolidated_entries, consolidated_entries_for_FY], ignore_index=True)
@@ -405,8 +405,8 @@ def add_lineitem_to_statement(statement, lineitem):
     '''
     Merges line item into statement
     '''
-    print(statement)
-    print(lineitem)
+    #print(statement)
+    #print(lineitem)
     if(statement.empty):
         return lineitem
     if(lineitem.empty):
@@ -418,7 +418,7 @@ def add_lineitem_to_statement(statement, lineitem):
         #TODO: fill in empty space as NA
     index1 = 0
     index2 = 0
-    print(statement)
+    #print(statement)
     while(index1 < len(statement) and index2 < len(lineitem)):
         if(statement.loc[index1, 'end_date'].year == lineitem.loc[index2, 'end_date'].year):
             if(statement.loc[index1, 'quarter_list'] == lineitem.loc[index2, 'quarter_list']):
@@ -448,9 +448,7 @@ def get_income_statement(ticker):
     #pre
     email = "tonytaylor25@yahoo.com"
     tickerDf = getCIKs()
-    company = Company(ticker)
-    #list line items
-    company.display_all_lineitem_names()
+    company = Company(ticker.upper())
 
     #Line item keywords
     Revenue = [r"Revenues", r"SalesRevenueNet"] 
@@ -502,7 +500,7 @@ def get_income_statement(ticker):
 def statement_to_csv(statement):
         statement.T.to_csv('statement.csv', index=False)
         
-def statement_to_json(statement):
+def statement_to_json(statement, company):
     
 
     json_data = {
@@ -513,7 +511,7 @@ def statement_to_json(statement):
         json.dump(json_data, f, indent=2)    
 
 def test_income_statement(ticker):
-    company = Company(ticker)
+    company = Company(ticker.upper())
     #list line items
     company.display_all_lineitem_names()
 
@@ -582,10 +580,11 @@ pd.set_option('display.max_columns', None)
 email = "tonytaylor25@yahoo.com"
 tickerDf = getCIKs()
 
+'''
 statement = get_income_statement("PM")
 statement_to_csv(statement)
 print(statement)
-
+'''
 
 
 

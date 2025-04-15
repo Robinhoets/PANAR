@@ -1,4 +1,4 @@
-
+import pandas as pd
 def run_model(income_statement):
     columns = [
         '2025Q1', '2025Q2', '2025Q3', '2025Q4',

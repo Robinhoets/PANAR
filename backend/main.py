@@ -3,17 +3,34 @@ from pydantic import BaseModel
 from fastapi.responses import JSONResponse
 from pipelines.sec.sec import get_income_statement
 from pipelines.yahoo.yahoo import *
-from pipelines.risk_premiums import get_equity_risk_premium
+#from pipelines.risk_premiums import get_equity_risk_premium
 from models.dcf.dcf import *
 from models.sample_model import run_model
-from pipelines.bls import get_bls_data
+#from pipelines.bls import get_bls_data
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
 
-class Ticker(BaseModel):
-    chars: str
-    model_selection : int
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173"],  # or "*" in development
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
+class Ticker(BaseModel):
+    tick: str
+    model : str
+
+@app.post("/test")
+async def test(ticker: Ticker):
+    company_income_statement = get_income_statement(ticker.tick)
+    future_net_income = run_model(company_income_statement)
+    dcf_model_output = dcf(future_net_income, .10, .02, 10000, 50)
+    return dcf_model_output
+
+'''
 @app.post("/test")
 async def test(ticker: Ticker):
     #get ML model data
@@ -24,15 +41,15 @@ async def test(ticker: Ticker):
     
     #get DCF model data
     future_net_income = run_model(company_income_statement)
-    risk_free_rate = get_risk_free_rate()
-    beta = get_beta(ticker.chars)
-    equity_risk_premium = get_equity_risk_premium()
-    discount_rate = COE(risk_free_rate, beta, equity_risk_premium)
+    #risk_free_rate = get_risk_free_rate()
+    #beta = get_beta(ticker.chars)
+    #equity_risk_premium = get_equity_risk_premium()
+    discount_rate = COE(.05, beta, equity_risk_premium)
     shares_outstanding = get_shares_outstanding(ticker.chars)
     market_price = get_market_price(ticker.chars)
     dcf_model_output = dcf(future_net_income, discount_rate, .02, shares_outstanding, market_price)
     return dcf_model_output
-
+'''
 '''
 @app.post("/test")
 async def test(ticker: Ticker):

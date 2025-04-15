@@ -27,7 +27,7 @@ values = [
      10000, 10000, 10000, 10000
 ]
 fcf = pd.DataFrame([values], columns=columns)
-fcf.to_csv('fcf.csv', index=False)
+#fcf.to_csv('fcf.csv', index=False)
 
 #Estimated future free cash flows from machine learning model
 fcf = pd.read_csv('fcf.csv')
