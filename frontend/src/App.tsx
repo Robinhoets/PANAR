@@ -73,6 +73,7 @@ function Ticker_Enter_Page_Form({ setPageIndex, setDcfOutput }) {
 function App() {
     const [pageIndex, setPageIndex] = useState<number>(0);
     const [dcfOutput, setDcfOutput] = useState<any>(null);
+    const [selectedTable, setSelectedTable] = useState<"dcf" | "income">("dcf");
 
     const Pages = Object.freeze({
         Ticker_Enter_Page: 0,
@@ -100,18 +101,49 @@ function App() {
             return (
                 <div>
                     <div className="header">
-                        <h1>DCF Output</h1>
-                        <h3>Model Results</h3>
-                        {dcfOutput ? (
+                        <h1> T </h1>
+                        <h1> Ticker </h1>
+
+                        <div style={{ marginBottom: '1rem' }}>
+                            <button onClick={() => setSelectedTable("dcf")}>DCF Table</button>
+                            <button onClick={() => setSelectedTable("income")}>Income Statement</button>
+                        </div>
+
+                        {selectedTable === "dcf" && dcfOutput ? (
                             <div>
-                                {Object.entries(dcfOutput).map(([key, value]) => (
-                                    <p key={key}>
-                                        <strong>{key.replace(/_/g, ' ').toUpperCase()}:</strong> {typeof value === 'number' ? value.toFixed(2) : value}
-                                    </p>
-                                ))}
+                                <h1> DCF Output </h1>
+                                {dcfOutput ? (
+                                    <table>
+                                        <thead>
+                                            <tr><th>Metric</th><th>Value</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            {Object.entries(dcfOutput).map(([key, value]) => (
+                                                <tr key={key}>
+                                                    <td>{key.replace(/_/g, ' ').toUpperCase()}</td>
+                                                    <td>{typeof value === 'number' ? value.toFixed(2) : value}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                ) : (
+                                    <p>No output available.</p>
+                                )}
+                            </div>
+                        ) : selectedTable === "income" ? (
+                            <div>
+                                <table>
+                                    <thead>
+                                        <tr><th>Year</th><th>Revenue</th><th>Net Income</th></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>2023</td><td>$50,000,000</td><td>$5,000,000</td></tr>
+                                        <tr><td>2024</td><td>$55,000,000</td><td>$6,000,000</td></tr>
+                                    </tbody>
+                                </table>
                             </div>
                         ) : (
-                            <p>No output available.</p>
+                            <p>No data available</p>
                         )}
                     </div>
                 </div>
