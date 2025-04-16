@@ -95,28 +95,30 @@ function FinancialStatementTable() {
     return (
         <div>
             <h2>Financial Statement</h2>
-            <table border={1} cellPadding={8}>
-                <thead>
-                    <tr>
-                        <th>Metric</th>
-                        {statementData.map((row, index) => (
-                            <th key={index}>{row.YearAndQuarter}</th>
-                        ))}
-                    </tr>
-                </thead>
-                <tbody>
-                    {metrics.map((metric) => (
-                        <tr key={metric.key}>
-                            <td>{metric.label}</td>
-                            {statementData.map((row, idx) => (
-                                <td key={idx}>
-                                    {(row[metric.key] / 1e9).toFixed(2)}B
-                                </td>
+            <div id="table_div">
+                <table border={1} cellPadding={8}>
+                    <thead>
+                        <tr>
+                            <th>Metric</th>
+                            {statementData.map((row, index) => (
+                                <th key={index}>{row.YearAndQuarter}</th>
                             ))}
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        {metrics.map((metric) => (
+                            <tr key={metric.key}>
+                                <td>{metric.label}</td>
+                                {statementData.map((row, idx) => (
+                                    <td key={idx}>
+                                        {(row[metric.key] / 1e9).toFixed(2)}B
+                                    </td>
+                                ))}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }
