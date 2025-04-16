@@ -2,13 +2,12 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.responses import JSONResponse
 from pipelines.sec.sec import get_income_statement
-from pipelines.yahoo.yahoo import *
-#from pipelines.risk_premiums import get_equity_risk_premium
+from pipelines.yahoo.yahoo import get_price_chart
 from models.dcf.dcf import dcf
 #from pipelines.bls import get_bls_data
 from fastapi.middleware.cors import CORSMiddleware
 import json
-from neuralNetwork import run_model
+from models.neuralNetwork import run_model
 
 app = FastAPI()
 
@@ -35,7 +34,7 @@ async def test(ticker: Ticker):
     global future_net_income
     future_net_income = run_model(company_income_statement)
     global dcf_model_output
-    dcf_model_output = dcf(future_net_income, .10, .02, 10000, 50)
+    dcf_model_output = dcf(future_net_income, current_ticker)
     return dcf_model_output
 
 @app.get("/financial-statement")

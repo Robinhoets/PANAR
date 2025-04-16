@@ -136,8 +136,8 @@ def run_model(income_statement):
     net_income = scaled_data[:, 4]
     print(net_income)
 
-    np.savetxt("INTC_net_income_prediction.csv", net_income, delimiter=',')
-    model.save("LSTM_NN_WORKING.keras")
+    #np.savetxt("INTC_net_income_prediction.csv", net_income, delimiter=',')
+    #model.save("LSTM_NN_WORKING.keras")
     
     return array_to_quarterly_df(net_income, 2025, 1)
     
