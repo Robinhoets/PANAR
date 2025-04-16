@@ -5,10 +5,10 @@ from pipelines.sec.sec import get_income_statement
 from pipelines.yahoo.yahoo import *
 #from pipelines.risk_premiums import get_equity_risk_premium
 from models.dcf.dcf import dcf
-from models.sample_model import run_model
 #from pipelines.bls import get_bls_data
 from fastapi.middleware.cors import CORSMiddleware
 import json
+from neuralNetwork import run_model
 
 app = FastAPI()
 
@@ -34,6 +34,7 @@ async def test(ticker: Ticker):
     company_income_statement = get_income_statement(current_ticker)
     global future_net_income
     future_net_income = run_model(company_income_statement)
+    global dcf_model_output
     dcf_model_output = dcf(future_net_income, .10, .02, 10000, 50)
     return dcf_model_output
 

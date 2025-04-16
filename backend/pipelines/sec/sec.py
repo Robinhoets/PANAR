@@ -3,15 +3,9 @@ import requests
 import os
 import pandas as pd
 import numpy as np
-import urllib.request, urllib.error, urllib.parse
 import re
-from bs4 import BeautifulSoup, UnicodeDammit
-import unicodedata
 import json
-from matplotlib import pyplot as plt
-from pathlib import Path
 import csv
-#import ace_tools as tools
 
 email = ""
 
