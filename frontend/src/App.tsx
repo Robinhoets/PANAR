@@ -1,5 +1,26 @@
 import './App.css'
 import { useState, useEffect } from 'react';
+import { 
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend,
+} from "chart.js/auto";
+
+ChartJS.register(CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend);
+import {Line} from "react-chartjs-2";
+
+
 
 function Ticker_Enter_Page_Form({ setPageIndex, setDcfOutput, setTicker }) {
     const [inputs, setInputs] = useState({
@@ -165,12 +186,49 @@ function FutureNetIncomeTable()
     );
 }
 
+function PriceChart(){
+    const [priceChart, setPriceChart] = useState<any[]>([]);
+
+    useEffect(() => {
+        fetch("http://localhost:8000/price-chart")
+            .then((res) => res.json())
+            .then((data) => setPriceChart(data))
+            .catch((err) => console.error("Failed to load price chart", err));
+    }, []);
+
+    if (priceChart.length === 0) {
+        return <p>Loading Price Chart table...</p>;
+    }
+
+    const keys : string[] = Object.keys(priceChart["Close" as keyof typeof priceChart])
+
+    return (
+        <div>
+            <h2>Price Chart</h2>
+            <div>
+                <Line
+                    data={{
+                        labels: keys.map((key) => key.substring(0, 10)),
+                        datasets:[
+                            {
+                                label: "Price Chart",
+                                data: keys.map((key) => priceChart["Close" as keyof typeof priceChart][key as keyof typeof priceChart])
+                            },
+                        ],
+                    }} 
+                />
+            </div>
+        </div>
+    );
+
+}
+
 
 function App() {
     const [pageIndex, setPageIndex] = useState<number>(0);
     const [ticker, setTicker] = useState<string>("");
     const [dcfOutput, setDcfOutput] = useState<any>(null);
-    const [selectedTable, setSelectedTable] = useState<"dcf" | "income">("dcf");
+    const [selectedTable, setSelectedTable] = useState<"dcf" | "income" | "priceChart">("dcf");
 
     const Pages = Object.freeze({
         Ticker_Enter_Page: 0,
@@ -203,6 +261,7 @@ function App() {
                         <div style={{ marginBottom: '1rem' }}>
                             <button onClick={() => setSelectedTable("income")}>Income Statement</button>
                             <button onClick={() => setSelectedTable("dcf")}>DCF Table</button>
+                            <button onClick={() => setSelectedTable("priceChart")}>Price & Charts</button>
                         </div>
 
                         {selectedTable === "dcf" && dcfOutput ? (
@@ -234,6 +293,10 @@ function App() {
                         ) : selectedTable === "income" ? (
                             <div>
                                     <FinancialStatementTable />
+                            </div>
+                        ) : selectedTable === "priceChart" ? (
+                            <div>
+                                    <PriceChart />
                             </div>
                         ) : (
                             <p>No data available</p>

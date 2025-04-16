@@ -88,14 +88,13 @@ async def test(ticker: Ticker):
 
 
 #ideal price_chart function
-'''
-@app.post("/price-chart")
-async def price_chart(ticker: Ticker):
+@app.get("/price-chart")
+async def price_chart():
+    global current_ticker 
     # From yahoo
-    price_chart_data = get_price_chart(ticker.chars)
+    price_chart_data = get_price_chart(current_ticker)
     #clean price chart data
-    return price_chart_data
-'''
+    return json.loads(price_chart_data.to_json(date_format='iso'))
 
 #ideal statements function
 '''
