@@ -499,7 +499,7 @@ def get_income_statement(ticker):
     statement = statement.drop('start_date', axis=1)
     statement = statement.replace({np.nan: None})
     #print(statement)
-    return statement.to_dict(orient='records')
+    return statement
 
 def statement_to_csv(statement):
         statement.T.to_csv('statement.csv', index=False)

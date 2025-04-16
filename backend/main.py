@@ -30,34 +30,19 @@ class Ticker(BaseModel):
 async def test(ticker: Ticker):
     global current_ticker 
     current_ticker = ticker.tick
+    global company_income_statement
     company_income_statement = get_income_statement(current_ticker)
-    print(company_income_statement)
+    global future_net_income
     future_net_income = run_model(company_income_statement)
     dcf_model_output = dcf(future_net_income, .10, .02, 10000, 50)
     return dcf_model_output
 
 @app.get("/financial-statement")
 async def get_financial_statement():
-    if not current_ticker:
-        return JSONResponse(
-            content={"error": "Ticker has not been set."},
-            status_code=400
-        )
-    company_income_statement = get_income_statement(current_ticker)
-    dictionary = {
-        "discount_rate": "10%"
-    }
-    return company_income_statement
+    return company_income_statement.to_dict(orient='records')
 
 @app.get("/future-net-income")
 async def get_future_net_income():
-    if not current_ticker:
-        return JSONResponse(
-            content={"error": "Ticker has not been set."},
-            status_code=400
-        )
-    company_income_statement = get_income_statement(current_ticker)
-    future_net_income = run_model(company_income_statement)
     return json.loads(future_net_income.to_json())
 
 '''
