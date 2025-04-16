@@ -3,6 +3,7 @@ import requests
 from io import BytesIO
 
 def get_equity_risk_premium():
+    '''
     # URL of the Excel file
     url = "https://www.stern.nyu.edu/~adamodar/pc/datasets/ctryprem.xlsx"
 
@@ -29,6 +30,6 @@ def get_equity_risk_premium():
     else:
         print("United States data not found in the dataset.")
     return equity_risk_premium
+    '''
+    return 0.0547  # Placeholder value for the equity risk premium
 
-num = get_equity_risk_premium()
-print(num)

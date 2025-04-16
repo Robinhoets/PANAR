@@ -39,7 +39,7 @@ function Ticker_Enter_Page_Form({ setPageIndex, setDcfOutput, setTicker }) {
 
         try {
 
-            const response = await fetch('http://localhost:8000/test', {
+            const response = await fetch('http://localhost:8000/initialize', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
