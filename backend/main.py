@@ -8,6 +8,7 @@ from models.dcf.dcf import dcf
 from models.sample_model import run_model
 #from pipelines.bls import get_bls_data
 from fastapi.middleware.cors import CORSMiddleware
+import json
 
 app = FastAPI()
 
@@ -47,6 +48,17 @@ async def get_financial_statement():
         "discount_rate": "10%"
     }
     return company_income_statement
+
+@app.get("/future-net-income")
+async def get_future_net_income():
+    if not current_ticker:
+        return JSONResponse(
+            content={"error": "Ticker has not been set."},
+            status_code=400
+        )
+    company_income_statement = get_income_statement(current_ticker)
+    future_net_income = run_model(company_income_statement)
+    return json.loads(future_net_income.to_json())
 
 '''
 @app.post("/test")

@@ -123,6 +123,48 @@ function FinancialStatementTable() {
     );
 }
 
+function FutureNetIncomeTable()
+{
+    const [fcfData, setfcfData] = useState<any[]>([]);
+
+    useEffect(() => {
+        fetch("http://localhost:8000/future-net-income")
+            .then((res) => res.json())
+            .then((data) => setfcfData(data))
+            .catch((err) => console.error("Failed to load financial statement", err));
+    }, []);
+
+    if (fcfData.length === 0) {
+        return <p>Loading future net income table...</p>;
+    }
+    
+    return (
+        <div>
+            <h2>Future Net Income</h2>
+            <div id="table_div">
+                <table border={1} cellPadding={8}>
+                    <thead>
+                        <tr>
+                            <th> </th>
+                            { Object.keys(fcfData).map((key) => (
+                                <th>{key}</th>
+                            ))}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> </td>
+                            { Object.keys(fcfData).map((key) => (
+                                <td>{fcfData[key as keyof typeof fcfData]["0"]}</td>
+                            ))}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    );
+}
+
 
 function App() {
     const [pageIndex, setPageIndex] = useState<number>(0);
@@ -154,7 +196,7 @@ function App() {
             );
         case Pages.Model_Output_Page:
             return (
-                <div>
+                <div style={{position: 'relative', top: '100px'}}>
                     <div className="header">
                         <h1> {ticker} </h1>
 
@@ -165,24 +207,29 @@ function App() {
 
                         {selectedTable === "dcf" && dcfOutput ? (
                             <div>
-                                <h1> DCF Output </h1>
-                                {dcfOutput ? (
-                                    <table>
-                                        <thead>
-                                            <tr><th>Metric</th><th>Value</th></tr>
-                                        </thead>
-                                        <tbody>
-                                            {Object.entries(dcfOutput).map(([key, value]) => (
-                                                <tr key={key}>
-                                                    <td>{key.replace(/_/g, ' ').toUpperCase()}</td>
-                                                    <td>{typeof value === 'number' ? value.toFixed(2) : value}</td>
-                                                </tr>
-                                            ))}
-                                        </tbody>
-                                    </table>
-                                ) : (
-                                    <p>No output available.</p>
-                                )}
+                                <div style={{textAlign: 'center'}}>
+                                    <h1> DCF Output </h1>
+                                    {dcfOutput ? (
+                                        <table>
+                                            <thead>
+                                                <tr><th>Metric</th><th>Value</th></tr>
+                                            </thead>
+                                            <tbody>
+                                                {Object.entries(dcfOutput).map(([key, value]) => (
+                                                    <tr key={key}>
+                                                        <td>{key.replace(/_/g, ' ').toUpperCase()}</td>
+                                                        <td>{typeof value === 'number' ? value.toFixed(2) : value}</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    ) : (
+                                        <p>No output available.</p>
+                                    )}
+                                </div>
+                                <div>
+                                    <FutureNetIncomeTable />
+                                </div>
                             </div>
                         ) : selectedTable === "income" ? (
                             <div>
