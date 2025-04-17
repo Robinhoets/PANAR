@@ -2,17 +2,17 @@
 beaapi?
 
     -GDP*
-    -GDP by industry*:          [done]
+    -GDP by industry*:                        [done]
     -Consumer Spending*: 
     -Personal income*
     -Personal Savings Rate*
     -Corporate Profits*
     -GDI(gross domestic income)
     -employment by industry
-    -international transactions: 
+    -international transactions:             [working on] _ don't do
     -Government receipts and expenditures*
     -Fixed assets by type:
-    -industry fixed assets
+    -industry fixed assets                   [working on]
     -government fixed assets
 '''
 import beaapi
@@ -90,3 +90,96 @@ class Bea:
         gdp_df.to_csv('gdp_by_industry.csv', index=False)
         return gdp_df
   
+    def get_gdp_by_industry(self):
+            """ 
+
+            1925-2023
+            :param: None
+            
+            :return: Pandas Dataframe
+            """
+            bea_tbl = beaapi.get_data(key, datasetname='FixedAssets', TableName='FAAt101', Year=1925)
+            pp.pprint(bea_tbl)
+
+
+    def get_international_transactions(self):
+        international_trans_df = pd.DataFrame(columns=['Country','1960','1961','1962','1963',
+                                                       '1964','1965','1966','1967',
+                                                       '1968','1969','1970','1971',
+                                                       '1972','1973','1974','1975',
+                                                       '1976','1977','1978','1979',
+                                                       '1980','1981','1982','1983',
+                                                       '1984','1985','1986','1987',
+                                                       '1988','1989','1990','1991',
+                                                       '1992','1993','1994','1995',
+                                                       '1996','1997','1998','1999',
+                                                       '2000','2001','2002','2003',
+                                                       '2004','2005','2006','2007',
+                                                       '2008','2009','2010','2011',
+                                                       '2012','2013','2014','2015',
+                                                       '2016','2017','2018','2019',
+                                                       '2020','2021','2022','2023',
+                                                       '2024'])
+        indicators = ['BalCapAcct', 'BalCurrAcct', 'BalGds', 'BalGdsServ',
+                       'BalPrimInc', 'BalSecInc', 'BalServ', 'CapTransPayAndOthDeb',
+                       'CapTransRecAndOthCred', 'CompOfEmplPay', 'CompOfEmplRec',
+                       'CurrAndDepAssets', 'CurrAndDepAssetsCentralBank',
+                       'CurrAndDepAssetsDepTaking', 'CurrAndDepAssetsOthFinNonFin',
+                       'CurrAndDepLiabs', 'CurrAndDepLiabsCentralBank',
+                       'CurrAndDepLiabsDepTaking', 'CurrAndDepLiabsFoa',
+                       'CurrAndDepLiabsOthFinNonFin', 'CurrAndDepReserveAssets',
+                       'CurrAssets', 'CurrLiabs']
+        list_aoc = beaapi.get_parameter_values(key, 'ITA', 'AreaOrCountry')
+        list_aoc = list_aoc['Key']
+
+        for ind in indicators:
+            print(ind)
+            for aoc in list_aoc:
+                print(aoc)
+                row = [aoc]
+                for year in range(1960, 2025):
+                    try:
+                        bea_tbl = beaapi.get_data(key, datasetname='ITA', Indicator=ind, AreaOrCountry=aoc, Frequency='A', Year=year)
+                        data_value = bea_tbl['DataValue']
+                        print(data_value)
+                        for val in data_value:
+                            row.append(val)
+                    except beaapi.beaapi_error.BEAAPIResponseError:
+                        row.append(0)
+                        # print("bea response error")
+                        pass
+                if(len(row) == len(international_trans_df.columns)):
+                    international_trans_df.loc[len(international_trans_df)] = row
+                    print(row)
+                else:
+                    print(row)
+                    print(len(row))
+                    print(len(international_trans_df.columns))
+                    print("row skipped")
+            # Define dynamic filename
+            filename = f"intl_trans_{aoc}.csv"
+            # Save DataFrame to CSV
+            international_trans_df.to_csv(filename, index=False)
+            return international_trans_df
+#'BalAcc', 
+    def get_gdp(self):
+        columns = []
+        vals = []
+        for year in range(1947, 2025):
+            print(year)
+            bea_tbl = beaapi.get_data(key, datasetname='NIPA', TableName='T10105', Frequency='Q', Year=year)
+            gdp_per_year = bea_tbl.loc[bea_tbl['LineDescription'] == 'Gross domestic product']
+            for index, quarter in gdp_per_year.iterrows():
+                amount = quarter['DataValue']
+                vals.append(amount)
+                q = quarter['TimePeriod']
+                columns.append(q)
+            print(columns)
+            print(vals)
+        print(len(columns))
+        print(len(vals))
+        df = pd.DataFrame(columns = columns)
+        # df.columns = columns
+        df.loc[0] = vals
+        df.to_csv('gdp.csv', index=False)
+        return df
