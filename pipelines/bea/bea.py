@@ -4,13 +4,13 @@ beaapi?
     -GDP*
     -GDP by industry*:                        [done]
     -Consumer Spending*: 
-    -Personal income*
+    -Personal income*                         [done]      
     -Personal Savings Rate*
     -Corporate Profits*
     -GDI(gross domestic income)
     -employment by industry
     -international transactions:             [working on] _ don't do
-    -Government receipts and expenditures*
+    -Government receipts and expenditures*      
     -Fixed assets by type:
     -industry fixed assets                   [working on]
     -government fixed assets
@@ -197,3 +197,17 @@ class Bea:
             df.to_csv('personal-income.csv', index=False)
             print(df)
             return df
+    
+    def get_current_receipts(self):
+        bea_tbl = beaapi.get_data(key, datasetname='NIPA', TableName='T30100', Frequency='q', Year='all')
+        per = bea_tbl.loc[bea_tbl['LineDescription'] == 'Current receipts']
+        columns = per['TimePeriod']
+        vals = per['DataValue']
+        print(vals.values)
+        print(len(columns))
+        print(len(vals))
+        df = pd.DataFrame(columns = columns)
+        df.loc[1] = vals.values
+        df.to_csv('current-receipts.csv', index=False)
+        print(df)
+        return df
