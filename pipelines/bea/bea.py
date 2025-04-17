@@ -1,7 +1,7 @@
 '''
 beaapi?
 
-    -GDP*
+    -GDP*                                     [done]
     -GDP by industry*:                        [done]
     -Consumer Spending*: 
     -Personal income*
@@ -182,4 +182,17 @@ class Bea:
         # df.columns = columns
         df.loc[0] = vals
         df.to_csv('gdp.csv', index=False)
+        return df
+    
+    def get_personal_income(self):
+        bea_tbl = beaapi.get_data(key, datasetname='NIPA', TableName='T20100', Frequency='q', Year='all')
+        per = bea_tbl.loc[bea_tbl['LineDescription'] == 'Personal income']
+        columns = per['TimePeriod']
+        vals = per['DataValue']
+        # print(vals.values)
+        # print(len(columns))
+        # print(len(vals))
+        df = pd.DataFrame(columns = columns)
+        df.loc[1] = vals
+        df.to_csv('personal-income.csv', index=False)
         return df
