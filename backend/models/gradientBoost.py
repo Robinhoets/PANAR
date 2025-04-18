@@ -13,77 +13,128 @@ from xgboost import plot_tree
 print(xgb.__version__)
 print(xgb.rabit.get_rank())
 
-dataFrame = pd.read_csv("statement.csv")
-data_columns = dataFrame[["revenue", "cogs", "gross_profit", "operating_expenses", "net_income"]]
+class gradientBoost:
+    def __init__(self):
+        self.model = None
+        self.ohe = None
+        self.dValidate = None
+        self.input_x = None
+        self.input_y = None
+        self.last_quarter = None
+        
+    def train(self, all_data):
+        dataFrame = pd.read_csv(all_data)
+        self.last_quarter = dataFrame.iloc[-1]["YearAndQuarter"]
 
-#Find correlation matrix of data points
-corrMatrix = dataFrame[["revenue", "cogs", "gross_profit", "operating_expenses", "net_income"]].corr()
-print(corrMatrix["net_income"].sort_values(ascending=False))
+        #Create new year column for encoding
+        dataFrame["year_cat"] = dataFrame["end_date"].astype(str).str[:4]
 
-#Create new year column for encoding
-dataFrame["year_cat"] = dataFrame["end_date"].astype(str).str[:4]
+        data_columns = dataFrame[["revenue", "cogs", "gross_profit", "operating_expenses", "net_income", "year_cat"]]
 
-#pipe = Pipeline([
-#    ('imputer', SimpleImputer()), 
-#    ('std_scaler', StandardScaler())])
+        #Find correlation matrix of data points
+        corrMatrix = dataFrame[["revenue", "cogs", "gross_profit", "operating_expenses", "net_income"]].corr()
+        print(corrMatrix["net_income"].sort_values(ascending=False))
 
-pipe = Pipeline([
-    ('imputer', SimpleImputer())])
+        pipe = Pipeline([
+            ('imputer', SimpleImputer()), 
+            ('scaler', StandardScaler())])
 
-#Potential one hot encoding transformer to be added (if categorical data required)
-ohe = ColumnTransformer([
-    ("num", pipe, list(data_columns)),
-    ("cat", OneHotEncoder(), ["quarter_list", "year_cat"])
-])
+        #Potential one hot encoding transformer to be added (if categorical data required)
+        self.ohe = ColumnTransformer([
+            ("num", pipe, list(data_columns)),
+            ("cat", OneHotEncoder(), ["Quarter"])
+        ])
 
-data_prep = ohe.fit_transform(dataFrame)
+        data_prep = self.ohe.fit_transform(dataFrame)
+        
+        self.input_x = []
+        self.input_y = []
+        size = data_prep.shape[0]
+        
+        k = 0
+        for i in range(4, size):
+            self.input_x.append(data_prep[k:i].flatten())
+            self.input_y.append(data_prep[i])
+            k = k + 1
+            
+        #MUST PREDICT NEXT VALUE. CAN NOT SHUFFLE.
+        train_input, validate_input = train_test_split(self.input_x, test_size=0.2, shuffle=False)
+        train_target, validate_target = train_test_split(self.input_y, test_size=0.2, shuffle=False)
+        
+        print(self.input_x[0])
 
-#MUST PREDICT NEXT VALUE. CAN NOT SHUFFLE.
-#data_train, data_test = train_test_split(data_prep, test_size=0.2)
-data_train = data_prep[:32]
-data_test = data_prep[32:]
+        #Get data into xgBoost form
+        dTrain = xgb.DMatrix(train_input, train_target)
+        self.dValidate = xgb.DMatrix(validate_input, validate_target)
 
-data_train = data_train[:-1, :]
-data_test = data_test[:-1, :]
-train_target = data_train[:, [1, 2, 3, 4, 5]]
-test_target = data_test[:, [1, 2, 3, 4, 5]]
+        #TODO: MUST FIND BEST PARAMETERS 
+        parameters = {
+            'tree_method': 'gpu_hist',
+            'predictor': 'gpu_predictor',
+            'objective': 'reg:squarederror',
+            'device': 'gpu',
+            'eval_metric': 'rmse',
+            'learning_rate': 1,
+            'max_depth': 4
+        }
 
+        self.model = xgb.train(parameters, dTrain)
+        yPred = self.model.predict(self.dValidate)
 
-print(data_train.shape[0])
-print(train_target.shape[0])
-print(data_test.shape)
-print(test_target.shape)
+        plot_tree(self.model)
+        plt.show()
 
-#Get data into xgBoost form
-dTrain = xgb.DMatrix(data_train, train_target)
-dTest = xgb.DMatrix(data_test, test_target)
+        performance = mean_squared_error(validate_target, yPred)
+        print("RMSE: ", np.sqrt(performance))
+        r2 = r2_score(validate_target, yPred)
+        print("R2 score = ", r2)
 
-#TODO: MUST FIND BEST PARAMETERS 
-parameters = {
-    'objective': 'reg:squarederror',
-    'device': 'cuda',
-    'eval_metric': 'rmse',
-    'learning_rate': 0.1,
-    'max_depth': 4
-}
+        self.model.save_model("BOOST_WORKING.keras")
 
-boost = xgb.train(parameters, dTrain)
-yPred = boost.predict(dTest)
-
-plot_tree(boost)
-plt.show()
-
-performance = mean_squared_error(test_target, yPred)
-print("RMSE: ", np.sqrt(performance))
-r2 = r2_score(test_target, yPred)
-print("R2 score = ", r2)
-
-boost.save_model("BOOST_WORKING.model")
-#boost.dump_model('dump.raw.txt', 'featmap.txt')
-
-#Reload model
-#boost = xgb.Booster({'nthread': 4})  
-#boost.load_model('BOOST_97.model') 
-
-yUser = boost.predict(dTest)
-print(yUser)
+    def predict(self, company):
+        future_series = np.empty((0, 0))
+        working_series = np.empty((0, 0))
+        starterMatrix = xgb.DMatrix(self.input_x[-1].reshape(1, -1))
+        
+        starter_pred = self.model.predict(starterMatrix)
+        future_series = np.append(future_series, starter_pred)
+        
+        starter = self.input_x[-1].reshape(4, -1)
+        
+        working_series = np.append(working_series, starter[1])
+        working_series = np.append(working_series, starter[2])
+        working_series = np.append(working_series, starter[3])
+        working_series = np.append(working_series, starter_pred)
+        
+        for i in range(1, 20):
+            futureMatrix = xgb.DMatrix(working_series.reshape(1, -1))
+            future_pred = self.model.predict(futureMatrix)
+            working_series = working_series.reshape(4, -1)
+            working_series = working_series[1:]
+            working_series = np.append(working_series, future_pred)
+            future_series = np.append(future_series, future_pred)
+            
+        future_series = future_series.reshape(20, 10)
+        future_series = future_series[:, [0, 1, 2, 3, 4, 5]]
+        print(future_series[:, 4])
+        
+        scaler = self.ohe.named_transformers_['num'].named_steps['scaler']
+        scaled_data = scaler.inverse_transform(future_series)
+        net_income = scaled_data[:, 4]
+        print(net_income)
+        
+        #Create future columns based on last quarter parse
+        columns = []
+        year = int(self.last_quarter[:4])
+        quarter = int(self.last_quarter[-1])
+        
+        for i in range(0, 20):
+            quarter += 1
+            if(quarter > 4):
+                quarter = 1 
+                year += 1
+            columns.append(f"{year}Q{quarter}")
+                
+        values = net_income
+        future_net_income = pd.DataFrame([values], columns=columns)
+        return future_net_income
