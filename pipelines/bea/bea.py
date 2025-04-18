@@ -6,11 +6,11 @@ beaapi?
     -Consumer Spending*: 
     -Personal income*                         [done]      
     -Personal Savings Rate*
-    -Corporate Profits*
+    -Corporate Profits*                         
     -GDI(gross domestic income)
     -employment by industry
     -international transactions:             [working on] _ don't do
-    -Government receipts and expenditures*      
+    -Government receipts and expenditures*   [done]   
     -Fixed assets by type:
     -industry fixed assets                   [working on]
     -government fixed assets
@@ -211,3 +211,35 @@ class Bea:
         df.to_csv('current-receipts.csv', index=False)
         print(df)
         return df
+    
+    def get_corporate_profits(self):
+        bea_tbl = beaapi.get_data(key, datasetname='NIPA', TableName='T61600B', Frequency='q', Year='all')
+        
+        per = bea_tbl.loc[bea_tbl['LineDescription'] == 'Corporate profits with inventory valuation and capital consumption adjustments']
+        columns = per['TimePeriod']
+        vals = per['DataValue']
+        print(vals.values)
+        print(len(columns))
+        print(len(vals))
+        df = pd.DataFrame(columns = columns)
+        df.loc[1] = vals.values
+        df.to_csv('corporate-profits.csv', index=False)
+        print(df)
+        return df
+
+
+
+        # row_identifier = bea_tbl['LineDescription'].unique()
+        # first = row_identifier[0]
+        # second = bea_tbl[bea_tbl['LineDescription'] == first]
+        # columns = second['TimePeriod']
+        # df = pd.DataFrame(columns = columns)
+        # df.insert(0, 'Identifier','')
+        # for iden in row_identifier:
+        #     tmp_df = bea_tbl[bea_tbl['LineDescription'] == iden]
+        #     vals = tmp_df['DataValue']
+        #     print(len(vals))
+        #     print(len(columns))
+            # pd.concat([pd.Series([iden]), vals])
+            # df.loc[len(df)] = vals.values
+
