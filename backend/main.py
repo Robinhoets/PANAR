@@ -8,6 +8,7 @@ from models.dcf.dcf import dcf
 from fastapi.middleware.cors import CORSMiddleware
 import json
 from models.ML_models.helper import run_neural_network
+import pandas as pd
 
 app = FastAPI()
 
@@ -36,7 +37,9 @@ async def test(ticker: Ticker):
     global company_income_statement
     company_income_statement = get_income_statement(current_ticker)
     global future_net_income
-    future_net_income = run_neural_network(current_ticker)
+    #future_net_income = run_neural_network(current_ticker)
+    #future_net_income.to_csv("data/future_net_income.csv")
+    future_net_income = pd.read_csv("data/future_net_income.csv")
     global dcf_model_output
     dcf_model_output = dcf(future_net_income, current_ticker)
     return dcf_model_output

@@ -28,7 +28,7 @@ def run_neural_network(ticker):
     # Create a new instance of the neuralNetwork class
     nn = neuralNetwork()
     # Train the model with the provided CSV file
-    nn.train("data/statement.csv")
+    nn.train("data/all_statements.csv")
     # Predict using the trained model
     nn_output = nn.predict(ticker)
     return nn_output

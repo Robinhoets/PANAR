@@ -93,7 +93,7 @@ class neuralNetwork:
         print("R2 score = ", r2)
 
         #Data preprocessing DONE after this point; save model and return
-        self.model.save("models/saved_models/NN_WORKING.keras")
+        self.model.save("models/ML_models/saved_models/NN_WORKING.keras")
 
     def predict(self, company):
         #Now format prediction for sliding window prediction going forward 5 years (20 points total)
@@ -150,7 +150,7 @@ class neuralNetwork:
         return future_net_income
     
     def PANAR_predict(self, company):
-        nn = load_model("models/saved_models/NN_WORKING.keras")
+        nn = load_model("models/ML_models/saved_models/NN_WORKING.keras")
         
         future_series = np.empty((0, 0))
         working_series = np.empty((0, 0))
