@@ -1,0 +1,880 @@
+,Key,Desc
+0,BalCapAcct,Balance on capital account
+1,BalCurrAcct,Balance on current account
+2,BalGds,Balance on goods
+3,BalGdsServ,Balance on goods and services
+4,BalPrimInc,Balance on primary income
+5,BalSecInc,Balance on secondary income (current transfers)
+6,BalServ,Balance on services
+7,CapTransPayAndOthDeb,Capital transfer payments and other debits
+8,CapTransRecAndOthCred,Capital transfer receipts and other credits
+9,CompOfEmplPay,Compensation of employees; payments
+10,CompOfEmplRec,Compensation of employees; receipts
+11,CurrAndDepAssets,Net U.S. acquisition of other investment assets; currency and deposits
+12,CurrAndDepAssetsCentralBank,Net U.S. acquistion of other investment assets; currency and deposits; held by central bank
+13,CurrAndDepAssetsDepTaking,Net U.S. acquistion of other investment assets; currency and deposits; held by deposit-taking institutions except central bank
+14,CurrAndDepAssetsOthFinNonFin,Net U.S. acquistion of other investment assets; currency and deposits; held by non-deposit-taking institutions and nonfinancial institutions except general government
+15,CurrAndDepLiabs,Net U.S. incurrence of other investment liabilities; currency and deposits
+16,CurrAndDepLiabsCentralBank,Net U.S. incurrence of other investment liabilities; currency and deposits; issued by central bank
+17,CurrAndDepLiabsDepTaking,Net U.S. incurrence of other investment liabilities; currency and deposits; issued by deposit-taking institutions except central bank
+18,CurrAndDepLiabsFoa,Net U.S. incurrence of other investment liabilities to foreign official agencies; currency and deposits
+19,CurrAndDepLiabsOthFinNonFin,Net U.S. incurrence of other investment liabilities; currency and deposits; issued by non-deposit-taking institutions and nonfinancial institutions except general government
+20,CurrAndDepReserveAssets,Net U.S. acquisition of reserve assets; other; currency and deposits
+21,CurrAssets,Net U.S. acquisition of other investment assets; currency (short term)
+22,CurrLiabs,Net U.S. incurrence of other investment liabilities; currency (short term)
+23,CurrLiabsCentralBank,Net U.S. incurrence of other investment liabilities; currency (short term); issued by central bank
+24,DebtSecAssets,Net U.S. acquisition of portfolio investment assets; debt securities
+25,DebtSecAssetsDepTaking,Net U.S. acquisition of portfolio investment assets; debt securities; held by deposit-taking institutions except central bank
+26,DebtSecAssetsNonFin,Net U.S. acquisition of portfolio investment assets; debt securities; held by nonfinancial institutions except general government
+27,DebtSecAssetsOthFin,Net U.S. acquisition of portfolio investment assets; debt securities; held by non-deposit-taking financial institutions
+28,DebtSecFedSponsorAgencyIncPay,Portfolio investment income payments; interest on federally sponsored agency securties
+29,DebtSecFedSponsorAgencyLiabs,Net U.S. incurrence of portfolio investment liabilities; federally sponsored agency securities
+30,DebtSecIncPay,Portfolio investment income payments; interest on debt securities
+31,DebtSecIncPayDepTaking,Portfolio investment income payments; interest on debt securities; deposit-taking institutions except central bank
+32,DebtSecIncPayGenGovt,Portfolio investment income payments; interest on debt securities; general government
+33,DebtSecIncPayNonFin,Portfolio investment income payments; interest on debt securities; nonfinancial institutions except general government
+34,DebtSecIncPayOthFin,Portfolio investment income payments; interest on debt securities; non-deposit-taking financial institutions
+35,DebtSecIncRec,Portfolio investment income receipts; interest on debt securities
+36,DebtSecIncRecDepTaking,Portfolio investment income receipts; interest on debt securities; deposit-taking institutions except central bank
+37,DebtSecIncRecNonFin,Portfolio investment income receipts; interest on debt securities; nonfinancial institutions except general government
+38,DebtSecIncRecOthFin,Portfolio investment income receipts; interest on debt securities; non-deposit-taking financial institutions
+39,DebtSecLiabs,Net U.S. incurrence of portfolio investment liabilities; debt securities
+40,DebtSecLiabsDepTaking,Net U.S. incurrence of portfolio investment liabilities; debt securities; issued by deposit-taking institutions except central bank
+41,DebtSecLiabsFoa,Net U.S. incurrence of portfolio investment liabilities to foreign official agencies; debt securities
+42,DebtSecLiabsGenGovt,Net U.S. incurrence of portfolio investment liabilities; debt securities; issued by general government
+43,DebtSecLiabsNonFin,Net U.S. incurrence of portfolio investment liabilities; debt securities; issued by nonfinancial institutions except general government
+44,DebtSecLiabsOthFin,Net U.S. incurrence of portfolio investment liabilities; debt securities; issued by non-deposit-taking financial institutions
+45,DebtSecOthThanFedSponsorAgencyIncPayOthFin,Portfolio investment income payments; interest on debt securities other than federally sponsored agency securties; non-deposit-taking financial institutions
+46,DebtSecOthThanFedSponsorAgencyLiabsOthFin,Net U.S. incurrence of portfolio investment liabilities; debt securities other than federally sponsored agency securities; issued by non-deposit-taking financial institutions
+47,DebtSecTreasIncPay,Portfolio investment income payments; interest on U.S. Treasury securities
+48,DebtSecTreasLiabs,Net U.S. incurrence of portfolio investment liabilities; U.S. Treasury securities
+49,DepAssets,Net U.S. acquisition of other investment assets; deposits
+50,DepAssetsCentralBank,Net U.S. acquistion of other investment assets; deposits; held by central bank
+51,DepAssetsDepTaking,Net U.S. acquistion of other investment assets; deposits; held by deposit-taking institutions except central bank
+52,DepAssetsOthFinNonFin,Net U.S. acquistion of other investment assets; deposits; held by non-deposit-taking institutions and nonfinancial institutions except general government
+53,DepLiabs,Net U.S. incurrence of other investment liabilities; deposits
+54,DepLiabsCentralBank,Net U.S. incurrence of other investment liabilities; deposits; issued by central bank
+55,DepLiabsDepTaking,Net U.S. incurrence of other investment liabilities; deposits; issued by deposit-taking institutions except central bank
+56,DepLiabsOthFinNonFin,Net U.S. incurrence of other investment liabilities; deposits; issued by non-deposit-taking institutions and nonfinancial institutions except general government
+57,DepRepurchaseLiabsDepTaking,"Net U.S. incurrence of other investment liabilities; deposits, of which repurchase agreements; issued by deposit-taking institutions except central bank"
+58,DepResaleAssetsDepTaking,"Net U.S. acquistion of other investment assets; deposits, of which resale agreements; held by deposit-taking institutions except central bank"
+59,DiInvAssets,"Net U.S. acquisition of direct investment assets, asset/liability basis"
+60,DiInvAssetsNonSpe,"Net U.S. acquisition of direct investment assets, asset/liability basis; Non-SPEs"
+61,DiInvAssetsSpe,"Net U.S. acquisition of direct investment assets, asset/liability basis; SPEs"
+62,DiInvCurrCostAdjAssets,Net U.S. acquisition of direct investment assets; current-cost adjustment
+63,DiInvCurrCostAdjIncPay,Direct investment income on liabilities; current-cost adjustment
+64,DiInvCurrCostAdjIncRec,Direct investment income on assets; current-cost adjustment
+65,DiInvCurrCostAdjLiabs,Net U.S. incurrence of direct investment liabilities; current-cost adjustment
+66,DiInvDebtInstAssets,"Net U.S. acquisition of direct investment assets, asset/liability basis; debt instruments"
+67,DiInvDebtInstAssetsNonSpe,"Net U.S. acquisition of direct investment assets, asset/liability basis; debt instruments; Non-SPEs"
+68,DiInvDebtInstAssetsSpe,"Net U.S. acquisition of direct investment assets, asset/liability basis; debt instruments; SPEs"
+69,DiInvDebtInstInward,"Financial transactions for inward direct investment (foreign direct investment in the United States), directional basis; debt instruments"
+70,DiInvDebtInstInwardByInd,"Financial transactions for inward direct investment (foreign direct investment in the United States), directional basis; debt instruments; by industry"
+71,DiInvDebtInstInwardFinAndIns,"Financial transactions for inward direct investment (foreign direct investment in the United States), directional basis; debt instruments; finance (including depository institutions) and insurance"
+72,DiInvDebtInstInwardMnfctr,"Financial transactions for inward direct investment (foreign direct investment in the United States), directional basis; debt instruments; manufacturing"
+73,DiInvDebtInstInwardOthInd,"Financial transactions for inward direct investment (foreign direct investment in the United States), directional basis; debt instruments; other industries (those not listed under incurrence of liabilities in table 6.1)"
+74,DiInvDebtInstInwardWhlslTrd,"Financial transactions for inward direct investment (foreign direct investment in the United States), directional basis; debt instruments; wholesale trade"
+75,DiInvDebtInstLiabs,"Net U.S. incurrence of direct investment liabilities, asset/liability basis; debt instruments"
+76,DiInvDebtInstLiabsNonSpe,"Net U.S. incurrence of direct investment liabilities, asset/liability basis; debt instruments; Non-SPEs"
+77,DiInvDebtInstLiabsSpe,"Net U.S. incurrence of direct investment liabilities, asset/liability basis; debt instruments; SPEs"
+78,DiInvDebtInstOutward,"Financial transactions for outward direct investment (U.S. direct investment abroad), directional basis; debt instruments"
+79,DiInvDebtInstOutwardByInd,"Financial transactions for outward direct investment (U.S. direct investment abroad), directional basis; debt instruments; by industry"
+80,DiInvDebtInstOutwardFinAndIns,"Financial transactions for outward direct investment (U.S. direct investment abroad), directional basis; debt instruments; finance (including depository institutions) and insurance"
+81,DiInvDebtInstOutwardHoldExcBank,"Financial transactions for outward direct investment (U.S. direct investment abroad), directional basis; debt instruments; holding companies except bank holding companies"
+82,DiInvDebtInstOutwardMnfctr,"Financial transactions for outward direct investment (U.S. direct investment abroad), directional basis; debt instruments; manufacturing"
+83,DiInvDebtInstOutwardOthInd,"Financial transactions for outward direct investment (U.S. direct investment abroad), directional basis; debt instruments; other industries (those not listed under acquisition of assets in table 6.1)"
+84,DiInvDebtInstOutwardWhlslTrd,"Financial transactions for outward direct investment (U.S. direct investment abroad), directional basis; debt instruments; wholesale trade"
+85,DiInvDebtInstUsAffiliatesClaims,Financial transactions for direct investment; debt instruments; U.S. affiliates' claims
+86,DiInvDebtInstUsAffiliatesClaimsByNonSpe,Financial transactions for direct investment; U.S. non-SPE affiliates' debt claims transactions with their foreign parent groups
+87,DiInvDebtInstUsAffiliatesClaimsBySpe,Financial transactions for direct investment; U.S. SPE affiliates' debt claims transactions with their foreign parent groups
+88,DiInvDebtInstUsAffiliatesClaimsNonSpe,Financial transactions for direct investment; debt instruments; U.S. affiliates' claims; Non-SPEs
+89,DiInvDebtInstUsAffiliatesClaimsSpe,Financial transactions for direct investment; debt instruments; U.S. affiliates' claims; SPEs
+90,DiInvDebtInstUsAffiliatesLiabs,Financial transactions for direct investment; debt instruments; U.S. affiliates' liabilities
+91,DiInvDebtInstUsAffiliatesLiabsNonSpe,Financial transactions for direct investment; debt instruments; U.S. affiliates' liabilities; Non-SPEs
+92,DiInvDebtInstUsAffiliatesLiabsSpe,Financial transactions for direct investment; debt instruments; U.S. affiliates' liabilities; SPEs
+93,DiInvDebtInstUsParentsClaims,Financial transactions for direct investment; debt instruments; U.S. parents' claims
+94,DiInvDebtInstUsParentsClaimsNonSpe,Financial transactions for direct investment; debt instruments; U.S. parents' claims; Non-SPEs
+95,DiInvDebtInstUsParentsClaimsSpe,Financial transactions for direct investment; debt instruments; U.S. parents' claims; SPEs
+96,DiInvDebtInstUsParentsLiabs,Financial transactions for direct investment; debt instruments; U.S. parents' liabilities
+97,DiInvDebtInstUsParentsLiabsNonSpe,Financial transactions for direct investment; debt instruments; U.S. parents' liabilities; Non-SPEs
+98,DiInvDebtInstUsParentsLiabsSpe,Financial transactions for direct investment; debt instruments; U.S. parents' liabilities; SPEs
+99,DiInvDebtInstUsParentsLiabsWithNonSpe,Financial transactions for direct investment; U.S. parents' debt liabilities transactions with their foreign non-SPE affiliates
+100,DiInvDebtInstUsParentsLiabsWithSpe,Financial transactions for direct investment; U.S. parents' debt liabilities transactions with their foreign SPE affiliates
+101,DiInvDirectionalBasisAdj,Financial transactions for direct investment; adjustments to convert to directional basis
+102,DiInvDirectionalBasisAdjIncPay,Direct investment income payments; adjustments to convert to directional basis
+103,DiInvDirectionalBasisAdjIncRec,Direct investment income receipts; adjustments to convert to directional basis
+104,DiInvDivWithdrawIncPay,Direct investment income on liabilities; dividends and withdrawals
+105,DiInvDivWithdrawIncPayNonSpe,Direct investment income on liabilities; dividends and withdrawals; Non-SPEs
+106,DiInvDivWithdrawIncPaySpe,Direct investment income on liabilities; dividends and withdrawals; SPEs
+107,DiInvDivWithdrawIncRec,Direct investment income on assets; dividends and withdrawals
+108,DiInvDivWithdrawIncRecNonSpe,Direct investment income on assets; dividends and withdrawals; Non-SPEs
+109,DiInvDivWithdrawIncRecSpe,Direct investment income on assets; dividends and withdrawals; SPEs
+110,DiInvEquityAssets,Net U.S. acquisition of direct investment assets; equity
+111,DiInvEquityAssetsNonSpe,Net U.S. acquisition of direct investment assets; equity; Non-SPEs
+112,DiInvEquityAssetsSpe,Net U.S. acquisition of direct investment assets; equity; SPEs
+113,DiInvEquityIncPay,Direct investment income on liabilities; equity
+114,DiInvEquityIncPayNonSpe,Direct investment income on liabilities; equity; Non-SPEs
+115,DiInvEquityIncPaySpe,Direct investment income on liabilities; equity; SPEs
+116,DiInvEquityIncRec,Direct investment income on assets; equity
+117,DiInvEquityIncRecNonSpe,Direct investment income on assets; equity; Non-SPEs
+118,DiInvEquityIncRecSpe,Direct investment income on assets; equity; SPEs
+119,DiInvEquityIntIncRecFinAndIns,"Direct investment income on outward investment (U.S. direct investment abroad), directional basis; interest, net receipts; finance (including depository institutions) and insurance"
+120,DiInvEquityIntIncRecHoldExcBank,"Direct investment income on outward investment (U.S. direct investment abroad), directional basis; interest, net receipts; holding companies except bank holding companies"
+121,DiInvEquityIntIncRecMnfctr,"Direct investment income on outward investment (U.S. direct investment abroad), directional basis; interest, net receipts; manufacturing"
+122,DiInvEquityIntIncRecOthInd,"Direct investment income on outward investment (U.S. direct investment abroad), directional basis; interest, net receipts; manufacturing; other industries (those not listed under receipts in table 4.2)"
+123,DiInvEquityIntIncRecWhlslTrd,"Direct investment income on outward investment (U.S. direct investment abroad), directional basis; interest, net receipts; wholesale trade"
+124,DiInvEquityLiabs,Net U.S. incurrence of direct investment liabilities; equity
+125,DiInvEquityLiabsNonSpe,Net U.S. incurrence of direct investment liabilities; equity; Non-SPEs
+126,DiInvEquityLiabsSpe,Net U.S. incurrence of direct investment liabilities; equity; SPEs
+127,DiInvEquityOthThanReinvestEarnAssets,Net U.S. acquisition of direct investment assets; equity other than reinvestment of earnings
+128,DiInvEquityOthThanReinvestEarnAssetsFinAndIns,Net U.S. acquisition of direct investment assets; equity other than reinvestment of earnings; finance (including depository institutions) and insurance
+129,DiInvEquityOthThanReinvestEarnAssetsHoldExcBank,Net U.S. acquisition of direct investment assets; equity other than reinvestment of earnings; holding companies except bank holding companies
+130,DiInvEquityOthThanReinvestEarnAssetsMnfctr,Net U.S. acquisition of direct investment assets; equity other than reinvestment of earnings; manufacturing
+131,DiInvEquityOthThanReinvestEarnAssetsNonSpe,Net U.S. acquisition of direct investment assets; equity other than reinvestment of earnings; Non-SPEs
+132,DiInvEquityOthThanReinvestEarnAssetsOthInd,Net U.S. acquisition of direct investment assets; equity other than reinvestment of earnings; other industries (those not listed under acquisition of assets in table 6.1)
+133,DiInvEquityOthThanReinvestEarnAssetsSpe,Net U.S. acquisition of direct investment assets; equity other than reinvestment of earnings; SPEs
+134,DiInvEquityOthThanReinvestEarnAssetsWhlslTrd,Net U.S. acquisition of direct investment assets; equity other than reinvestment of earnings; wholesale trade
+135,DiInvEquityOthThanReinvestEarnDecAssets,Net U.S. acquisition of direct investment assets; equity other than reinvestment of earnings; decreases
+136,DiInvEquityOthThanReinvestEarnDecLiabs,Net U.S. incurrence of direct investment liabilities; equity other than reinvestment of earnings; decreases
+137,DiInvEquityOthThanReinvestEarnIncAssets,Net U.S. acquisition of direct investment assets; equity other than reinvestment of earnings; increases
+138,DiInvEquityOthThanReinvestEarnIncLiabs,Net U.S. incurrence of direct investment liabilities; equity other than reinvestment of earnings; increases
+139,DiInvEquityOthThanReinvestEarnLiabs,Net U.S. incurrence of direct investment liabilities; equity other than reinvestment of earnings
+140,DiInvEquityOthThanReinvestEarnLiabsFinAndIns,Net U.S. incurrence of direct investment liabilities; equity other than reinvestment of earnings; finance (including depository institutions) and insurance
+141,DiInvEquityOthThanReinvestEarnLiabsHoldExcBank,Net U.S. incurrence of direct investment liabilities; equity other than reinvestment of earnings; other industries (those not listed under incurrence of liabilities in table 6.1)
+142,DiInvEquityOthThanReinvestEarnLiabsMnfctr,Net U.S. incurrence of direct investment liabilities; equity other than reinvestment of earnings; manufacturing
+143,DiInvEquityOthThanReinvestEarnLiabsNonSpe,Net U.S. incurrence of direct investment liabilities; equity other than reinvestment of earnings; Non-SPEs
+144,DiInvEquityOthThanReinvestEarnLiabsSpe,Net U.S. incurrence of direct investment liabilities; equity other than reinvestment of earnings; SPEs
+145,DiInvEquityOthThanReinvestEarnLiabsWhlslTrd,Net U.S. incurrence of direct investment liabilities; equity other than reinvestment of earnings; wholesale trade
+146,DiInvEquityWithoutCurrCostAdjIncPay,Direct investment income without current cost adjustment on liabilities; equity
+147,DiInvEquityWithoutCurrCostAdjIncPayFinAndIns,Direct investment income without current cost adjustment on liabilities; equity; finance (including depository institutions) and insurance
+148,DiInvEquityWithoutCurrCostAdjIncPayMnfctr,Direct investment income without current cost adjustment on liabilities; equity; manufacturing
+149,DiInvEquityWithoutCurrCostAdjIncPayOthInd,Direct investment income without current cost adjustment on liabilities; equity; other industries (those not listed under receipts in table 4.2)
+150,DiInvEquityWithoutCurrCostAdjIncPayWhlslTrd,Direct investment income without current cost adjustment on liabilities; equity; wholesale trade
+151,DiInvEquityWithoutCurrCostAdjIncRec,Direct investment income without current cost adjustment on assets; equity
+152,DiInvEquityWithoutCurrCostAdjIncRecFinAndIns,Direct investment income without current cost adjustment on assets; equity; finance (including depository institutions) and insurance
+153,DiInvEquityWithoutCurrCostAdjIncRecHoldExcBank,Direct investment income without current cost adjustment on assets; equity; holding companies except bank holding companies
+154,DiInvEquityWithoutCurrCostAdjIncRecMnfctr,Direct investment income without current cost adjustment on assets; equity; manufacturing
+155,DiInvEquityWithoutCurrCostAdjIncRecOthInd,Direct investment income without current cost adjustment on assets; equity; manufacturing; other industries (those not listed under receipts in table 4.2)
+156,DiInvEquityWithoutCurrCostAdjIncRecWhlslTrd,Direct investment income without current cost adjustment on assets; equity; wholesale trade
+157,DiInvIncPay,"Direct investment income on liabilities, asset/liability basis"
+158,DiInvIncPayNonSpe,"Direct investment income on liabilities, asset/liability basis; Non-SPEs"
+159,DiInvIncPaySpe,"Direct investment income on liabilities, asset/liability basis; SPEs"
+160,DiInvIncRec,"Direct investment income on assets, asset/liability basis"
+161,DiInvIncRecNonSpe,"Direct investment income on assets, asset/liability basis; Non-SPEs"
+162,DiInvIncRecSpe,"Direct investment income on assets, asset/liability basis; SPEs"
+163,DiInvIntIncInward,"Direct investment income on inward investment (foreign direct investment in the United States), directional basis; interest, net payments"
+164,DiInvIntIncInwardFinAndIns,"Direct investment income on inward investment (foreign direct investment in the United States), directional basis; interest, net payments; finance (including depository institutions) and insurance"
+165,DiInvIntIncInwardMnfctr,"Direct investment income on inward investment (foreign direct investment in the United States), directional basis; interest, net payments; manufacturing"
+166,DiInvIntIncInwardOthInd,"Direct investment income on inward investment (foreign direct investment in the United States), directional basis; interest, net payments; other industries (those not listed under receipts in table 4.2)"
+167,DiInvIntIncInwardWhlslTrd,"Direct investment income on inward investment (foreign direct investment in the United States), directional basis; interest, net payments; wholesale trade"
+168,DiInvIntIncOutward,"Direct investment income on outward investment (U.S. direct investment abroad), directional basis; interest, net receipts"
+169,DiInvIntIncPay,"Direct investment income on liabilities, asset/liability basis; interest"
+170,DiInvIntIncPayNonSpe,"Direct investment income on liabilities, asset/liability basis; interest; Non-SPEs"
+171,DiInvIntIncPaySpe,"Direct investment income on liabilities, asset/liability basis; interest; SPEs"
+172,DiInvIntIncRec,"Direct investment income on assets, asset/liability basis; interest"
+173,DiInvIntIncRecNonSpe,"Direct investment income on assets, asset/liability basis; interest; Non-SPEs"
+174,DiInvIntIncRecSpe,"Direct investment income on assets, asset/liability basis; interest; SPEs"
+175,DiInvIntUsAffiliatesIncPay,Direct investment income; U.S. affiliates' interest payments
+176,DiInvIntUsAffiliatesIncPayNonSpe,Direct investment income; U.S. affiliates' interest payments; Non-SPEs
+177,DiInvIntUsAffiliatesIncPaySpe,Direct investment income; U.S. affiliates' interest payments; SPEs
+178,DiInvIntUsAffiliatesIncRec,Direct investment income; U.S. affiliates' interest receipts
+179,DiInvIntUsAffiliatesIncRecNonSpe,Direct investment income; U.S. affiliates' receipts from their foreign parent groups; Non-SPEs
+180,DiInvIntUsAffiliatesIncRecOfNonSpe,Direct investment income; U.S. non-SPE affiliates' interest receipts from their foreign parent groups
+181,DiInvIntUsAffiliatesIncRecOfSpe,Direct investment income; U.S. non-SPE affiliates' interest receipts from their foreign parent groups
+182,DiInvIntUsAffiliatesIncRecSpe,Direct investment income; U.S. affiliates' receipts from their foreign parent groups; SPEs
+183,DiInvIntUsParentsIncPay,Direct investment income; U.S. parents' interest payments
+184,DiInvIntUsParentsIncPayNonSpe,Direct investment income; U.S. parents' payments to their foreign affiliates; Non-SPEs
+185,DiInvIntUsParentsIncPaySpe,Direct investment income; U.S. parents' payments to their foreign affiliates; SPEs
+186,DiInvIntUsParentsIncPayToNonSpe,Direct investment income; U.S. parents' interest payments to their foreign non-SPE affiliates
+187,DiInvIntUsParentsIncPayToSpe,Direct investment income; U.S. parents' interest payments to their foreign SPE affiliates
+188,DiInvIntUsParentsIncRec,Direct investment income; U.S. parents' interest receipts
+189,DiInvIntUsParentsIncRecNonSpe,Direct investment income; U.S. parents' interest receipts; Non-SPEs
+190,DiInvIntUsParentsIncRecSpe,Direct investment income; U.S. parents' interest receipts; SPEs
+191,DiInvInwardDirectionalBasis,"Financial transactions for inward direct investment (foreign direct investment in the United States), directional basis"
+192,DiInvLiabs,"Net U.S. incurrence of direct investment liabilities, asset/liability basis"
+193,DiInvLiabsNonSpe,"Net U.S. incurrence of direct investment liabilities, asset/liability basis; Non-SPEs"
+194,DiInvLiabsSpe,"Net U.S. incurrence of direct investment liabilities, asset/liability basis; SPEs"
+195,DiInvOutward,"Financial transactions for outward direct investment (U.S. direct investment abroad), directional basis"
+196,DiInvReinvestEarnAssets,Net U.S. acquisition of direct investment assets; reinvestment of earnings
+197,DiInvReinvestEarnAssetsNonSpe,Net U.S. acquisition of direct investment assets; reinvestment of earnings; Non-SPEs
+198,DiInvReinvestEarnAssetsSpe,Net U.S. acquisition of direct investment assets; reinvestment of earnings; SPEs
+199,DiInvReinvestEarnIncPay,Direct investment income on liabilities; reinvested earnings
+200,DiInvReinvestEarnIncPayNonSpe,Direct investment income on liabilities; reinvested earnings; Non-SPEs
+201,DiInvReinvestEarnIncPaySpe,Direct investment income on liabilities; reinvested earnings; SPEs
+202,DiInvReinvestEarnIncRec,Direct investment income on assets; reinvested earnings
+203,DiInvReinvestEarnIncRecNonSpe,Direct investment income on assets; reinvested earnings; Non-SPEs
+204,DiInvReinvestEarnIncRecSpe,Direct investment income on assets; reinvested earnings; SPEs
+205,DiInvReinvestEarnLiabs,Net U.S. incurrence of direct investment liabilities; reinvestment of earnings
+206,DiInvReinvestEarnLiabsNonSpe,Net U.S. incurrence of direct investment liabilities; reinvestment of earnings; Non-SPEs
+207,DiInvReinvestEarnLiabsSpe,Net U.S. incurrence of direct investment liabilities; reinvestment of earnings; SPEs
+208,DiInvReinvestEarnWithoutCurrCostAdjAssets,Net U.S. acquisition of direct investment assets; reinvestment of earnings without current-cost adjustment
+209,DiInvReinvestEarnWithoutCurrCostAdjAssetsFinAndIns,Net U.S. acquisition of direct investment assets; reinvestment of earnings without current-cost adjustment; finance (including depository institutions) and insurance
+210,DiInvReinvestEarnWithoutCurrCostAdjAssetsHoldExcBank,Net U.S. acquisition of direct investment assets; reinvestment of earnings without current-cost adjustment; holding companies except bank holding companies
+211,DiInvReinvestEarnWithoutCurrCostAdjAssetsMnfctr,Net U.S. acquisition of direct investment assets; reinvestment of earnings without current-cost adjustment; manufacturing
+212,DiInvReinvestEarnWithoutCurrCostAdjAssetsOthInd,Net U.S. acquisition of direct investment assets; reinvestment of earnings without current-cost adjustment; other industries (those not listed under acquisition of assets in table 6.1)
+213,DiInvReinvestEarnWithoutCurrCostAdjAssetsWhlslTrd,Net U.S. acquisition of direct investment assets; reinvestment of earnings without current-cost adjustment; wholesale trade
+214,DiInvReinvestEarnWithoutCurrCostAdjIncPay,Direct investment income on liabilities; reinvested earnings without current-cost adjustment
+215,DiInvReinvestEarnWithoutCurrCostAdjIncRec,Direct investment income on assets; reinvested earnings without current-cost adjustment
+216,DiInvReinvestEarnWithoutCurrCostAdjLiabs,Net U.S. incurrence of direct investment liabilities; reinvestment of earnings without current-cost adjustment
+217,DiInvReinvestEarnWithoutCurrCostAdjLiabsFinAndIns,Net U.S. incurrence of direct investment liabilities; reinvestment of earnings without current-cost adjustment; finance (including depository institutions) and insurance
+218,DiInvReinvestEarnWithoutCurrCostAdjLiabsMnfctr,Net U.S. incurrence of direct investment liabilities; reinvestment of earnings without current-cost adjustment; manufacturing
+219,DiInvReinvestEarnWithoutCurrCostAdjLiabsOthInd,Net U.S. incurrence of direct investment liabilities; reinvestment of earnings without current-cost adjustment; other industries (those not listed under incurrence of liabilities in table 6.1)
+220,DiInvReinvestEarnWithoutCurrCostAdjLiabsWhlslTrd,Net U.S. incurrence of direct investment liabilities; reinvestment of earnings without current-cost adjustment; wholesale trade
+221,DiInvWithoutCurrCostAdjIncInward,"Direct investment income without current-cost adjustment on inward investment, directional basis"
+222,DiInvWithoutCurrCostAdjIncInwardChem,"Direct investment income without current-cost adjustment on inward investment, directional basis; chemicals"
+223,DiInvWithoutCurrCostAdjIncInwardCompElecProd,"Direct investment income without current-cost adjustment on inward investment, directional basis; computers and electronic products"
+224,DiInvWithoutCurrCostAdjIncInwardDepIns,"Direct investment income without current-cost adjustment on inward investment, directional basis; depository institutions "
+225,DiInvWithoutCurrCostAdjIncInwardElectrical,"Direct investment income without current-cost adjustment on inward investment, directional basis; electrical equipment, appliances, and components"
+226,DiInvWithoutCurrCostAdjIncInwardFinAndIns,"Direct investment income without current-cost adjustment on inward investment, directional basis; finance (including depository institutions) and insurance"
+227,DiInvWithoutCurrCostAdjIncInwardFinExclDepInsAndIns,"Direct investment income without current-cost adjustment on inward investment, directional basis; finance (including depository institutions) and insurance"
+228,DiInvWithoutCurrCostAdjIncInwardFood,"Direct investment income without current-cost adjustment on inward investment, directional basis; food"
+229,DiInvWithoutCurrCostAdjIncInwardInfo,"Direct investment income without current-cost adjustment on inward investment, directional basis; information"
+230,DiInvWithoutCurrCostAdjIncInwardMachinery,"Direct investment income without current-cost adjustment on inward investment, directional basis; machinery"
+231,DiInvWithoutCurrCostAdjIncInwardMnfctr,"Direct investment income without current-cost adjustment on inward investment, directional basis; manufacturing"
+232,DiInvWithoutCurrCostAdjIncInwardMnfctrOth,"Direct investment income without current-cost adjustment on inward investment, directional basis; other manufacturing"
+233,DiInvWithoutCurrCostAdjIncInwardOthInd,"Direct investment income without current-cost adjustment on inward investment, directional basis; other industries (those not listed under receipts in table 4.2)"
+234,DiInvWithoutCurrCostAdjIncInwardOthIndExcl8DiInward,"Direct investment income without current-cost adjustment on inward investment, directional basis; other industries (excluding 8 industry groups)"
+235,DiInvWithoutCurrCostAdjIncInwardPrimFabMtls,"Direct investment income without current-cost adjustment on inward investment, directional basis; primary and fabricated metals"
+236,DiInvWithoutCurrCostAdjIncInwardProfSciAndTech,"Direct investment income without current-cost adjustment on inward investment, directional basis; professional, scientific, and technical services"
+237,DiInvWithoutCurrCostAdjIncInwardRealEstRentLeas,"Direct investment income without current-cost adjustment on inward investment, directional basis; real estate and rental and leasing"
+238,DiInvWithoutCurrCostAdjIncInwardRtlTrd,"Direct investment income without current-cost adjustment on inward investment, directional basis; retail trade"
+239,DiInvWithoutCurrCostAdjIncInwardTransEquip,"Direct investment income without current-cost adjustment on inward investment, directional basis; transportation equipment"
+240,DiInvWithoutCurrCostAdjIncInwardWhlslTrd,"Direct investment income without current-cost adjustment on inward investment, directional basis; wholesale trade"
+241,DiInvWithoutCurrCostAdjIncOutward,"Direct investment income without current cost adjustment on outward investment (U.S. direct investment abroad), directional basis"
+242,DiInvWithoutCurrCostAdjIncOutwardChem,"Direct investment income without current cost adjustment on outward investment (U.S. direct investment abroad), directional basis; chemicals"
+243,DiInvWithoutCurrCostAdjIncOutwardCompElecProd,"Direct investment income without current cost adjustment on outward investment (U.S. direct investment abroad), directional basis; computers and electronic products"
+244,DiInvWithoutCurrCostAdjIncOutwardDepIns,"Direct investment income without current cost adjustment on outward investment (U.S. direct investment abroad), directional basis; depository institutions "
+245,DiInvWithoutCurrCostAdjIncOutwardElectrical,"Direct investment income without current cost adjustment on outward investment (U.S. direct investment abroad), directional basis; electrical equipment, appliances, and components"
+246,DiInvWithoutCurrCostAdjIncOutwardFinAndIns,"Direct investment income without current cost adjustment on outward investment (U.S. direct investment abroad), directional basis; finance (including depository institutions) and insurance"
+247,DiInvWithoutCurrCostAdjIncOutwardFinExclDepInsAndIns,"Direct investment income without current cost adjustment on outward investment (U.S. direct investment abroad), directional basis; finance (including depository institutions) and insurance"
+248,DiInvWithoutCurrCostAdjIncOutwardFood,"Direct investment income without current cost adjustment on outward investment (U.S. direct investment abroad), directional basis; food"
+249,DiInvWithoutCurrCostAdjIncOutwardHoldExcBank,"Direct investment income without current cost adjustment on outward investment (U.S. direct investment abroad), directional basis; holding companies except bank holding companies"
+250,DiInvWithoutCurrCostAdjIncOutwardInfo,"Direct investment income without current cost adjustment on outward investment (U.S. direct investment abroad), directional basis; information"
+251,DiInvWithoutCurrCostAdjIncOutwardMachinery,"Direct investment income without current cost adjustment on outward investment (U.S. direct investment abroad), directional basis; machinery"
+252,DiInvWithoutCurrCostAdjIncOutwardMining,"Direct investment income without current cost adjustment on outward investment (U.S. direct investment abroad), directional basis; mining"
+253,DiInvWithoutCurrCostAdjIncOutwardMnfctr,"Direct investment income without current cost adjustment on outward investment (U.S. direct investment abroad), directional basis; manufacturing"
+254,DiInvWithoutCurrCostAdjIncOutwardMnfctrOth,"Direct investment income without current cost adjustment on outward investment (U.S. direct investment abroad), directional basis; other manufacturing"
+255,DiInvWithoutCurrCostAdjIncOutwardOthInd,"Direct investment income without current cost adjustment on outward investment (U.S. direct investment abroad), directional basis; manufacturing; other industries (those not listed under receipts in table 4.2)"
+256,DiInvWithoutCurrCostAdjIncOutwardOthIndExcl8DiOutward,"Direct investment income without current cost adjustment on outward investment (U.S. direct investment abroad), directional basis; other industries (excluding 8 industry groups)"
+257,DiInvWithoutCurrCostAdjIncOutwardPrimFabMtls,"Direct investment income without current cost adjustment on outward investment (U.S. direct investment abroad), directional basis; primary and fabricated metals"
+258,DiInvWithoutCurrCostAdjIncOutwardProfSciAndTech,"Direct investment income without current cost adjustment on outward investment (U.S. direct investment abroad), directional basis; professional, scientific, and technical services"
+259,DiInvWithoutCurrCostAdjIncOutwardTransEquip,"Direct investment income without current cost adjustment on outward investment (U.S. direct investment abroad), directional basis; transportation equipment"
+260,DiInvWithoutCurrCostAdjIncOutwardWhlslTrd,"Direct investment income without current cost adjustment on outward investment (U.S. direct investment abroad), directional basis; wholesale trade"
+261,DiInvWithoutCurrCostAdjInward,"Financial transactions without current-cost adjustment for inward direct investment (foreign direct investment in the United States), directional basis"
+262,DiInvWithoutCurrCostAdjInwardChem,"Financial transactions without current-cost adjustment for inward direct investment (foreign direct investment in the United States), directional basis; chemicals"
+263,DiInvWithoutCurrCostAdjInwardCompElecProd,"Financial transactions without current-cost adjustment for inward direct investment (foreign direct investment in the United States), directional basis; computers and electronic products"
+264,DiInvWithoutCurrCostAdjInwardDepIns,"Financial transactions without current-cost adjustment for inward direct investment (foreign direct investment in the United States), directional basis; depository institutions "
+265,DiInvWithoutCurrCostAdjInwardElectrical,"Financial transactions without current-cost adjustment for inward direct investment (foreign direct investment in the United States), directional basis; electrical equipment, appliances, and components"
+266,DiInvWithoutCurrCostAdjInwardFinAndIns,"Financial transactions without current-cost adjustment for inward direct investment (foreign direct investment in the United States), directional basis; finance (including depository institutions) and insurance"
+267,DiInvWithoutCurrCostAdjInwardFinExclDepInsAndIns,"Financial transactions without current-cost adjustment for inward direct investment (foreign direct investment in the United States), directional basis; finance (including depository institutions) and insurance"
+268,DiInvWithoutCurrCostAdjInwardFood,"Financial transactions without current-cost adjustment for inward direct investment (foreign direct investment in the United States), directional basis; food"
+269,DiInvWithoutCurrCostAdjInwardInfo,"Financial transactions without current-cost adjustment for inward direct investment (foreign direct investment in the United States), directional basis; information"
+270,DiInvWithoutCurrCostAdjInwardMachinery,"Financial transactions without current-cost adjustment for inward direct investment (foreign direct investment in the United States), directional basis; machinery"
+271,DiInvWithoutCurrCostAdjInwardMnfctr,"Financial transactions without current-cost adjustment for inward direct investment (foreign direct investment in the United States), directional basis; manufacturing"
+272,DiInvWithoutCurrCostAdjInwardMnfctrOth,"Financial transactions without current-cost adjustment for inward direct investment (foreign direct investment in the United States), directional basis; other manufacturing"
+273,DiInvWithoutCurrCostAdjInwardOthInd,"Financial transactions without current-cost adjustment for inward direct investment (foreign direct investment in the United States), directional basis; other industries (those not listed under incurrence of liabilities in table 6.1)"
+274,DiInvWithoutCurrCostAdjInwardOthIndExcl8DiInward,"Financial transactions without current-cost adjustment for inward direct investment (foreign direct investment in the United States), directional basis; other industries (excluding 8 industry groups)"
+275,DiInvWithoutCurrCostAdjInwardPrimFabMtls,"Financial transactions without current-cost adjustment for inward direct investment (foreign direct investment in the United States), directional basis; primary and fabricated metals"
+276,DiInvWithoutCurrCostAdjInwardProfSciAndTech,"Financial transactions without current-cost adjustment for inward direct investment (foreign direct investment in the United States), directional basis; professional, scientific, and technical services"
+277,DiInvWithoutCurrCostAdjInwardRealEstRentLeas,"Financial transactions without current-cost adjustment for inward direct investment (foreign direct investment in the United States), directional basis; real estate and rental and leasing"
+278,DiInvWithoutCurrCostAdjInwardRtlTrd,"Financial transactions without current-cost adjustment for inward direct investment (foreign direct investment in the United States), directional basis; retail trade"
+279,DiInvWithoutCurrCostAdjInwardTransEquip,"Financial transactions without current-cost adjustment for inward direct investment (foreign direct investment in the United States), directional basis; transportation equipment"
+280,DiInvWithoutCurrCostAdjInwardWhlslTrd,"Financial transactions without current-cost adjustment for inward direct investment (foreign direct investment in the United States), directional basis; wholesale trade"
+281,DiInvWithoutCurrCostAdjOutward,"Financial transactions without current-cost adjustment for outward direct investment (U.S. direct investment abroad), directional basis"
+282,DiInvWithoutCurrCostAdjOutwardChem,"Financial transactions without current-cost adjustment for outward direct investment (U.S. direct investment abroad), directional basis; chemicals"
+283,DiInvWithoutCurrCostAdjOutwardCompElecProd,"Financial transactions without current-cost adjustment for outward direct investment (U.S. direct investment abroad), directional basis; computers and electronic products"
+284,DiInvWithoutCurrCostAdjOutwardDepIns,"Financial transactions without current-cost adjustment for outward direct investment (U.S. direct investment abroad), directional basis; depository institutions "
+285,DiInvWithoutCurrCostAdjOutwardElectrical,"Financial transactions without current-cost adjustment for outward direct investment (U.S. direct investment abroad), directional basis; electrical equipment, appliances, and components"
+286,DiInvWithoutCurrCostAdjOutwardFinAndIns,"Financial transactions without current-cost adjustment for outward direct investment (U.S. direct investment abroad), directional basis; finance (including depository institutions) and insurance"
+287,DiInvWithoutCurrCostAdjOutwardFinExclDepInsAndIns,"Financial transactions without current-cost adjustment for outward direct investment (U.S. direct investment abroad), directional basis; finance (including depository institutions) and insurance"
+288,DiInvWithoutCurrCostAdjOutwardFood,"Financial transactions without current-cost adjustment for outward direct investment (U.S. direct investment abroad), directional basis; food"
+289,DiInvWithoutCurrCostAdjOutwardHoldExcBank,"Financial transactions without current-cost adjustment for outward direct investment (U.S. direct investment abroad), directional basis; holding companies except bank holding companies"
+290,DiInvWithoutCurrCostAdjOutwardInfo,"Financial transactions without current-cost adjustment for outward direct investment (U.S. direct investment abroad), directional basis; information"
+291,DiInvWithoutCurrCostAdjOutwardMachinery,"Financial transactions without current-cost adjustment for outward direct investment (U.S. direct investment abroad), directional basis; machinery"
+292,DiInvWithoutCurrCostAdjOutwardMining,"Financial transactions without current-cost adjustment for outward direct investment (U.S. direct investment abroad), directional basis; mining"
+293,DiInvWithoutCurrCostAdjOutwardMnfctr,"Financial transactions without current-cost adjustment for outward direct investment (U.S. direct investment abroad), directional basis; manufacturing"
+294,DiInvWithoutCurrCostAdjOutwardMnfctrOth,"Financial transactions without current-cost adjustment for outward direct investment (U.S. direct investment abroad), directional basis; other manufacturing"
+295,DiInvWithoutCurrCostAdjOutwardOthInd,"Financial transactions without current-cost adjustment for outward direct investment (U.S. direct investment abroad), directional basis; other industries (those not listed under acquisition of assets in table 6.1)"
+296,DiInvWithoutCurrCostAdjOutwardOthIndExcl8DiOutward,"Financial transactions without current-cost adjustment for outward direct investment (U.S. direct investment abroad), directional basis; other industries (excluding 8 industry groups)"
+297,DiInvWithoutCurrCostAdjOutwardPrimFabMtls,"Financial transactions without current-cost adjustment for outward direct investment (U.S. direct investment abroad), directional basis; primary and fabricated metals"
+298,DiInvWithoutCurrCostAdjOutwardProfSciAndTech,"Financial transactions without current-cost adjustment for outward direct investment (U.S. direct investment abroad), directional basis; professional, scientific, and technical services"
+299,DiInvWithoutCurrCostAdjOutwardTransEquip,"Financial transactions without current-cost adjustment for outward direct investment (U.S. direct investment abroad), directional basis; transportation equipment"
+300,DiInvWithoutCurrCostAdjOutwardWhlslTrd,"Financial transactions without current-cost adjustment for outward direct investment (U.S. direct investment abroad), directional basis; wholesale trade"
+301,EquityAndInvFundSharesAssets,Net U.S. acquisition of portfolio investment assets; equity and investment fund shares
+302,EquityAndInvFundSharesAssetsDepTaking,Net U.S. acquisition of portfolio investment assets; equity and investment fund shares; held by deposit-taking institutions except central bank
+303,EquityAndInvFundSharesAssetsNonFin,Net U.S. acquisition of portfolio investment assets; equity and investment fund shares; held by nonfinancial institutions except general government
+304,EquityAndInvFundSharesAssetsOthFin,Net U.S. acquisition of portfolio investment assets; equity and investment fund shares; held by non-deposit-taking financial institutions
+305,EquityAndInvFundSharesIncPay,Portfolio investment income payments; income on equity and investment fund shares
+306,EquityAndInvFundSharesIncPayDepTaking,Portfolio investment income payments on equity and investment fund shares; deposit-taking institutions except central bank
+307,EquityAndInvFundSharesIncPayNonFin,Portfolio investment income payments on equity and investment fund shares; nonfinancial institutions except general government
+308,EquityAndInvFundSharesIncPayOthFin,Portfolio investment income payments on equity and investment fund shares; non-deposit-taking financial institutions
+309,EquityAndInvFundSharesIncRec,Portfolio investment income receipts; income on equity and investment fund shares
+310,EquityAndInvFundSharesIncRecDepTaking,Portfolio investment income receipts on equity and investment fund shares; deposit-taking institutions except central bank
+311,EquityAndInvFundSharesIncRecNonFin,Portfolio investment income receipts on equity and investment fund shares; nonfinancial institutions except general government
+312,EquityAndInvFundSharesIncRecOthFin,Portfolio investment income receipts on equity and investment fund shares; non-deposit-taking financial institutions
+313,EquityAndInvFundSharesLiabs,Net U.S. incurrence of portfolio investment liabilities; equity and investment fund shares
+314,EquityAndInvFundSharesLiabsDepTaking,Net U.S. incurrence of portfolio investment liabilities; equity and investment fund shares; issued by deposit-taking institutions except central bank
+315,EquityAndInvFundSharesLiabsFoa,Net U.S. incurrence of portfolio investment liabilities to foreign official agencies; equity and investment fund shares
+316,EquityAndInvFundSharesLiabsNonFin,Net U.S. incurrence of portfolio investment liabilities; equity and investment fund shares; issued by nonfinancial institutions except general government
+317,EquityAndInvFundSharesLiabsOthFin,Net U.S. incurrence of portfolio investment liabilities; equity and investment fund shares; issued by non-deposit-taking financial institutions
+318,EquityOthThanInvFundSharesAssets,Net U.S. acquisition of portfolio investment assets; equity other than investment fund shares
+319,EquityOthThanInvFundSharesIncPay,Portfolio investment income payments; dividends on equity other than investment fund shares
+320,EquityOthThanInvFundSharesIncRec,Portfolio investment income receipts; dividends on equity other than investment fund shares
+321,EquityOthThanInvFundSharesLiabs,Net U.S. incurrence of portfolio investment liabilities; equity other than investment fund shares
+322,EquityOthThanInvFundSharesLiabsFoa,Net U.S. incurrence of portfolio investment liabilities to foreign official agencies; equity excluding investment fund shares
+323,ExpGds,Exports of goods
+324,ExpGdsAgFoodsFeedsAndBevs,"Exports of agricultural foods, feeds, and beverages"
+325,ExpGdsAgIsm,Exports of agricultural industrial supplies and materials
+326,ExpGdsAppFootAndHouse,"Exports of apparel, footwear, and household goods"
+327,ExpGdsAutoEngAndEngParts,Exports of automotive engines and engine parts
+328,ExpGdsAutoVehPartsAndEngines,"Exports of automotive vehicles, parts, and engines"
+329,ExpGdsBauxAndAlum,Exports of bauxite and aluminum
+330,ExpGdsBopAdj,"Exports of goods; balance of payments adjustments, net"
+331,ExpGdsBuildMatsExcMetals,Exports of building materials except metals
+332,ExpGdsCapGoodsExclAuto,Exports of capital goods except automotive
+333,ExpGdsCensus,"Exports of goods, Census basis"
+334,ExpGdsChemsExcMeds,Exports of chemicals except medicinals
+335,ExpGdsCivAir,"Exports of civilian aircraft, complete, all types"
+336,ExpGdsCivAirEngAndParts,"Exports of civilian aircraft, engines, and parts"
+337,ExpGdsCoalAndRelProds,Exports of coal and related products
+338,ExpGdsComp,Exports of computers
+339,ExpGdsCompAccPeriAndParts,"Exports of computer accessories, peripherals, and parts"
+340,ExpGdsConsGoodsExcFoodAndAuto,Exports of consumer goods except food and automotive
+341,ExpGdsCopper,Exports of copper
+342,ExpGdsCorn,Exports of corn
+343,ExpGdsCrudePet,Exports of crude petroleum
+344,ExpGdsDistBevAndOthNonAgFoodsFeedsAndBevs,"Exports of distilled beverages and other nonagricultural foods, feeds, and beverages"
+345,ExpGdsDurCons,Exports of durable consumer goods
+346,ExpGdsElecGenMachElecAppAndParts,"Exports of electric-generating machinery, electric apparatus, and parts"
+347,ExpGdsEnergyProd,Exports of energy products
+348,ExpGdsEngAndPartsForCivAir,Exports of engines and parts for civilian aircraft
+349,ExpGdsFertPestAndInsect,"Exports of fertilizers, pesticides, and insecticides"
+350,ExpGdsFishShellfish,Exports of fish and shellfish
+351,ExpGdsFoodsFeedsAndBevs,"Exports of foods, feeds, and beverages"
+352,ExpGdsFuelOil,Exports of fuel oil
+353,ExpGdsGdsProcPortsBopAdj,"Exports of goods; balance of payments adjustments, net; goods procured in U.S. ports by foreign carriers"
+354,ExpGdsGemDiamAndOthGem,Exports of gem diamonds and other gemstones
+355,ExpGdsGenMerch,Exports of general merchandise
+356,ExpGdsGrainsPreps,Exports of grains and preparations
+357,ExpGdsHidesSkins,"Exports of hides and skins, including furskins"
+358,ExpGdsHouseAndKitchApp,Exports of household and kitchen appliances
+359,ExpGdsHouseFurnAndRelProds,Exports of household furnishings and related products
+360,ExpGdsHouseKitchAppAndOthHouse,Exports of household and kitchen appliances and other household goods
+361,ExpGdsIndEngPumpsComps,"Exports of industrial engines, pumps, and compressors"
+362,ExpGdsIndInorgChems,Exports of industrial inorganic chemicals
+363,ExpGdsIndOrgChems,Exports of industrial organic chemicals
+364,ExpGdsIronAndSteelProds,Exports of iron and steel products
+365,ExpGdsIsm,Exports of industrial supplies and materials
+366,ExpGdsJewelryAndCollect,Exports of jewelry and collectibles
+367,ExpGdsLiqPetGases,Exports of liquified petroleum gases
+368,ExpGdsMachAndEquipExcCons,Exports of machinery and equipment except consumer-type
+369,ExpGdsMachToolsMetalworkMach,Exports of machine tools and metalworking machinery
+370,ExpGdsMeasTestControlInst,"Exports of measuring, testing, and control instruments"
+371,ExpGdsMeatProdsPoultry,Exports of meat products and poultry
+372,ExpGdsMedDentAndPharm,"Exports of medicinal, dental, and pharmaceutical products"
+373,ExpGdsMerchantingBopAdj,"Exports of goods; balance of payments adjustments, net; net exports of goods under merchanting"
+374,ExpGdsMerchantingNet,Net exports of goods under merchanting
+375,ExpGdsMetalsAndNonmetProds,Exports of metals and nonmetallic products
+376,ExpGdsNaturalGas,Exports of natural gas
+377,ExpGdsNonAgFoodsFeedsAndBevs,"Exports of nonagricultural foods, feeds, and beverages"
+378,ExpGdsNonAgIsm,Exports of nonagricultural industrial supplies and materials
+379,ExpGdsNondurCons,Exports of nondurable consumer goods
+380,ExpGdsNonferrousMetals,Exports of nonferrous metals
+381,ExpGdsNonmonetaryGold,Exports of nonmonetary gold
+382,ExpGdsNonmonGoldBopAdj,"Exports of goods; balance of payments adjustments, net; nonmonetary gold"
+383,ExpGdsNuclearFuelAndElecEnergy,Exports of nuclear fuel and electric energy
+384,ExpGdsOilDrillMiningConstMach,"Exports of oil-drilling, mining, and construction machinery"
+385,ExpGdsOthAgFoodsFeedsAndBevs,"Exports of other agricultural foods, feeds, and beverages"
+386,ExpGdsOthAgIsm,Exports of other agricultural industrial supplies
+387,ExpGdsOthAutoPartsAndAcc,Exports of other automotive parts and accessories
+388,ExpGdsOthBopAdj,"Exports of goods; balance of payments adjustments, net; other adjustments, net"
+389,ExpGdsOthChems,Exports of other chemicals
+390,ExpGdsOthDurCons,Exports of other durable consumer goods
+391,ExpGdsOthFeeds,Exports of other feeds
+392,ExpGdsOthGenMerch,Exports of other general merchandise
+393,ExpGdsOthHouseIncCellPhones,"Exports of other household goods, including cell phones"
+394,ExpGdsOthIndMach,Exports of other industrial machinery
+395,ExpGdsOthMetalsAndNonmetProds,Exports of other metals and nonmetallic products
+396,ExpGdsOthNondurCons,Exports of other nondurable consumer goods
+397,ExpGdsOthNonferrousMetals,Exports of other nonferrous metals
+398,ExpGdsOthNonmetals,Exports of other nonmetals
+399,ExpGdsOthOfficeAndBusMach,Exports of other office and business machines
+400,ExpGdsOthPetProds,Exports of other petroleum products
+401,ExpGdsOthServIndAndAgMach,Exports of other service-industry and agricultural machinery
+402,ExpGdsOthTransEquip,Exports of other transportation equipment
+403,ExpGdsPaperAndPaperBaseStocks,Exports of paper and paper-base stocks
+404,ExpGdsPassCars,"Exports of passenger cars, new and used"
+405,ExpGdsPetAndProds,Exports of petroleum and products
+406,ExpGdsPlasticMaterials,Exports of plastic materials
+407,ExpGdsPrecMetalsExcNonmonGold,Exports of precious metals except nonmonetary gold
+408,ExpGdsPrivGiftParcelRemitBopAdj,"Exports of goods; balance of payments adjustments, net; private gift parcel remittances"
+409,ExpGdsRadioAndStereoEquip,"Exports of radio and stereo equipment, including recorded media"
+410,ExpGdsRawCotton,Exports of raw cotton
+411,ExpGdsRepairEquipBopAdj,"Exports of goods; balance of payments adjustments, net; repair of equipment"
+412,ExpGdsRiceOthFoodGrains,Exports of rice and other food grains
+413,ExpGdsSciHospAndMedEquipAndParts,"Exports of scientific, hospital, and medical equipment and parts"
+414,ExpGdsSemiconductors,Exports of semiconductors
+415,ExpGdsServ,Exports of goods and services
+416,ExpGdsServIncRec,Exports of goods and services and income receipts (credits)
+417,ExpGdsSoybeans,Exports of soybeans
+418,ExpGdsSteelmakingMats,Exports of steelmaking materials
+419,ExpGdsTelecomEquip,Exports of telecommunications equipment
+420,ExpGdsTextileSupAndRelMats,Exports of textile supplies and related materials
+421,ExpGdsToilAndCosmet,Exports of toiletries and cosmetics
+422,ExpGdsToysAndSport,"Exports of toys and sporting goods, including bicycles"
+423,ExpGdsTrucksBusesSpecPurpVeh,"Exports of trucks, buses, and special purpose vehicles"
+424,ExpGdsTvsVidRecAndOthVidEquip,"Exports of televisions, video receivers, and other video equipment"
+425,ExpGdsUnmanufTobacco,Exports of unmanufactured tobacco
+426,ExpGdsUsMilAgencyBopAdj,"Exports of goods; balance of payments adjustments, net; exports under U.S. military agency sales contracts"
+427,ExpGdsVegFruitNutPreps,"Exports of vegetables, fruits, nuts, and preparations"
+428,ExpGdsWheat,Exports of wheat
+429,ExpGenMerch,Exports of general merchandise
+430,ExpServ,Exports of services
+431,ExpServArtisticRelated,Exports of artistic related services
+432,ExpServAudVis,Exports of audiovisual services
+433,ExpServChargesForTheUseOfIpNie,Charges for the use of intellectual property n.i.e.; exports
+434,ExpServCipLicensesAudVis,Charges for the use of intellectual property n.i.e.; exports; licenses to reproduce and/or distribute audiovisual products
+435,ExpServCipLicensesCompSoftware,Charges for the use of intellectual property n.i.e.; exports; licenses to reproduce and/or distribute computer software
+436,ExpServCipLicensesFranchisesTrademarks,Charges for the use of intellectual property n.i.e.; exports; franchises and trademarks licensing fees
+437,ExpServCipLicensesOutcomesResearchAndDev,Charges for the use of intellectual property n.i.e.; exports; licenses for the use of outcomes of research and development
+438,ExpServComp,Exports of computer services
+439,ExpServConst,Exports of construction services
+440,ExpServConstAbroad,Construction abroad
+441,ExpServConstExpend,Foreign contractors' expenditures in the United States
+442,ExpServConstruction,Exports of construction services
+443,ExpServFinancial,Exports of financial services
+444,ExpServFinancialExplicitAndOth,Exports of explicitly charged and other financial services
+445,ExpServFinBrokMarketMak,Exports of brokerage and market-making services
+446,ExpServFinCredCardOthCredRelated,Exports of credit card and other credit-related services
+447,ExpServFinFinAdvCust,Exports of financial advisory and custody services
+448,ExpServFinFinMan,Exports of financial management services
+449,ExpServFinSecLendEftOth,"Exports of securities lending, electronic funds transfer, and other services"
+450,ExpServFinUwPrivPlace,Exports of underwriting and private placement services
+451,ExpServFisim,Exports of financial intermediation services indirectly measured
+452,ExpServGovtGoodsAndServicesNie,Exports of government goods and services n.i.e.
+453,ExpServInfo,Exports of information services
+454,ExpServInsurance,Exports of insurance services
+455,ExpServInsuranceAuxIns,Exports of auxiliary insurance services
+456,ExpServInsuranceDirect,Exports of direct insurance services
+457,ExpServInsuranceReIns,Exports of reinsurance services
+458,ExpServMaintenanceAndRepairNie,Exports of maintenance and repair services n.i.e.
+459,ExpServManufacturing,Exports of manufacturing services on physical inputs owned by others
+460,ExpServOtherBusiness,Exports of other business services
+461,ExpServPersCultAndRec,"Exports of personal, cultural, and recreational services"
+462,ExpServPersCultAndRecOth,"Exports of other personal, cultural, and recreational services"
+463,ExpServProfMgmtConsult,Exports of professional and management consulting services
+464,ExpServResearchAndDev,Exports of research and development services
+465,ExpServTechTradeRelatedOth,"Exports of technical, trade-related, and other business services"
+466,ExpServTelecom,Exports of telecommunications services
+467,ExpServTelecomCompAndInfo,"Exports of telecommunications, computer, and information services"
+468,ExpServTransport,Exports of transport services
+469,ExpServTransportAir,Exports of air transport services
+470,ExpServTransportAirFreight,Exports of air freight services
+471,ExpServTransportAirPass,Exports of air passenger services
+472,ExpServTransportAirPort,Exports of air port services
+473,ExpServTransportOth,Exports of transport services; other modes of transport
+474,ExpServTransportSea,Exports of sea transport services
+475,ExpServTransportSeaFreight,Exports of sea freight services
+476,ExpServTransportSeaPort,Exports of sea port services
+477,ExpServTravel,Exports of travel services (for all purposes including education)
+478,ExpServTravelBusiness,Exports of business travel services
+479,ExpServTravelBusinessOth,Exports of other business travel services
+480,ExpServTravelEducation,Exports of education-related services
+481,ExpServTravelHealth,Exports of health-related services
+482,ExpServTravelPersonal,Exports of personal travel services
+483,ExpServTravelPersonalOth,Exports of other personal travel services
+484,ExpServTravelShortTermWork,"Expenditures in the U.S. by border, seasonal, and other short-term workers"
+485,FinAssetsExclFinDeriv,Net U.S. acquisition of financial assets excluding financial derivatives
+486,FinDeriv,"Financial derivatives other than reserves, net transactions"
+487,FinDerivReserveAssets,Net U.S. acquisition of reserve assets; other; financial derivatives
+488,FinLiabsExclFinDeriv,Net U.S. incurrence of liabilities excluding financial derivatives
+489,FinLiabsFoa,Net U.S. incurrence of liabilities to foreign official agencies
+490,GoldReserveAssets,Net U.S. acquisition of reserve assets; monetary gold
+491,ImfReserveAssets,Net U.S. acquisition of reserve assets; reserve position in the International Monetary Fund
+492,ImpGds,Imports of goods
+493,ImpGdsAgFoodsFeedsAndBevs,"Imports of agricultural foods, feeds, and beverages"
+494,ImpGdsAgIsm,Imports of agricultural industrial supplies and materials
+495,ImpGdsAppFootAndHouse,"Imports of apparel, footwear, and household goods"
+496,ImpGdsAutoEngAndEngParts,Imports of automotive engines and engine parts
+497,ImpGdsAutoVehPartsAndEngines,"Imports of automotive vehicles, parts, and engines"
+498,ImpGdsBauxAndAlum,Imports of bauxite and aluminum
+499,ImpGdsBopAdj,"Imports of goods; balance of payments adjustments, net"
+500,ImpGdsBuildMatsExcMetals,Imports of building materials except metals
+501,ImpGdsCapGoodsExclAuto,Imports of capital goods except automotive
+502,ImpGdsCensus,"Imports of goods, Census basis"
+503,ImpGdsChemsExcMeds,Imports of chemicals except medicinals
+504,ImpGdsCivAir,"Imports of civilian aircraft, complete, all types"
+505,ImpGdsCivAirEngAndParts,"Imports of civilian aircraft, engines, and parts"
+506,ImpGdsCoalAndRelProds,Imports of coal and related products
+507,ImpGdsCocoaAndSugar,Imports of cocoa beans and sugar
+508,ImpGdsComp,Imports of computers
+509,ImpGdsCompAccPeriAndParts,"Imports of computer accessories, peripherals, and parts"
+510,ImpGdsConsGoodsExcFoodAndAuto,Imports of consumer goods except food and automotive
+511,ImpGdsCrudePet,Imports of crude petroleum
+512,ImpGdsDistBevAndOthNonAgFoodsFeedsAndBevs,"Imports of distilled beverages and other nonagricultural foods, feeds, and beverages"
+513,ImpGdsDurCons,Imports of durable consumer goods
+514,ImpGdsElecGenMachElecAppAndParts,"Imports of electric-generating machinery, electric apparatus and parts"
+515,ImpGdsEnergyProds,Imports of energy products
+516,ImpGdsEngAndPartsForCivAir,Imports of engines and parts for civilian aircraft
+517,ImpGdsFertPestAndInsect,"Imports of fertilizers, pesticides, and insecticides"
+518,ImpGdsFishShellfish,Imports of fish and shellfish
+519,ImpGdsFoodsFeedsAndBevs,"Imports of foods, feeds, and beverages"
+520,ImpGdsFuelOil,Imports of fuel oil
+521,ImpGdsGdsProcPortsBopAdj,"Imports of goods; balance of payments adjustments, net; goods procured in foreign ports by U.S. carriers"
+522,ImpGdsGemDiamAndOthGem,Imports of gem diamonds and other gemstones
+523,ImpGdsGenMerch,Imports of general merchandise
+524,ImpGdsGreenCoffee,Imports of green coffee
+525,ImpGdsHouseAndKitchApp,Imports of household and kitchen appliances
+526,ImpGdsHouseFurnAndRelProds,Imports of household furnishings and related products
+527,ImpGdsHouseKitchAppAndOthHouse,Imports of household and kitchen appliances and other household goods
+528,ImpGdsIndEngPumpsComps,"Imports of industrial engines, pumps, and compressors"
+529,ImpGdsIndInorgChems,Imports of industrial inorganic chemicals
+530,ImpGdsIndOrgChems,Imports of industrial organic chemicals
+531,ImpGdsInlandFreightCanMexBopAdj,"Imports of goods; balance of payments adjustments, net; inland freight in Canada and Mexico"
+532,ImpGdsIronAndSteelProds,Imports of iron and steel products
+533,ImpGdsIsm,Imports of industrial supplies and materials
+534,ImpGdsJewelryAndCollect,Imports of jewelry and collectibles
+535,ImpGdsLiqPetGases,Imports of liquified petroleum gases
+536,ImpGdsLocoRailBopAdj,"Imports of goods; balance of payments adjustments, net; locomotives and railcars"
+537,ImpGdsMachAndEquipExcCons,Imports of machinery and equipment except consumer-type
+538,ImpGdsMachToolsMetalworkMach,Imports of machine tools and metalworking machinery
+539,ImpGdsMeasTestControlInst,"Imports of measuring, testing, and control instruments"
+540,ImpGdsMeatProdsPoultry,Imports of meat products and poultry
+541,ImpGdsMedDentAndPharm,"Imports of medicinal, dental, and pharmaceutical products"
+542,ImpGdsMetalsAndNonmetProds,Imports of metals and nonmetallic products
+543,ImpGdsNaturalGas,Imports of natural gas
+544,ImpGdsNonAgFoodsFeedsAndBevs,"Imports of nonagricultural foods, feeds, and beverages"
+545,ImpGdsNonAgIsm,Imports of nonagricultural industrial supplies and materials
+546,ImpGdsNondurCons,Imports of nondurable consumer goods
+547,ImpGdsNonferrousMetals,Imports of nonferrous metals
+548,ImpGdsNonmonetaryGold,Imports of nonmonetary gold
+549,ImpGdsNonmonGoldBopAdj,"Imports of goods; balance of payments adjustments, net; nonmonetary gold"
+550,ImpGdsNuclearFuelAndElecEnergy,Imports of nuclear fuel and electric energy
+551,ImpGdsOilDrillMiningConstMach,"Imports of oil-drilling, mining, and construction machinery"
+552,ImpGdsOthAgFoodsFeedsAndBevs,"Imports of other agricultural foods, feeds, and beverages"
+553,ImpGdsOthAutoPartsAndAcc,Imports of other automotive parts and accessories
+554,ImpGdsOthBopAdj,"Imports of goods; balance of payments adjustments, net; other adjustments, net"
+555,ImpGdsOthChems,Imports of other chemicals
+556,ImpGdsOthDurCons,Imports of other durable consumer goods
+557,ImpGdsOthGenMerch,Imports of other general merchandise
+558,ImpGdsOthHouseIncCellPhones,"Imports of other household goods, including cell phones"
+559,ImpGdsOthIndMach,Imports of other industrial machinery
+560,ImpGdsOthMetalsAndNonmetProds,Imports of other metals and nonmetallic products
+561,ImpGdsOthNondurCons,Imports of other nondurable consumer goods
+562,ImpGdsOthNonferrousMetals,Imports of other nonferrous metals
+563,ImpGdsOthNonmetals,Imports of other nonmetals
+564,ImpGdsOthOfficeAndBusMach,Imports of other office and business machines
+565,ImpGdsOthPetProds,Imports of other petroleum products
+566,ImpGdsOthServIndAndAgMach,Imports of other service-industry and agricultural machinery
+567,ImpGdsOthTransEquip,Imports of other transportation equipment
+568,ImpGdsPaperAndPaperBaseStocks,Imports of paper and paper-base stocks
+569,ImpGdsPassCars,"Imports of passenger cars, new and used"
+570,ImpGdsPetAndProds,Imports of petroleum and products
+571,ImpGdsPlasticMaterials,Imports of plastic materials
+572,ImpGdsPrecMetalsExcNonmonGold,Imports of precious metals except nonmonetary gold
+573,ImpGdsRadioAndStereoEquip,"Imports of radio and stereo equipment, including recorded media"
+574,ImpGdsRepairEquipBopAdj,"Imports of goods; balance of payments adjustments, net; repair of equipment"
+575,ImpGdsSciHospAndMedEquipAndParts,"Imports of scientific, hospital, and medical equipment and parts"
+576,ImpGdsSemiconductors,Imports of semiconductors
+577,ImpGdsServ,Imports of goods and services
+578,ImpGdsServIncPay,Imports of goods and services and income payments (debits)
+579,ImpGdsSoftRevalBopAdj,"Imports of goods; balance of payments adjustments, net; software revaluation"
+580,ImpGdsSteelmakingMats,Imports of steelmaking materials
+581,ImpGdsTelecomEquip,Imports of telecommunications equipment
+582,ImpGdsTextileSupAndRelMats,Imports of textile supplies and related materials
+583,ImpGdsToilAndCosmet,Imports of toiletries and cosmetics
+584,ImpGdsToysAndSport,"Imports of toys and sporting goods, including bicycles"
+585,ImpGdsTrucksBusesSpecPurpVeh,"Imports of trucks, buses, and special purpose vehicles"
+586,ImpGdsTvsVidRecAndOthVidEquip,"Imports of televisions, video receivers, and other video equipment"
+587,ImpGdsUsMilAgencyBopAdj,"Imports of goods; balance of payments adjustments, net; imports by U.S. military agencies"
+588,ImpGdsVegFruitNutPreps,"Imports of vegetables, fruits, nuts, and preparations"
+589,ImpGdsWineBeerRelProds,"Imports of wine, beer, and related products"
+590,ImpServ,Imports of services
+591,ImpServArtisticRelated,Imports of artistic related services
+592,ImpServAudVis,Imports of audiovisual services
+593,ImpServChargesForTheUseOfIpNie,Charges for the use of intellectual property n.i.e.; imports
+594,ImpServCipLicensesAudVis,Charges for the use of intellectual property n.i.e.; imports; licenses to reproduce and/or distribute audiovisual products
+595,ImpServCipLicensesCompSoftware,Charges for the use of intellectual property n.i.e.; imports; licenses to reproduce and/or distribute computer software
+596,ImpServCipLicensesFranchisesTrademarks,Charges for the use of intellectual property n.i.e.; imports; franchises and trademarks licensing fees
+597,ImpServCipLicensesOutcomesResearchAndDev,Charges for the use of intellectual property n.i.e.; imports; licenses for the use of outcomes of research and development
+598,ImpServComp,Imports of computer services
+599,ImpServConst,Imports of construction services
+600,ImpServConstExpend,U.S. contractors' expenditures abroad
+601,ImpServConstInTheUs,Construction in the United States
+602,ImpServConstruction,Imports of construction services
+603,ImpServFinancial,Imports of financial services
+604,ImpServFinancialExplicitAndOth,Imports of explicitly charged and other financial services
+605,ImpServFinBrokMarketMak,Imports of brokerage and market-making services
+606,ImpServFinCredCardOthCredRelated,Imports of credit card and other credit-related services
+607,ImpServFinFinAdvCust,Imports of financial advisory and custody services
+608,ImpServFinFinMan,Imports of financial management services
+609,ImpServFinSecLendEftOth,"Imports of securities lending, electronic funds transfer, and other services"
+610,ImpServFinUwPrivPlace,Imports of underwriting and private placement services
+611,ImpServFisim,Imports of financial intermediation services indirectly measured
+612,ImpServGovtGoodsAndServicesNie,Imports of government goods and services n.i.e.
+613,ImpServInfo,Imports of information services
+614,ImpServInsurance,Imports of insurance services
+615,ImpServInsuranceAuxIns,Imports of auxiliary insurance services
+616,ImpServInsuranceDirect,Imports of direct insurance services
+617,ImpServInsuranceReIns,Imports of reinsurance services
+618,ImpServMaintenanceAndRepairNie,Imports of maintenance and repair services n.i.e.
+619,ImpServManufacturing,Imports of manufacturing services on physical inputs owned by others
+620,ImpServOtherBusiness,Imports of other business services
+621,ImpServPersCultAndRec,"Imports of personal, cultural, and recreational services"
+622,ImpServPersCultAndRecOth,"Imports of other personal, cultural, and recreational services"
+623,ImpServProfMgmtConsult,Imports of professional and management consulting services
+624,ImpServResearchAndDev,Imports of research and development services
+625,ImpServTechTradeRelatedOth,"Imports of technical, trade-related, and other business services"
+626,ImpServTelecom,Imports of telecommunications services
+627,ImpServTelecomCompAndInfo,"Imports of telecommunications, computer, and information services"
+628,ImpServTransport,Imports of transport services
+629,ImpServTransportAir,Imports of air transport services
+630,ImpServTransportAirFreight,Imports of air freight services
+631,ImpServTransportAirPass,Imports of air passenger services
+632,ImpServTransportAirPort,Imports of air port services
+633,ImpServTransportOth,Imports of transport services; other modes of transport
+634,ImpServTransportSea,Imports of sea transport services
+635,ImpServTransportSeaFreight,Imports of sea freight services
+636,ImpServTransportSeaPort,Imports of sea port services
+637,ImpServTravel,Imports of travel services (for all purposes including education)
+638,ImpServTravelBusiness,Imports of business travel services
+639,ImpServTravelBusinessOth,Imports of other business travel services
+640,ImpServTravelEducation,Imports of education-related services
+641,ImpServTravelHealth,Imports of health-related services
+642,ImpServTravelPersonal,Imports of personal travel services
+643,ImpServTravelPersonalOth,Imports of other personal travel services
+644,ImpServTravelShortTermWork,"Expenditures abroad by border, seasonal, and other short-term workers"
+645,InsLossesPaid,Insurance losses paid
+646,InsLossesRecovered,Insurance losses recovered
+647,InsPremiumsPaid,Insurance premiums paid
+648,InsPremiumsReceived,Insurance premiums received
+649,InsTechReservesAssets,Net U.S. acquisition of other investment assets; insurance technical reserves
+650,InsTechReservesAssetsOthFinNonFin,Net U.S. acquistion of other investment assets; insurance technical reserves; held by non-deposit-taking institutions and nonfinancial institutions except general government
+651,InsTechReservesLiabs,Net U.S. incurrence of other investment liabilities; insurance technical reserves
+652,InsTechReservesLiabsOthFinNonFin,Net U.S. incurrence of other investment liabilities; insurance technical reserves; issued by non-deposit-taking institutions and nonfinancial institutions except general government
+653,InvFundSharesAssets,Net U.S. acquisition of portfolio investment assets; investment fund shares
+654,InvFundSharesIncPay,Portfolio investment income payments; income attributable to investment fund shareholders
+655,InvFundSharesIncRec,Portfolio investment income receipts; income attributable to investment fund shareholders
+656,InvFundSharesLiabs,Net U.S. incurrence of portfolio investment liabilities; investment fund shares
+657,InvFundSharesLiabsFoa,Net U.S. incurrence of portfolio investment liabilities to foreign official agencies; investment fund shares
+658,InvIncPay,Investment income payments
+659,InvIncRec,Investment income receipts
+660,InvRaIncRec,Reserve asset income receipts
+661,InvRaIntIncRec,Reserve asset income receipts; interest
+662,LoansAssets,Net U.S. acquisition of other investment assets; loans
+663,LoansAssetsDepTaking,Net U.S. acquistion of other investment assets; loans; held by deposit-taking institutions except central bank
+664,LoansAssetsGenGovt,Net U.S. acquistion of other investment assets; loans; held by general government
+665,LoansAssetsOthFinNonFin,Net U.S. acquistion of other investment assets; loans; held by non-deposit-taking institutions and nonfinancial institutions except general government
+666,LoansLiabs,Net U.S. incurrence of other investment liabilities; loans
+667,LoansLiabsDepTaking,Net U.S. incurrence of other investment liabilities; loans; issued by deposit-taking institutions except central bank
+668,LoansLiabsFoa,Net U.S. incurrence of other investment liabilities to foreign official agencies; loans
+669,LoansLiabsOthFinNonFin,Net U.S. incurrence of other investment liabilities; loans; issued by non-deposit-taking institutions and nonfinancial institutions except general government
+670,LoansRepurchaseLiabsOthFinNonFin,"Net U.S. incurrence of other investment liabilities; loans, of which repurchase agreements; issued by non-deposit-taking institutions and nonfinancial institutions except general government"
+671,LoansResaleAssetsOthFinNonFin,"Net U.S. acquistion of other investment assets; loans, of which resale agreements; held by non-deposit-taking institutions and nonfinancial institutions except general government"
+672,LtDebtSecAssets,Net U.S. acquisition of portfolio investment assets; long-term debt securities
+673,LtDebtSecAssetsDepTaking,Net U.S. acquisition of portfolio investment assets; long-term debt securities; held by deposit-taking institutions except central bank
+674,LtDebtSecAssetsNonFin,Net U.S. acquisition of portfolio investment assets; long-term debt securities; held by nonfinancial institutions except general government
+675,LtDebtSecAssetsOthFin,Net U.S. acquisition of portfolio investment assets; long-term debt securities; held by non-deposit-taking financial institutions
+676,LtDebtSecCorpAssets,Net U.S. acquisition of portfolio investment assets; corporate bonds and notes
+677,LtDebtSecCorpLiabs,Net U.S. incurrence of portfolio investment liabilities; corporate bonds and notes
+678,LtDebtSecCorpLiabsFoa,Net U.S. incurrence of portfolio investment liabilities to foreign official agencies; corporate bonds and notes
+679,LtDebtSecFedSponsorAgencyIncPay,Portfolio investment income payments; interest on long-term federally sponsored agency securties
+680,LtDebtSecFedSponsorAgencyLiabs,Net U.S. incurrence of portfolio investment liabilities; long-term federally sponsored agency securities
+681,LtDebtSecFedSponsorAgencyLiabsFoa,Net U.S. incurrence of portfolio investment liabilities to foreign official agencies; long-term federally sponsored agency securities
+682,LtDebtSecGovtAssets,Net U.S. acquisition of portfolio investment assets; long-term government debt securities
+683,LtDebtSecIncPay,Portfolio investment income payments; interest on long-term debt securities
+684,LtDebtSecIncPayDepTaking,Portfolio investment income payments; interest on long-term debt securities; deposit-taking institutions except central bank
+685,LtDebtSecIncPayNonFin,Portfolio investment income payments; interest on long-term debt securities; nonfinancial institutions except general government
+686,LtDebtSecIncRec,Portfolio investment income receipts; interest on long-term debt securities
+687,LtDebtSecIncRecDepTaking,Portfolio investment income receipts; interest on long-term debt securities; deposit-taking institutions except central bank
+688,LtDebtSecIncRecNonFin,Portfolio investment income receipts; interest on long-term debt securities; nonfinancial institutions except general government
+689,LtDebtSecIncRecOthFin,Portfolio investment income receipts; interest on long-term debt securities; non-deposit-taking financial institutions
+690,LtDebtSecLiabs,Net U.S. incurrence of portfolio investment liabilities; long-term debt securities
+691,LtDebtSecLiabsDepTaking,Net U.S. incurrence of portfolio investment liabilities; long-term debt securities; issued by deposit-taking institutions except central bank
+692,LtDebtSecLiabsFoa,Net U.S. incurrence of portfolio investment liabilities to foreign official agencies; long-term debt securities
+693,LtDebtSecLiabsNonFin,Net U.S. incurrence of portfolio investment liabilities; long-term debt securities; issued by nonfinancial institutions except general government
+694,LtDebtSecNegCdAssets,Net U.S. acquisition of portfolio investment assets; long-term negotiable certificates of deposit
+695,LtDebtSecNegCdLiabs,Net U.S. incurrence of portfolio investment liabilities; long-term negotiable certificates of deposit
+696,LtDebtSecNegCdLiabsFoa,Net U.S. incurrence of portfolio investment liabilities to foreign official agencies; long-term negotiable certificates of deposit
+697,LtDebtSecOthThanFedSponsorAgencyIncPayOthFin,Portfolio investment income payments; interest on long-term debt securities other than federally sponsored agency securties; non-deposit-taking financial institutions
+698,LtDebtSecOthThanFedSponsorAgencyLiabsOthFin,Net U.S. incurrence of portfolio investment liabilities; long-term debt securities other than federally sponsored agency securities; issued by non-deposit-taking financial institutions
+699,LtDebtSecStateLocalGovtIncPay,Portfolio investment income payments; interest on state and local government long-term securities
+700,LtDebtSecStateLocalGovtLiabs,Net U.S. incurrence of portfolio investment liabilities; state and local government long-term securities
+701,LtDebtSecStateLocalGovtLiabsFoa,Net U.S. incurrence of portfolio investment liabilities to foreign official agencies; state and local government long-term securities
+702,LtDebtSecTreasIncPay,Portfolio investment income payments; interest on long-term U.S. Treasury securities
+703,LtDebtSecTreasLiabs,Net U.S. incurrence of portfolio investment liabilities; Treasury bonds and notes
+704,LtDepAssets,Net U.S. acquisition of other investment assets; long-term deposits
+705,LtDepAssetsDepTaking,Net U.S. acquistion of other investment assets; long-term deposits; held by deposit-taking institutions except central bank
+706,LtDepAssetsOthFinNonFin,Net U.S. acquistion of other investment assets; long-term deposits; held by non-deposit-taking institutions and nonfinancial institutions except general government
+707,LtDepLiabs,Net U.S. incurrence of other investment liabilities; long-term deposits
+708,LtDepLiabsDepTaking,Net U.S. incurrence of other investment liabilities; long-term deposits; issued by deposit-taking institutions except central bank
+709,LtDepLiabsOthFinNonFin,Net U.S. incurrence of other investment liabilities; long-term deposits; issued by non-deposit-taking institutions and nonfinancial institutions except general government
+710,LtLoansAssets,Net U.S. acquisition of other investment assets; long-term loans
+711,LtLoansAssetsDepTaking,Net U.S. acquistion of other investment assets; long-term loans; held by deposit-taking institutions except central bank
+712,LtLoansAssetsGenGovt,Net U.S. acquistion of other investment assets; long-term loans; held by general government
+713,LtLoansAssetsOthFinNonFin,Net U.S. acquistion of other investment assets; long-term loans; held by non-deposit-taking institutions and nonfinancial institutions except general government
+714,LtLoansLiabs,Net U.S. incurrence of other investment liabilities; long-term loans
+715,LtLoansLiabsDepTaking,Net U.S. incurrence of other investment liabilities; long-term loans; issued by deposit-taking institutions except central bank
+716,LtLoansLiabsOthFinNonFin,Net U.S. incurrence of other investment liabilities; long-term loans; issued by non-deposit-taking institutions and nonfinancial institutions except general government
+717,LtTrdCredAndAdvAssets,Net U.S. acquisition of other investment assets; long-term trade credit and advances
+718,LtTrdCredAndAdvAssetsOthFinNonFin,Net U.S. acquistion of other investment assets; long-term trade credit and advances; held by non-deposit-taking institutions and nonfinancial institutions except general government
+719,LtTrdCredAndAdvLiabs,Net U.S. incurrence of other investment liabilities; long-term trade credit and advances
+720,LtTrdCredAndAdvLiabsGenGovt,Net U.S. incurrence of other investment liabilities; long-term trade credit and advances; issued by general government
+721,LtTrdCredAndAdvLiabsOthFinNonFin,Net U.S. incurrence of other investment liabilities; long-term trade credit and advances; issued by non-deposit-taking institutions and nonfinancial institutions except general government
+722,NetLendBorrCurrCapAcct,Net lending (+) or net borrowing (-) from current- and capital-account transactions
+723,NetLendBorrFinAcct,Net lending (+) or net borrowing (-) from financial-account transactions
+724,OthClmReserveAssets,Net U.S. acquisition of reserve assets; other; other claims
+725,OthEquityAssets,Net U.S. acquisition of other investment assets; other equity
+726,OthEquityAssetsGenGovt,Net U.S. acquistion of other investment assets; held by general government; other equity
+727,OthEquityLiabs,Net U.S. incurrence of other investment liabilities; other equity
+728,OthEquityLiabsFoa,Net U.S. incurrence of other investment liabilities to foreign official agencies; other equity
+729,OthInvAssets,Net U.S. acquisition of other investment assets
+730,OthInvAssetsCentralBank,Net U.S. acquistion of other investment assets; held by central bank
+731,OthInvAssetsDepTaking,Net U.S. acquistion of other investment assets; held by deposit-taking institutions except central bank
+732,OthInvAssetsGenGovt,Net U.S. acquistion of other investment assets; held by general government
+733,OthInvAssetsOthFinNonFin,Net U.S. acquistion of other investment assets; held by non-deposit-taking institutions and nonfinancial institutions except general government
+734,OthInvIncPay,Other investment income payments
+735,OthInvIncPayBeforeFisim,Other investment interest income payments before adjusting for FISIM
+736,OthInvIncPayCentralBank,Other investment income payments; on liabilities issued by central bank
+737,OthInvIncPayDepTaking,Other investment income payments; on liabilities issued by deposit-taking institutions except central bank
+738,OthInvIncPayGenGovt,Other investment income payments; on liabilities issued by general government
+739,OthInvIncPayOthFinNonFin,Other investment income payments; on liabilities issued by non-deposit-taking financial institutions and nonfinancial instutitions except general government
+740,OthInvIncRec,Other investment income receipts
+741,OthInvIncRecBeforeFisim,Other investment interest income receipts before adjusting for FISIM
+742,OthInvIncRecCentralBank,Other investment income receipts; on assets held by central bank
+743,OthInvIncRecDepTaking,Other investment income receipts; on assets held by deposit-taking institutions except central bank
+744,OthInvIncRecGenGovt,Other investment income receipts; on assets held by general government
+745,OthInvIncRecOthFinNonFin,Other investment income receipts; on assets held by non-deposit-taking financial institutions and nonfinancial instutitions except general government
+746,OthInvInsPolHoldtIncPay,Other investment income payments; income attributable to insurance policyholders
+747,OthInvInsPolHoldtIncPayOthFinNonFin,Other investment income payments; income attributable to insurance policyholders; on liabilities issued by non-deposit-taking institutions and nonfinancial institutions except general government
+748,OthInvInsPolHoldtIncRec,Other investment income receipts; income attributable to insurance policyholders
+749,OthInvInsPolHoldtIncRecOthFinNonFin,Other investment income receipts; income attributable to insurance policyholders; on assets held by non-deposit-taking institutions and nonfinancial institutions except general government
+750,OthInvInterbankAssets,Net U.S. acquistion of other investment assets; interbank transactions
+751,OthInvInterbankLiabsDepTaking,Net U.S. incurrence of other investment liabilities; interbank transactions
+752,OthInvIntIncPay,Other investment income payments; interest
+753,OthInvIntIncPayCentralBank,Other investment income payments; interest; on liabilities issued by central bank
+754,OthInvIntIncPayDepTaking,Other investment income payments; interest; on liabilities issued by deposit-taking institutions except central bank
+755,OthInvIntIncPayGenGovt,Other investment income payments; interest on special drawing rights allocations
+756,OthInvIntIncPayOthFinNonFin,Other investment income payments; interest; on liabilities issued by non-deposit-taking financial institutions and nonfinancial instutitions except general government
+757,OthInvIntIncRec,Other investment income receipts; interest
+758,OthInvIntIncRecCentralBank,Other investment income receipts; interest; on assets held by central bank
+759,OthInvIntIncRecDepTaking,Other investment income receipts; interest; on assets held by deposit-taking institutions except central bank
+760,OthInvIntIncRecGenGovt,Other investment income receipts; interest; on assets held by general government
+761,OthInvIntIncRecOthFinNonFin,Other investment income receipts; interest; on assets held by non-deposit-taking financial institutions and nonfinancial instutitions except general government
+762,OthInvLiabs,Net U.S. incurrence of other investment liabilities
+763,OthInvLiabsCentralBank,Net U.S. incurrence of other investment liabilities; issued by central bank
+764,OthInvLiabsDepTaking,Net U.S. incurrence of other investment liabilities; issued by deposit-taking institutions except central bank
+765,OthInvLiabsFoa,Net U.S. incurrence of other investment liabilities to foreign official agencies
+766,OthInvLiabsGenGovt,Net U.S. incurrence of other investment liabilities; issued by general government
+767,OthInvLiabsOthFinNonFin,Net U.S. incurrence of other investment liabilities; issued by non-deposit-taking institutions and nonfinancial institutions except general government
+768,OthReserveAssets,Net U.S. acquisition of reserve assets; other
+769,PfInvAssets,Net U.S. acquisition of portfolio investment assets
+770,PfInvAssetsDepTaking,Net U.S. acquisition of portfolio investment assets; held by deposit-taking institutions except central bank
+771,PfInvAssetsNonFin,Net U.S. acquisition of portfolio investment assets; held by nonfinancial institutions except general government
+772,PfInvAssetsOthFin,Net U.S. acquisition of portfolio investment assets; held by non-deposit-taking financial institutions
+773,PfInvIncPay,Portfolio investment income payments
+774,PfInvIncPayDepTaking,Portfolio investment income payments; deposit-taking institutions except central bank
+775,PfInvIncPayGenGovt,Portfolio investment income payments; general government
+776,PfInvIncPayNonFin,Portfolio investment income payments; nonfinancial institutions except general government
+777,PfInvIncPayOthFin,Portfolio investment income payments; non-deposit-taking financial institutions
+778,PfInvIncRec,Portfolio investment income receipts
+779,PfInvIncRecDepTaking,Portfolio investment income receipts; deposit-taking institutions except central bank
+780,PfInvIncRecNonFin,Portfolio investment income receipts; nonfinancial institutions except general government
+781,PfInvIncRecOthFin,Portfolio investment income receipts; non-deposit-taking financial institutions
+782,PfInvLiabs,Net U.S. incurrence of portfolio investment liabilities
+783,PfInvLiabsDepTaking,Net U.S. incurrence of portfolio investment liabilities; issued by deposit-taking institutions except central bank
+784,PfInvLiabsFoa,Net U.S. incurrence of portfolio investment liabilities to foreign official agencies
+785,PfInvLiabsGenGovt,Net U.S. incurrence of portfolio investment liabilities; issued by general government
+786,PfInvLiabsNonFin,Net U.S. incurrence of portfolio investment liabilities; issued by nonfinancial institutions except general government
+787,PfInvLiabsOthFin,Net U.S. incurrence of portfolio investment liabilities; issued by non-deposit-taking financial institutions
+788,PrimIncPay,Primary income payments
+789,PrimIncRec,Primary income receipts
+790,ReserveAssets,Net U.S. acquisition of reserve assets
+791,SdrAllocLiabs,Net U.S. incurrence of other investment liabilities; special drawing rights allocations
+792,SdrAllocLiabsFoa,Net U.S. incurrence of other investment liabilities to foreign official agencies; special drawing rights allocations
+793,SdrReserveAssets,Net U.S. acquisition of reserve assets; special drawing rights
+794,SeasAdjDisc,Seasonal adjustment discrepancy
+795,SecIncPay,Secondary income (current transfer) payments
+796,SecIncPayCharitableDonations,Secondary income (current transfer) payments; private transfers; charitable donations
+797,SecIncPayForeignStudents,Secondary income (current transfer) payments; private transfers; transfers to foreign students
+798,SecIncPayGenGovt,Secondary income (current transfer) payments; general government transfers
+799,SecIncPayGenGovtContribIntOrg,Secondary income (current transfer) payments; general government transfers; contributions to international organizations
+800,SecIncPayGenGovtIntCoop,Secondary income (current transfer) payments; general government transfers; international cooperation
+801,SecIncPayGenGovtOth,Secondary income (current transfer) payments; other general government transfers
+802,SecIncPayGenGovtSocialBenefits,Secondary income (current transfer) payments; general government transfers; social benefits
+803,SecIncPayInsuranceRelated,Secondary income (current transfer) payments; private transfers; insurance-related transfers
+804,SecIncPayOthPrivateTransfer,Secondary income (current transfer) payments; other private transfers
+805,SecIncPayPersonal,Secondary income (current transfer) payments; private transfers; personal transfers
+806,SecIncPayPrivate,Secondary income (current transfer) payments; private transfers
+807,SecIncPayPrivateFinesPenalties,Secondary income (current transfer) payments; private transfers; fines and penalties
+808,SecIncPayTaxesIncomeWealth,"Secondary income (current transfer) payments; private transfers; taxes on income, wealth, etc."
+809,SecIncRec,Secondary income (current transfer) receipts
+810,SecIncRecGenGovt,Secondary income (current transfer) receipts; general government transfers
+811,SecIncRecGenGovtFinesPenalties,Secondary income (current transfer) receipts; general government transfers; fines and penalties
+812,SecIncRecGenGovtIntCoop,Secondary income (current transfer) receipts; general government transfers; international cooperation
+813,SecIncRecGenGovtOth,Secondary income (current transfer) receipts; other general government transfers
+814,SecIncRecGenGovtTaxesIncomeWealth,"Secondary income (current transfer) receipts; general government transfers; taxes on income, wealth, etc."
+815,SecIncRecInsuranceRelated,Secondary income (current transfer) receipts; insurance-related transfers
+816,SecIncRecOthPrivateTransfer,Secondary income (current transfer) receipts; other private transfers
+817,SecIncRecPrivate,Secondary income (current transfer) receipts; private transfers
+818,SecIncRecPrivateFinesPenalties,Secondary income (current transfer) receipts; fines and penalties
+819,SecReserveAssets,Net U.S. acquisition of reserve assets; other; securities
+820,StatDisc,Statistical discrepancy
+821,StDebtSecAssets,Net U.S. acquisition of portfolio investment assets; short-term debt securities
+822,StDebtSecAssetsDepTaking,Net U.S. acquisition of portfolio investment assets; short-term debt securities; held by deposit-taking institutions except central bank
+823,StDebtSecAssetsNonFin,Net U.S. acquisition of portfolio investment assets; short-term debt securities; held by nonfinancial institutions except general government
+824,StDebtSecAssetsOthFin,Net U.S. acquisition of portfolio investment assets; short-term debt securities; held by non-deposit-taking financial institutions
+825,StDebtSecCommPaperAndOthLiabs,Net U.S. incurrence of portfolio investment liabilities; commercial paper and other short-term debt securities (those not listed in table 7.1)
+826,StDebtSecCommPaperAndOthLiabsFoa,Net U.S. incurrence of portfolio investment liabilities to foreign official agencies; commercial paper and other short-term debt securities (those not listed in table 9.1)
+827,StDebtSecCommPaperAssets,Net U.S. acquisition of portfolio investment assets; short-term commercial paper
+828,StDebtSecFedSponsorAgencyIncPay,Portfolio investment income payments; interest on short-term federally sponsored agency securties
+829,StDebtSecFedSponsorAgencyLiabs,Net U.S. incurrence of portfolio investment liabilities; short-term federally sponsored agency securities
+830,StDebtSecFedSponsorAgencyLiabsFoa,Net U.S. incurrence of portfolio investment liabilities to foreign official agencies; short-term federally sponsored agency securities
+831,StDebtSecIncPay,Portfolio investment income payments; interest on short-term debt securities
+832,StDebtSecIncPayDepTaking,Portfolio investment income payments; interest on short-term debt securities; deposit-taking institutions except central bank
+833,StDebtSecIncPayNonFin,Portfolio investment income payments; interest on short-term debt securities; nonfinancial institutions except general government
+834,StDebtSecIncRec,Portfolio investment income receipts; interest on short-term debt securities
+835,StDebtSecIncRecDepTaking,Portfolio investment income receipts; interest on short-term debt securities; deposit-taking institutions except central bank
+836,StDebtSecIncRecNonFin,Portfolio investment income receipts; interest on short-term debt securities; nonfinancial institutions except general government
+837,StDebtSecIncRecOthFin,Portfolio investment income receipts; interest on short-term debt securities; non-deposit-taking financial institutions
+838,StDebtSecLiabs,Net U.S. incurrence of portfolio investment liabilities; short-term debt securities
+839,StDebtSecLiabsDepTaking,Net U.S. incurrence of portfolio investment liabilities; short-term debt securities; issued by deposit-taking institutions except central bank
+840,StDebtSecLiabsFoa,Net U.S. incurrence of portfolio investment liabilities to foreign official agencies; short-term debt securities
+841,StDebtSecLiabsNonFin,Net U.S. incurrence of portfolio investment liabilities; short-term debt securities; issued by nonfinancial institutions except general government
+842,StDebtSecNegCdAssets,Net U.S. acquisition of portfolio investment assets; short-term negotiable certificates of deposit
+843,StDebtSecNegCdLiabs,Net U.S. incurrence of portfolio investment liabilities; short-term negotiable certificates of deposit
+844,StDebtSecNegCdLiabsFoa,Net U.S. incurrence of portfolio investment liabilities to foreign official agencies; short-term negotiable certificates of deposit
+845,StDebtSecOthAssets,Net U.S. acquisition of portfolio investment assets; short-term debt securities other than negotiable certificates of deposit and commercial paper
+846,StDebtSecOthThanFedSponsorAgencyIncPayOthFin,Portfolio investment income payments; interest on short-term debt securities other than federally sponsored agency securties; non-deposit-taking financial institutions
+847,StDebtSecOthThanFedSponsorAgencyLiabsOthFin,Net U.S. incurrence of portfolio investment liabilities; short-term debt securities other than federally sponsored agency securities; issued by non-deposit-taking financial institutions
+848,StDebtSecTreasIncPay,Portfolio investment income payments; interest on short-term U.S. Treasury securities
+849,StDebtSecTreasLiabs,Net U.S. incurrence of portfolio investment liabilities; Treasury bills and certificates
+850,StDebtSecTreasLiabsFoa,Net U.S. incurrence of portfolio investment liabilities to foreign official agencies; Treasury bills and certificates
+851,StDepAssets,Net U.S. acquisition of other investment assets; short-term deposits
+852,StDepAssetsCentralBank,Net U.S. acquistion of other investment assets; short-term deposits; held by central bank
+853,StDepAssetsDepTaking,Net U.S. acquistion of other investment assets; short-term deposits; held by deposit-taking institutions except central bank
+854,StDepAssetsOthFinNonFin,Net U.S. acquistion of other investment assets; short-term deposits; held by non-deposit-taking institutions and nonfinancial institutions except general government
+855,StDepLiabs,Net U.S. incurrence of other investment liabilities; short-term deposits
+856,StDepLiabsCentralBank,Net U.S. incurrence of other investment liabilities; short-term deposits; issued by central bank
+857,StDepLiabsDepTaking,Net U.S. incurrence of other investment liabilities; short-term deposits; issued by deposit-taking institutions except central bank
+858,StDepLiabsOthFinNonFin,Net U.S. incurrence of other investment liabilities; short-term deposits; issued by non-deposit-taking institutions and nonfinancial institutions except general government
+859,StLoansAssets,Net U.S. acquisition of other investment assets; short-term loans
+860,StLoansAssetsDepTaking,Net U.S. acquistion of other investment assets; short-term loans; held by deposit-taking institutions except central bank
+861,StLoansAssetsOthFinNonFin,Net U.S. acquistion of other investment assets; short-term loans; held by non-deposit-taking institutions and nonfinancial institutions except general government
+862,StLoansLiabs,Net U.S. incurrence of other investment liabilities; short-term loans
+863,StLoansLiabsDepTaking,Net U.S. incurrence of other investment liabilities; short-term loans; issued by deposit-taking institutions except central bank
+864,StLoansLiabsOthFinNonFin,Net U.S. incurrence of other investment liabilities; short-term loans; issued by non-deposit-taking institutions and nonfinancial institutions except general government
+865,StTrdCredAndAdvAssets,Net U.S. acquisition of other investment assets; short-term trade credit and advances
+866,StTrdCredAndAdvAssetsOthFinNonFin,Net U.S. acquistion of other investment assets; short-term trade credit and advances; held by non-deposit-taking institutions and nonfinancial institutions except general government
+867,StTrdCredAndAdvLiabs,Net U.S. incurrence of other investment liabilities; short-term trade credit and advances
+868,StTrdCredAndAdvLiabsOthFinNonFin,Net U.S. incurrence of other investment liabilities; short-term trade credit and advances; issued by non-deposit-taking institutions and nonfinancial institutions except general government
+869,TrdCredAndAdvAssets,Net U.S. acquisition of other investment assets; trade credit and advances
+870,TrdCredAndAdvAssetsOthFinNonFin,Net U.S. acquistion of other investment assets; trade credit and advances; held by non-deposit-taking institutions and nonfinancial institutions except general government
+871,TrdCredAndAdvLiabs,Net U.S. incurrence of other investment liabilities; trade credit and advances
+872,TrdCredAndAdvLiabsFoa,Net U.S. incurrence of other investment liabilities to foreign official agencies; trade credit and advances
+873,TrdCredAndAdvLiabsGenGovt,Net U.S. incurrence of other investment liabilities; trade credit and advances; issued by general government
+874,TrdCredAndAdvLiabsOthFinNonFin,Net U.S. incurrence of other investment liabilities; trade credit and advances; issued by non-deposit-taking institutions and nonfinancial institutions except general government
+875,TreasBondsAndNotesLiabsFoa,Net U.S. incurrence of portfolio investment liabilities to foreign official agencies; Treasury bonds and notes
+876,TSI_ItaDiInvIncInward,"Direct investment income on inward investment (foreign direct investment in the United States), directional basis"
+877,TSI_ItaDiInvIncOutward,"Direct investment income on outward investment (U.S. direct investment abroad), directional basis"
+878,TSI_ItaDiInvWithoutCurrCostAdjIncOutward,"Direct investment income without current cost adjustment on outward investment (U.S. direct investment abroad), directional basis"
