@@ -3,9 +3,7 @@ import requests
 import os
 import pandas as pd
 import numpy as np
-import unicodedata
 import json
-from matplotlib import pyplot as plt
 import csv
 from pipelines.yahoo.yahoo import *
 from pipelines.risk_premiums import get_equity_risk_premium

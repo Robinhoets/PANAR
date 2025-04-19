@@ -488,16 +488,15 @@ def get_income_statement(ticker):
     
     
     statement["YearAndQuarter"] = statement["end_date"].apply(lambda x: datetime.strptime(x, "%Y-%m-%d").strftime("%Y")) + "Q" + statement["Quarter"].astype(str)
-    #drop dates
+    #drop dates and NA
     statement = statement.drop('end_date', axis=1)
     statement = statement.drop('start_date', axis=1)
-    statement_to_csv(statement)
     statement = statement.replace({np.nan: None})
-    #print(statement)
+    statement["ticker"] = company.ticker
     return statement
 
-def statement_to_csv(statement):
-        statement.to_csv('data/statement.csv')
+def statement_to_csv(all_statements):
+        all_statements.to_csv('all_statement.csv')
         
 def statement_to_json(statement, company):
     statement = statement.replace({np.nan: None})
@@ -510,12 +509,16 @@ def statement_to_json(statement, company):
         json.dump(json_data, f, indent=2)    
 
 def ticker_csv_to_statements():
+    all_statements = pd.DataFrame(columns=["revenue", "cogs", "gross_profit", "operating_expenses", "net_income", "Quarter", "YearAndQuarter", "ticker"])
     with open("backend/tickers.csv", newline='') as csvfile:
         reader = csv.reader(csvfile)
         for row in reader:
             ticker = row[0]
             statement = get_income_statement(ticker)
-            print(statement)
+            all_statements = pd.concat([all_statements, statement], axis=0, ignore_index=True)
+            print(all_statements)
+    statement_to_csv(all_statements)
+    
             
 
 
@@ -529,16 +532,12 @@ pd.set_option('display.max_columns', None)
 email = "tonytaylor25@yahoo.com"
 tickerDf = getCIKs()
 
-#ticker_csv_to_statements()
 
 
 #statement = get_income_statement("INTC")
-
-#dataFrame = pd.read_csv("data/statement.csv")
-#print(dataFrame.columns)
 #print(statement)
 
-
+#ticker_csv_to_statements()
 
 
 
