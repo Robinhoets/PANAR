@@ -1,8 +1,9 @@
-from keras._tf_keras.keras.models import Sequential, load_model
+import tensorflow
+from tensorflow.keras.models import Sequential, load_model
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
-from keras._tf_keras.keras.layers import LSTM, Dense, BatchNormalization
-from keras._tf_keras.keras.optimizers import RMSprop
+from tensorflow.keras.layers import LSTM, Dense, BatchNormalization
+from tensorflow.keras.optimizers import RMSprop
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.pipeline import Pipeline
@@ -92,7 +93,7 @@ class neuralNetwork:
         print("R2 score = ", r2)
 
         #Data preprocessing DONE after this point; save model and return
-        self.model.save("backend/models/saved_models/NN_WORKING.keras")
+        self.model.save("models/saved_models/NN_WORKING.keras")
 
     def predict(self, company):
         #Now format prediction for sliding window prediction going forward 5 years (20 points total)
@@ -149,7 +150,7 @@ class neuralNetwork:
         return future_net_income
     
     def PANAR_predict(self, company):
-        nn = load_model("backend/models/saved_models/NN_WORKING.keras")
+        nn = load_model("models/saved_models/NN_WORKING.keras")
         
         future_series = np.empty((0, 0))
         working_series = np.empty((0, 0))

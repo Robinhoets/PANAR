@@ -491,12 +491,13 @@ def get_income_statement(ticker):
     #drop dates
     statement = statement.drop('end_date', axis=1)
     statement = statement.drop('start_date', axis=1)
+    statement_to_csv(statement)
     statement = statement.replace({np.nan: None})
     #print(statement)
     return statement
 
 def statement_to_csv(statement):
-        statement.T.to_csv('statement.csv', index=False)
+        statement.to_csv('data/statement.csv')
         
 def statement_to_json(statement, company):
     statement = statement.replace({np.nan: None})
@@ -508,57 +509,6 @@ def statement_to_json(statement, company):
     with open('company.json', 'w') as f:
         json.dump(json_data, f, indent=2)    
 
-def test_income_statement(ticker):
-    company = Company(ticker.upper())
-    #list line items
-    company.display_all_lineitem_names()
-
-    #Line item keywords
-    Revenue = [r"Revenues", r"SalesRevenueNet"] 
-    COGS = [r"CostOfGoodsSold", r'CostOfRevenue', r'CostOfGoodsAndServicesSold']
-    GrossProfit = [r"GrossProfit"]
-    OperatingExpenses = [r"[Oo]perating[Ee]xpenses"]
-    NetIncome = [r"\b[Nn]et[Ii]ncome[Ll]oss"]
-
-    #get item row from companyfacts
-    Revenue = createItemRow(company.companyFacts, Revenue)
-    COGS = createItemRow(company.companyFacts, COGS)
-    GrossProfit = createItemRow(company.companyFacts, GrossProfit)
-    OperatingExpenses = createItemRow(company.companyFacts, OperatingExpenses)
-    NetIncome = createItemRow(company.companyFacts, NetIncome)
-
-
-
-    Revenue = consolidate_all_FY(Revenue.T)
-    COGS = consolidate_all_FY(COGS.T)
-    GrossProfit = consolidate_all_FY(GrossProfit.T)
-    OperatingExpenses = consolidate_all_FY(OperatingExpenses.T)
-    NetIncome = consolidate_all_FY(NetIncome.T)
-
-    #unique item names
-    Revenue = Revenue.rename(columns={'value': 'revenue'})
-    COGS = COGS.rename(columns={'value': 'cogs'})
-    GrossProfit = GrossProfit.rename(columns={'value': 'gross_profit'})
-    OperatingExpenses = OperatingExpenses.rename(columns={'value': 'operating_expenses'})
-    NetIncome = NetIncome.rename(columns={'value': 'net_income'})
-    
-    statement = add_lineitem_to_statement(Revenue, COGS)
-    
-    statement = add_lineitem_to_statement(statement, GrossProfit)
-    
-
-    statement = add_lineitem_to_statement(statement, OperatingExpenses)
-    statement = add_lineitem_to_statement(statement, NetIncome)
-
-    statement['Quarter'] = statement.pop('quarter_list').apply(lambda x: x[0])
-    
-    #convert
-    statement['start_date'] = pd.to_datetime(statement['start_date'])
-    statement['end_date'] = pd.to_datetime(statement['end_date'])
-    statement['start_date'] = statement['start_date'].dt.strftime('%Y-%m-%d')
-    statement['end_date'] = statement['end_date'].dt.strftime('%Y-%m-%d')
-    return statement
-    
 def ticker_csv_to_statements():
     with open("backend/tickers.csv", newline='') as csvfile:
         reader = csv.reader(csvfile)
@@ -582,7 +532,10 @@ tickerDf = getCIKs()
 #ticker_csv_to_statements()
 
 
-#statement = get_income_statement("PM")
+#statement = get_income_statement("INTC")
+
+#dataFrame = pd.read_csv("data/statement.csv")
+#print(dataFrame.columns)
 #print(statement)
 
 
