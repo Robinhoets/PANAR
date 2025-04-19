@@ -173,3 +173,5 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+backend/pipelines/yahoo/output2.txt
+backend/pipelines/yahoo/output1.txt
