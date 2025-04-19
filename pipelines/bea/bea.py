@@ -6,7 +6,7 @@ beaapi?
     -Consumer Spending*: 
     -Personal income*                         [done]      
     -Personal Savings Rate*
-    -Corporate Profits*                         
+    -Corporate Profits*                       [done]  
     -GDI(gross domestic income)
     -employment by industry
     -international transactions:             [working on] _ don't do
@@ -14,6 +14,18 @@ beaapi?
     -Fixed assets by type:
     -industry fixed assets                   [working on]
     -government fixed assets
+
+                    DatasetName                                  DatasetDescription
+
+4                       ITA                 International Transactions Accounts
+5                       IIP                   International Investment Position
+6               InputOutput                                   Input-Output Data
+7             IntlServTrade                        International Services Trade
+8               IntlServSTA  International Services Supplied Through Affiliates
+9             GDPbyIndustry                                     GDP by Industry
+10                 Regional                                  Regional data sets
+11  UnderlyingGDPbyIndustry                          Underlying GDP by Industry
+12       APIDatasetMetaData                   Metadata about other API datasets
 '''
 import beaapi
 from secret import secret
