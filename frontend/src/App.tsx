@@ -162,7 +162,7 @@ function FutureNetIncomeTable()
     return (
         <div>
             <h2>Future Net Income</h2>
-            <div id="table_div">
+            <div id="table_div" contentEditable>
                 <table border={1} cellPadding={8}>
                     <thead>
                         <tr>
@@ -211,7 +211,7 @@ function PriceChart(){
                         labels: keys.map((key) => key.substring(0, 10)),
                         datasets:[
                             {
-                                label: "Price Chart",
+                                label: "",
                                 data: keys.map((key) => priceChart["Close" as keyof typeof priceChart][key as keyof typeof priceChart])
                             },
                         ],
@@ -259,9 +259,9 @@ function App() {
                         <h1> {ticker} </h1>
 
                         <div style={{ marginBottom: '1rem' }}>
+                            <button onClick={() => setSelectedTable("priceChart")}>Price & Charts</button>
                             <button onClick={() => setSelectedTable("income")}>Income Statement</button>
                             <button onClick={() => setSelectedTable("dcf")}>DCF Table</button>
-                            <button onClick={() => setSelectedTable("priceChart")}>Price & Charts</button>
                         </div>
 
                         {selectedTable === "dcf" && dcfOutput ? (
