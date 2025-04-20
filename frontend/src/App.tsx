@@ -20,8 +20,6 @@ ChartJS.register(CategoryScale,
     Legend);
 import {Line} from "react-chartjs-2";
 
-
-
 function Ticker_Enter_Page_Form({ setPageIndex, setDcfOutput, setTicker }) {
     const [inputs, setInputs] = useState({
         tick: "",
@@ -159,10 +157,31 @@ function FutureNetIncomeTable()
         return <p>Loading future net income table...</p>;
     }
     
+    function handleEdit(event: any, index: number){
+        console.log(index);
+        const new_fcf_data = fcfData
+        
+        Object.keys(new_fcf_data).map((key, i) => {
+            if(index == i){
+                new_fcf_data[key as keyof typeof fcfData]["0"] = event.target.textContent
+            } 
+        });
+
+        setfcfData(new_fcf_data)
+
+        Object.keys(fcfData).map((key, i) => {
+            if(index == i){
+                console.log(fcfData[key as keyof typeof fcfData]["0"])
+            } 
+        });
+    }
+    
+
+    
     return (
         <div>
             <h2>Future Net Income</h2>
-            <div id="table_div" contentEditable>
+            <div id="table_div">
                 <table border={1} cellPadding={8}>
                     <thead>
                         <tr>
@@ -175,8 +194,8 @@ function FutureNetIncomeTable()
                     <tbody>
                         <tr>
                             <td> </td>
-                            { Object.keys(fcfData).map((key) => (
-                                <td>{fcfData[key as keyof typeof fcfData]["0"]}</td>
+                            { Object.keys(fcfData).map((key, index) => (
+                                <td contentEditable suppressContentEditableWarning={true} onInput={(e) => handleEdit(e, index)}>{fcfData[key as keyof typeof fcfData]["0"]}</td>
                             ))}
                         </tr>
                     </tbody>
