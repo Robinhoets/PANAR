@@ -145,6 +145,16 @@ function FinancialStatementTable() {
 function FutureNetIncomeTable()
 {
     const [fcfData, setfcfData] = useState<any[]>([]);
+    const [inputs, setInputs] = useState({
+        fcfData: fcfData,
+        model: "",
+    });
+
+    const handleChange = (event: any) => {
+        const name = event.target.name;
+        const value = event.target.value;
+        setInputs(values => ({ ...values, [name]: value }))
+    }
 
     useEffect(() => {
         fetch("http://localhost:8000/future-net-income")
@@ -158,7 +168,6 @@ function FutureNetIncomeTable()
     }
     
     function handleEdit(event: any, index: number){
-        console.log(index);
         const new_fcf_data = fcfData
         
         Object.keys(new_fcf_data).map((key, i) => {
@@ -168,6 +177,7 @@ function FutureNetIncomeTable()
         });
 
         setfcfData(new_fcf_data)
+        setInputs(values => ({ ...values, ["fcfData"]: fcfData }))
 
         Object.keys(fcfData).map((key, i) => {
             if(index == i){
@@ -175,7 +185,33 @@ function FutureNetIncomeTable()
             } 
         });
     }
-    
+
+    const handleSubmit = async (event: any) => {
+        /*
+        event.preventDefault();
+        try {
+            const response = await fetch('http://localhost:8000/future-net-income', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(inputs),
+            });
+
+            if (!response.ok) {
+                throw new Error(`Server error: ${response.status}`);
+            }
+
+            const data = await response.json();
+            console.log("Backend response:", data);
+            
+        } catch (error) {
+            console.error("Failed to submit model\new data:", error);
+            alert("Something went wrong sending your request.");
+        }
+        */
+            
+    }
 
     
     return (
@@ -200,6 +236,20 @@ function FutureNetIncomeTable()
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            <div>
+                <form onSubmit={handleSubmit}>
+                    <label>Select the model:<br></br>
+                        <input type="radio" id="m1" name="model" value="Model 1" onChange={handleChange} required></input>
+                        <label htmlFor="m1">Model 1</label><br></br>
+                        <input type="radio" id="m2" name="model" value="Model 2" onChange={handleChange} required></input>
+                        <label htmlFor="m2">Model 2</label><br></br>
+                        <input type="radio" id="m3" name="model" value="Model 3" onChange={handleChange} required></input>
+                        <label htmlFor="m3">Model 3</label>
+                    </label>
+                    <br></br>
+                    <input type="submit" />
+                </form>
             </div>
         </div>
     );
