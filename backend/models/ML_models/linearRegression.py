@@ -2,7 +2,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.linear_model import LinearRegression
 from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.preprocessing import StandardScaler, OneHotEncoder, OrdinalEncoder
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 import numpy as np
@@ -13,7 +13,8 @@ import joblib
 class linearRegression():
     def __init__(self):
         self.model = None
-        self.ohe = None
+        self.encoder = None
+        self.ticker_map = None
         self.last_quarter = None
         self.input_x = None
         self.input_y = None
@@ -23,12 +24,12 @@ class linearRegression():
         dataFrame = pd.read_csv(all_data)
         self.last_quarter = dataFrame.iloc[-1]["YearAndQuarter"]
         
-        dataFrame["year_cat"] = dataFrame["end_date"].astype(str).str[:4]
+        dataFrame["year_ord"] = dataFrame["YearAndQuarter"].astype(str).str[:4]
         
-        data_columns = dataFrame[["revenue", "cogs", "gross_profit", "operating_expenses", "net_income", "year_cat"]]
+        data_columns = dataFrame[["revenue", "cogs", "gross_profit", "operating_expenses", "net_income"]]
 
         #Find correlation matrix of data points
-        corrMatrix = dataFrame[["revenue", "cogs", "gross_profit", "operating_expenses", "net_income", "year_cat", "Quarter"]].corr()
+        corrMatrix = dataFrame[["revenue", "cogs", "gross_profit", "operating_expenses", "net_income"]].corr()
         #print(corrMatrix["year_cat"].sort_values(ascending=False))
 
         #Uncomment to see data heat map / correlation
@@ -37,16 +38,18 @@ class linearRegression():
         #plt.show()
 
         pipe = Pipeline([
-            ('imputer', SimpleImputer()), 
+            ('imputer', SimpleImputer(strategy="mean")), 
             ('scaler', StandardScaler())])
 
-        self.ohe = ColumnTransformer([
+        self.encoder = ColumnTransformer([
             ("num", pipe, list(data_columns)),
-            ("cat", OneHotEncoder(), ["Quarter"])
+            ("cat", OneHotEncoder(), ["Quarter"]),
+            ("ord", OrdinalEncoder(), ["year_ord", "ticker"])
         ])
 
-        data_prep = self.ohe.fit_transform(dataFrame)
+        data_prep = self.encoder.fit_transform(dataFrame)
         
+        self.ticker_map = {ticker: idx for idx, ticker in enumerate(self.encoder.named_transformers_["ord"].categories_[1])} 
         self.parameter_num = data_prep.shape[1]
 
         self.input_x = []
@@ -55,6 +58,9 @@ class linearRegression():
         
         k = 0
         for i in range(4, size):
+            if(data_prep[k, 10] != data_prep[i, 10]):
+                k = k + 1
+                continue
             self.input_x.append(data_prep[k:i].flatten())
             self.input_y.append(data_prep[i])
             k = k + 1
@@ -73,17 +79,25 @@ class linearRegression():
         r2 = r2_score(validate_target, y_validate)
         print("R2 score = ", r2)
         
-        joblib.dump(self.model, "backend/models/saved_models/LINEAR_WORKING.joblib")
+        joblib.dump(self.model, "backend/models/ML_models/saved_models/LINEAR_WORKING.joblib")
         
     def predict(self, company):
+        try:
+            userComp = self.ticker_map[company]
+        except KeyError:
+            return(f"Error: Company '{company}' not found in data. Aborting prediction.")
+        
         future_series = np.empty((0, 0))
         working_series = np.empty((0, 0))
-        starter_series = self.input_x[-1].reshape(1, -1)
         
-        starter_pred = self.model.predict(starter_series)
+        tickerRows = np.array(self.input_x)
+        temp = tickerRows[tickerRows[:, 10] == userComp]
+        tickerAdj = temp[[-1]].reshape(1, -1)
+        
+        starter_pred = self.model.predict(tickerAdj)
         future_series = np.append(future_series, starter_pred)
         
-        starter = starter_series.reshape(4, -1)
+        starter = tickerAdj.reshape(4, -1)
         
         working_series = np.append(working_series, starter[1])
         working_series = np.append(working_series, starter[2])
@@ -99,12 +113,11 @@ class linearRegression():
             future_series = np.append(future_series, future_pred)
 
         future_series = future_series.reshape(20, self.parameter_num)
-        future_series = future_series[:, [0, 1, 2, 3, 4, 5]]
+        future_series = future_series[:, [0, 1, 2, 3, 4]]
         
-        scaler = self.ohe.named_transformers_['num'].named_steps['scaler']
+        scaler = self.encoder.named_transformers_['num'].named_steps['scaler']
         scaled_data = scaler.inverse_transform(future_series)
         net_income = scaled_data[:, 4]
-        print(net_income)
         
         columns = []
         year = int(self.last_quarter[:4])
@@ -122,16 +135,24 @@ class linearRegression():
         return future_net_income
     
     def PANAR_predict(self, company):
-        lin = joblib.load("backend/models/saved_models/LINEAR_WORKING.joblib")
+        try:
+            userComp = self.ticker_map[company]
+        except KeyError:
+            return(f"Error: Company '{company}' not found in data. Aborting prediction.")
+        
+        lin = joblib.load("backend/models/ML_models/saved_models/LINEAR_WORKING.joblib")
         
         future_series = np.empty((0, 0))
         working_series = np.empty((0, 0))
-        starter_series = self.input_x[-1].reshape(1, -1)
         
-        starter_pred = lin.predict(starter_series)
+        tickerRows = np.array(self.input_x)
+        temp = tickerRows[tickerRows[:, 10] == userComp]
+        tickerAdj = temp[[-1]].reshape(1, -1)
+        
+        starter_pred = lin.predict(tickerAdj)
         future_series = np.append(future_series, starter_pred)
         
-        starter = starter_series.reshape(4, -1)
+        starter = tickerAdj.reshape(4, -1)
         
         working_series = np.append(working_series, starter[1])
         working_series = np.append(working_series, starter[2])
@@ -147,12 +168,11 @@ class linearRegression():
             future_series = np.append(future_series, future_pred)
 
         future_series = future_series.reshape(20, self.parameter_num)
-        future_series = future_series[:, [0, 1, 2, 3, 4, 5]]
+        future_series = future_series[:, [0, 1, 2, 3, 4]]
         
-        scaler = self.ohe.named_transformers_['num'].named_steps['scaler']
+        scaler = self.encoder.named_transformers_['num'].named_steps['scaler']
         scaled_data = scaler.inverse_transform(future_series)
         net_income = scaled_data[:, 4]
-        print(net_income)
         
         columns = []
         year = int(self.last_quarter[:4])

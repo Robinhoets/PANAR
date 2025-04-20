@@ -2,7 +2,7 @@ from xgboost import plot_tree
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+from sklearn.preprocessing import StandardScaler, OneHotEncoder, OrdinalEncoder
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 import numpy as np
@@ -16,7 +16,8 @@ print(xgb.rabit.get_rank())
 class gradientBoost:
     def __init__(self):
         self.model = None
-        self.ohe = None
+        self.encoder = None
+        self.ticker_map = None
         self.dValidate = None
         self.input_x = None
         self.input_y = None
@@ -25,30 +26,31 @@ class gradientBoost:
         
     def train(self, all_data):
         dataFrame = pd.read_csv(all_data)
-        print(dataFrame.columns)
         self.last_quarter = dataFrame.iloc[-1]["YearAndQuarter"]
 
         #Create new year column for encoding
-        dataFrame["year_cat"] = dataFrame["end_date"].astype(str).str[:4]
+        dataFrame["year_ord"] = dataFrame["YearAndQuarter"].astype(str).str[:4]
 
-        data_columns = dataFrame[["revenue", "cogs", "gross_profit", "operating_expenses", "net_income", "year_cat"]]
+        data_columns = dataFrame[["revenue", "cogs", "gross_profit", "operating_expenses", "net_income"]]
 
         #Find correlation matrix of data points
         corrMatrix = dataFrame[["revenue", "cogs", "gross_profit", "operating_expenses", "net_income"]].corr()
         #print(corrMatrix["net_income"].sort_values(ascending=False))
 
         pipe = Pipeline([
-            ('imputer', SimpleImputer()), 
+            ('imputer', SimpleImputer(strategy="mean")), 
             ('scaler', StandardScaler())])
 
         #Potential one hot encoding transformer to be added (if categorical data required)
-        self.ohe = ColumnTransformer([
+        self.encoder = ColumnTransformer([
             ("num", pipe, list(data_columns)),
-            ("cat", OneHotEncoder(), ["Quarter"])
+            ("cat", OneHotEncoder(), ["Quarter"]),
+            ("ord", OrdinalEncoder(), ["year_ord", "ticker"])
         ])
-
-        data_prep = self.ohe.fit_transform(dataFrame)
         
+        data_prep = self.encoder.fit_transform(dataFrame)
+        
+        self.ticker_map = {ticker: idx for idx, ticker in enumerate(self.encoder.named_transformers_["ord"].categories_[1])} 
         self.parameter_num = data_prep.shape[1]
         
         self.input_x = []
@@ -57,6 +59,9 @@ class gradientBoost:
         
         k = 0
         for i in range(4, size):
+            if(data_prep[k, 10] != data_prep[i, 10]):
+                k = k + 1
+                continue
             self.input_x.append(data_prep[k:i].flatten())
             self.input_y.append(data_prep[i])
             k = k + 1
@@ -89,12 +94,21 @@ class gradientBoost:
         r2 = r2_score(validate_target, yPred)
         print("R2 score = ", r2)
 
-        self.model.save_model("backend/models/saved_models/BOOST_WORKING.json")
+        self.model.save_model("backend/models/ML_models/saved_models/BOOST_WORKING.json")
 
     def predict(self, company):
+        try:
+            userComp = self.ticker_map[company]
+        except KeyError:
+            return(f"Error: Company '{company}' not found in data. Aborting prediction.")
+        
         future_series = np.empty((0, 0))
         working_series = np.empty((0, 0))
-        starterMatrix = xgb.DMatrix(self.input_x[-1].reshape(1, -1))
+        
+        tickerRows = np.array(self.input_x)
+        temp = tickerRows[tickerRows[:, 10] == userComp]
+        tickerAdj = temp[[-1]].reshape(1, -1)
+        starterMatrix = xgb.DMatrix(tickerAdj)
         
         starter_pred = self.model.predict(starterMatrix)
         future_series = np.append(future_series, starter_pred)
@@ -115,12 +129,11 @@ class gradientBoost:
             future_series = np.append(future_series, future_pred)
             
         future_series = future_series.reshape(20, self.parameter_num)
-        future_series = future_series[:, [0, 1, 2, 3, 4, 5]]
+        future_series = future_series[:, [0, 1, 2, 3, 4]]
         
-        scaler = self.ohe.named_transformers_['num'].named_steps['scaler']
+        scaler = self.encoder.named_transformers_['num'].named_steps['scaler']
         scaled_data = scaler.inverse_transform(future_series)
         net_income = scaled_data[:, 4]
-        print(net_income)
         
         #Create future columns based on last quarter parse
         columns = []
@@ -139,12 +152,21 @@ class gradientBoost:
         return future_net_income
     
     def PANAR_predict(self, company):
+        try:
+            userComp = self.ticker_map[company]
+        except KeyError:
+            return(f"Error: Company '{company}' not found in data. Aborting prediction.")
+        
         boost = xgb.Booster()
-        boost.load_model("backend/models/saved_models/BOOST_WORKING.json")
+        boost.load_model("backend/models/ML_models/saved_models/BOOST_WORKING.json")
         
         future_series = np.empty((0, 0))
         working_series = np.empty((0, 0))
-        starterMatrix = xgb.DMatrix(self.input_x[-1].reshape(1, -1))
+        
+        tickerRows = np.array(self.input_x)
+        temp = tickerRows[tickerRows[:, 10] == userComp]
+        tickerAdj = temp[[-1]].reshape(1, -1)
+        starterMatrix = xgb.DMatrix(tickerAdj)
         
         starter_pred = boost.predict(starterMatrix)
         future_series = np.append(future_series, starter_pred)
@@ -165,12 +187,11 @@ class gradientBoost:
             future_series = np.append(future_series, future_pred)
             
         future_series = future_series.reshape(20, self.parameter_num)
-        future_series = future_series[:, [0, 1, 2, 3, 4, 5]]
+        future_series = future_series[:, [0, 1, 2, 3, 4]]
         
-        scaler = self.ohe.named_transformers_['num'].named_steps['scaler']
+        scaler = self.encoder.named_transformers_['num'].named_steps['scaler']
         scaled_data = scaler.inverse_transform(future_series)
         net_income = scaled_data[:, 4]
-        print(net_income)
         
         columns = []
         year = int(self.last_quarter[:4])
