@@ -19,7 +19,9 @@ ChartJS.register(CategoryScale,
     Tooltip,
     Legend);
 import {Line} from "react-chartjs-2";
-
+import zoomPlugin from "chartjs-plugin-zoom";
+import 'chartjs-adapter-date-fns';
+ChartJS.register(zoomPlugin);
 
 
 function Ticker_Enter_Page_Form({ setPageIndex, setDcfOutput, setTicker }) {
@@ -223,6 +225,155 @@ function PriceChart(){
 
 }
 
+function BLSChart() {
+    const [blsData, setBlsData] = useState<any>({});
+    const [selectedSeries, setSelectedSeries] = useState<string>("LNS14000000");
+    const [startYear, setStartYear] = useState<number>(1970);
+    const [endYear, setEndYear] = useState<number>(2023);
+    const [chartType, setChartType] = useState<"line" | "bar">("line");
+    const [aggregation, setAggregation] = useState<"monthly" | "annual">("monthly");
+
+    useEffect(() => {
+        fetch("http://localhost:8000/bls-data")
+            .then(res => res.json())
+            .then(data => setBlsData(data))
+            .catch(err => console.error("Failed to load BLS data", err));
+    }, []);
+
+    if (Object.keys(blsData).length === 0) {
+        return <p>Loading BLS data...</p>;
+    }
+
+    const current = blsData[selectedSeries];
+    if (!current) return <p>No data found for this series.</p>;
+
+    const parsedData = current.dates.map((date: string, i: number) => ({
+        date: new Date(date),
+        value: current.values[i]
+    })).filter((entry: any) => {
+        const year = entry.date.getFullYear();
+        return year >= startYear && year <= endYear;
+    });
+
+    const aggregatedData = aggregation === "annual"
+        ? Object.values(parsedData.reduce((acc: any, entry: any) => {
+            const year = entry.date.getFullYear();
+            if (!acc[year]) acc[year] = { sum: 0, count: 0 };
+            acc[year].sum += entry.value;
+            acc[year].count++;
+            return acc;
+        }, {})).map((val: any, i: number, arr) => ({
+            x: (1970 + i).toString(),
+            y: val.sum / val.count
+        }))
+        : parsedData.map((entry: any) => ({
+            x: entry.date.toISOString().split('T')[0],
+            y: entry.value
+        }));
+
+    return (
+        <div>
+            <h2>BLS Chart</h2>
+            <div style={{ marginBottom: "1rem" }}>
+                <label>Select Series: &nbsp;
+                    <select value={selectedSeries} onChange={e => setSelectedSeries(e.target.value)}>
+                        {Object.keys(blsData).map((seriesId) => (
+                            <option key={seriesId} value={seriesId}>
+                                {seriesId} - {blsData[seriesId].title}
+                            </option>
+                        ))}
+                    </select>
+                </label>
+            </div>
+
+            <div style={{ display: "flex", gap: "1rem", marginBottom: "1rem", flexWrap: "wrap" }}>
+                <div>
+                    <label>Start Year: &nbsp;
+                        <input
+                            type="number"
+                            value={startYear}
+                            min="1970"
+                            max="2023"
+                            onChange={e => setStartYear(parseInt(e.target.value))}
+                        />
+                    </label>
+                </div>
+                <div>
+                    <label>End Year: &nbsp;
+                        <input
+                            type="number"
+                            value={endYear}
+                            min="1970"
+                            max="2023"
+                            onChange={e => setEndYear(parseInt(e.target.value))}
+                        />
+                    </label>
+                </div>
+                <div>
+                    <label>Chart Type: &nbsp;
+                        <select value={chartType} onChange={e => setChartType(e.target.value as "line" | "bar")}>
+                            <option value="line">Line</option>
+                            <option value="bar">Bar</option>
+                        </select>
+                    </label>
+                </div>
+                <div>
+                    <label>Aggregation: &nbsp;
+                        <select value={aggregation} onChange={e => setAggregation(e.target.value as "monthly" | "annual")}>
+                            <option value="monthly">Monthly</option>
+                            <option value="annual">Annual Avg</option>
+                        </select>
+                    </label>
+                </div>
+            </div>
+
+            <Line
+                data={{
+                    labels: aggregatedData.map((d: any) => d.x),
+                    datasets: [{
+                        label: current.title,
+                        data: aggregatedData.map((d: any) => d.y),
+                        backgroundColor: chartType === "bar" ? "rgba(54, 162, 235, 0.6)" : "transparent",
+                        borderColor: "rgba(75,192,192,1)",
+                        fill: false
+                    }]
+                }}
+                options={{
+                    responsive: true,
+                    plugins: {
+                        tooltip: { mode: "index", intersect: false },
+                        legend: { position: "top" },
+                        zoom: {
+                            zoom: {
+                                wheel: { enabled: true },
+                                pinch: { enabled: true },
+                                mode: "x"
+                            },
+                            pan: {
+                                enabled: true,
+                                mode: "x"
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: "time",
+                            time: {
+                                unit: aggregation === "monthly" ? "month" : "year"
+                            },
+                            ticks: {
+                                autoSkip: true,
+                                maxTicksLimit: 12
+                            }
+                        },
+                        y: { beginAtZero: false }
+                    }
+                }}
+                type={chartType}
+            />
+        </div>
+    );
+}
 
 function App() {
     const [pageIndex, setPageIndex] = useState<number>(0);
@@ -297,6 +448,10 @@ function App() {
                         ) : selectedTable === "priceChart" ? (
                             <div>
                                     <PriceChart />
+                            </div>
+                        ) : selectedTable === "bls" ? (
+                            <div>
+                                <BLSChart />
                             </div>
                         ) : (
                             <p>No data available</p>
