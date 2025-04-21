@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 from pipelines.sec.sec import get_income_statement
 from pipelines.yahoo.yahoo import get_price_chart
 from models.dcf.dcf import dcf
-#from pipelines.bls import get_bls_data
+from pipelines.bls.bls import get_bls_data, create_chart_data, label_mapping
 from fastapi.middleware.cors import CORSMiddleware
 import json
 from models.ML_models.helper import run_neural_network
@@ -62,3 +62,16 @@ async def price_chart():
     #clean price chart data
     return json.loads(price_chart_data.to_json(date_format='iso'))
 
+@app.get("/bls-data")
+async def get_bls_chart_data():
+    bls_df = get_bls_data()
+
+    series_ids = list(label_mapping.keys())
+    print(bls_df.head())
+    print(bls_df["series_id"].unique())
+    charts = {}
+    for sid in series_ids:
+        human = label_mapping.get(sid, sid)
+        charts[sid] = create_chart_data(bls_df, sid, human)
+
+    return charts
