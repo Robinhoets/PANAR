@@ -77,11 +77,11 @@ function Ticker_Enter_Page_Form({ setPageIndex, setDcfOutput, setTicker }) {
                 <br></br>
                 <label>Select the model:<br></br>
                     <input type="radio" id="m1" name="model" value="Model 1" onChange={handleChange} required></input>
-                    <label htmlFor="m1">Model 1</label><br></br>
+                    <label htmlFor="m1">Linear Regression</label><br></br>
                     <input type="radio" id="m2" name="model" value="Model 2" onChange={handleChange} required></input>
-                    <label htmlFor="m2">Model 2</label><br></br>
+                    <label htmlFor="m2">Gradient Boosting</label><br></br>
                     <input type="radio" id="m3" name="model" value="Model 3" onChange={handleChange} required></input>
-                    <label htmlFor="m3">Model 3</label>
+                    <label htmlFor="m3">Neural Network</label>
                 </label>
                 <br></br>
                 <input type="submit" />
@@ -241,11 +241,11 @@ function FutureNetIncomeTable()
                 <form onSubmit={handleSubmit}>
                     <label>Select the model:<br></br>
                         <input type="radio" id="m1" name="model" value="Model 1" onChange={handleChange} required></input>
-                        <label htmlFor="m1">Model 1</label><br></br>
+                        <label htmlFor="m1">Linear Regression</label><br></br>
                         <input type="radio" id="m2" name="model" value="Model 2" onChange={handleChange} required></input>
-                        <label htmlFor="m2">Model 2</label><br></br>
+                        <label htmlFor="m2">Gradient Boosting</label><br></br>
                         <input type="radio" id="m3" name="model" value="Model 3" onChange={handleChange} required></input>
-                        <label htmlFor="m3">Model 3</label>
+                        <label htmlFor="m3">Neural Network</label>
                     </label>
                     <br></br>
                     <input type="submit" />
@@ -292,12 +292,72 @@ function PriceChart(){
 
 }
 
+function ModelInfo(){
+    return(
+        <div>
+            <h1>About Models</h1>
+            <div style={{textAlign: 'left'}}>
+            <h2>Data Preparation</h2>
+            <ul>
+                <li>Numerical values include the five major income statement values. </li>
+                <li>Categorical values are created with two algorithms: </li>
+                    <ul style={{listStyleType: 'lower-alpha'}}>
+                        <li> Quarterly data is processed with one-hot encoding, meaning every quarter is tracked as a binary value in four columns.</li>
+                        <li> Year value and company ticker columns are processed with ordinal encoding, which essentially creates a dictionary mapping input values to integers. </li>
+                    </ul>
+            </ul>
+
+            <h2>Model #1: Linear Regression </h2>
+            <ul>
+                <li>Very simple machine learning algorithm, creates relationships between linear values. </li>
+                <li>
+                    Has a tendency to be overly dependent on the trend of the first prediction quarter (negative yields negative downwards trend, while positive yields positive upwards trend). 
+                </li>
+            </ul>
+
+            <h2>Model #2: Gradient Boosting </h2>
+            <ul>
+                <li>
+                    Uses previous prediction’s gradient value in next prediction’s ‘tree’ structure to make decisions on important features of data. 
+                </li>
+                <li>
+                    Tree’s prediction method is auto generated based on error minimization 
+                </li>
+                <li>
+                    Tree has the objective of decreasing ‘squared error’ output of company net income with ‘root mean squared error’ (RSME) evaluation metric. 
+                </li>
+                <li>
+                    Additional tree features include a maximum tree depth of 8 and a 1,000-step boosting round when training. 
+                </li>
+                    
+            </ul>
+
+            <h2>Model #3: Neural Network</h2>
+            <ul>
+                <li>
+                    Uses three ‘Long Short-Term Memory’ layers (LSTM) to remember important values and features of input data, combined in a single dense output layer. Two of these ‘inner’ LSTM layers are hidden / black box operations.  
+                </li>
+                <li>
+                    All LSTM layers use Rectified Linear Unit (RELU) activation functions to solve model issues of the ‘vanishing gradient’ problem, which has been relevant in attempts to improve model performance. 
+                </li>
+                <li>
+                    ‘Adaptive Moment Estimator’ (ADAM) optimizer is used in the network along with the ‘mean squared error’ loss function. 
+                </li>
+                <li>
+                    Requires 150 epochs (passes) of all data into the network to minimize loss.  
+                </li>
+                    
+            </ul>
+            </div>
+        </div>
+    )
+}
 
 function App() {
     const [pageIndex, setPageIndex] = useState<number>(0);
     const [ticker, setTicker] = useState<string>("");
     const [dcfOutput, setDcfOutput] = useState<any>(null);
-    const [selectedTable, setSelectedTable] = useState<"dcf" | "income" | "priceChart">("dcf");
+    const [selectedTable, setSelectedTable] = useState<"dcf" | "income" | "priceChart" | "modelInfo">("dcf");
 
     const Pages = Object.freeze({
         Ticker_Enter_Page: 0,
@@ -331,6 +391,7 @@ function App() {
                             <button onClick={() => setSelectedTable("priceChart")}>Price & Charts</button>
                             <button onClick={() => setSelectedTable("income")}>Income Statement</button>
                             <button onClick={() => setSelectedTable("dcf")}>DCF Table</button>
+                            <button onClick={() => setSelectedTable("modelInfo")}>Models Info</button>
                         </div>
 
                         {selectedTable === "dcf" && dcfOutput ? (
@@ -366,6 +427,10 @@ function App() {
                         ) : selectedTable === "priceChart" ? (
                             <div>
                                     <PriceChart />
+                            </div>
+                        ) : selectedTable === "modelInfo" ? (
+                            <div>
+                                    <ModelInfo />
                             </div>
                         ) : (
                             <p>No data available</p>
