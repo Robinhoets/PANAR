@@ -357,7 +357,7 @@ function App() {
     const [pageIndex, setPageIndex] = useState<number>(0);
     const [ticker, setTicker] = useState<string>("");
     const [dcfOutput, setDcfOutput] = useState<any>(null);
-    const [selectedTable, setSelectedTable] = useState<"dcf" | "income" | "priceChart" | "modelInfo">("dcf");
+    const [selectedTable, setSelectedTable] = useState<"dcf" | "income" | "priceChart" | "modelInfo" | "model">("dcf");
 
     const Pages = Object.freeze({
         Ticker_Enter_Page: 0,
@@ -390,6 +390,7 @@ function App() {
                         <div style={{ marginBottom: '1rem' }}>
                             <button onClick={() => setSelectedTable("priceChart")}>Price & Charts</button>
                             <button onClick={() => setSelectedTable("income")}>Income Statement</button>
+                            <button onClick={() => setSelectedTable("model")}>Model</button>
                             <button onClick={() => setSelectedTable("dcf")}>DCF Table</button>
                             <button onClick={() => setSelectedTable("modelInfo")}>Models Info</button>
                         </div>
@@ -416,9 +417,6 @@ function App() {
                                         <p>No output available.</p>
                                     )}
                                 </div>
-                                <div>
-                                    <FutureNetIncomeTable />
-                                </div>
                             </div>
                         ) : selectedTable === "income" ? (
                             <div>
@@ -431,6 +429,10 @@ function App() {
                         ) : selectedTable === "modelInfo" ? (
                             <div>
                                     <ModelInfo />
+                            </div>
+                        ) : selectedTable === "model" ? (
+                            <div>
+                                    <FutureNetIncomeTable />
                             </div>
                         ) : (
                             <p>No data available</p>
