@@ -9,16 +9,23 @@ import {
     Title,
     Tooltip,
     Legend,
+    TimeScale,
 } from "chart.js/auto";
 
+ChartJS.register(zoomPlugin);
 ChartJS.register(CategoryScale,
     LinearScale,
     PointElement,
     LineElement,
     Title,
     Tooltip,
-    Legend);
+    Legend
+    Timescale
+);
 import {Line} from "react-chartjs-2";
+import 'chartjs-adapter-date-fns';
+import zoomPlugin from "chartjs-plugin-zoom";
+import BLSChart from './components/BLSCharts';
 
 function Ticker_Enter_Page_Form({ setPageIndex, setDcfOutput, setTicker }) {
     const [inputs, setInputs] = useState({
@@ -357,7 +364,7 @@ function App() {
     const [pageIndex, setPageIndex] = useState<number>(0);
     const [ticker, setTicker] = useState<string>("");
     const [dcfOutput, setDcfOutput] = useState<any>(null);
-    const [selectedTable, setSelectedTable] = useState<"dcf" | "income" | "priceChart" | "modelInfo" | "model">("dcf");
+    const [selectedTable, setSelectedTable] = useState<"dcf" | "income" | "priceChart" | "modelInfo" | "model" | "bls">("dcf");
 
     const Pages = Object.freeze({
         Ticker_Enter_Page: 0,
@@ -392,6 +399,7 @@ function App() {
                             <button onClick={() => setSelectedTable("income")}>Income Statement</button>
                             <button onClick={() => setSelectedTable("model")}>Model</button>
                             <button onClick={() => setSelectedTable("dcf")}>DCF Table</button>
+                            <button onClick={() => setSelectedTable("bls")}>BLS Charts</button>
                             <button onClick={() => setSelectedTable("modelInfo")}>Models Info</button>
                         </div>
 
@@ -433,6 +441,10 @@ function App() {
                         ) : selectedTable === "model" ? (
                             <div>
                                     <FutureNetIncomeTable />
+                            </div>
+                        ) : selectedTable === "bls" ? (
+                            <div>
+                                    <BLSChart />
                             </div>
                         ) : (
                             <p>No data available</p>
