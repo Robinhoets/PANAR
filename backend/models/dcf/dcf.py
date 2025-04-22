@@ -10,11 +10,12 @@ from pipelines.risk_premiums import get_equity_risk_premium
 
 def coe(rf_rate, beta, equity_risk_premium):
     # Calculate the cost of equity using the Capital Asset Pricing Model (CAPM)
-    return beta * equity_risk_premium
+    return rf_rate + (beta * equity_risk_premium)
 
 def dcf_model(future_net_income, COE, PGR, shares_outstanding, market_price):
     #TODO: use formula to get from net income to fcf
     fcf = future_net_income
+    
     #print("Future Free Cash Flows:")
     #print(fcf)
     #print("Discount Rate (Cost of Equity):", COE*100, "%")
@@ -29,6 +30,9 @@ def dcf_model(future_net_income, COE, PGR, shares_outstanding, market_price):
     discount_fcf = fcf
     #print("Discounted Free Cash Flows:")
     #print(discount_fcf)
+    
+    #last year terminal value or avg of all quarters
+    '''
     if last_quarter < 0:
         terminal_value = 0
         pv_of_tv = 0
@@ -36,6 +40,16 @@ def dcf_model(future_net_income, COE, PGR, shares_outstanding, market_price):
         terminal_value = int(last_quarter * (1 + quarterly_PGR) / (quarterly_COE - quarterly_PGR))
         #print("Terminal value at", PGR*100, "% growth per year and discounting by", COE * 100, "% per year: ",terminal_value)
         pv_of_tv = int(terminal_value / (1 + quarterly_COE) ** (len(fcf.columns) + 1))
+    '''
+    if last_quarter < 0:
+        terminal_value = 0
+        pv_of_tv = 0
+    else:
+        terminal_value = int(fcf.mean(axis=1) * (1 + quarterly_PGR) / (quarterly_COE - quarterly_PGR))
+        pv_of_tv = int(terminal_value / (1 + quarterly_COE) ** (len(fcf.columns) + 1))  
+    if (terminal_value < 0):
+        terminal_value = 0
+        pv_of_tv = 0    
     #print("Present value of terminal value: ", pv_of_tv)
     pv_of_cf = int(discount_fcf.iloc[0].sum())
     if(pv_of_cf < 0):
@@ -53,9 +67,9 @@ def dcf_model(future_net_income, COE, PGR, shares_outstanding, market_price):
     dcf_dictionary = {
         "discount_rate": str(round(COE * 100, 2)) + "%",
         "perpetual_growth_rate": str(PGR * 100) + "%",
+        "present_value_of_cash_flows": "$" + str(int(pv_of_cf)),
         "terminal_value": "$"+ str(int(terminal_value)),
         "present_value_of_terminal_value": "$" + str(int(pv_of_tv)),
-        "present_value_of_cash_flows": "$" + str(int(pv_of_cf)),
         "present_value": "$" + str(int(presant_value)),
         "value_per_share": price_per_share,
         "market_price": market_price,
@@ -64,11 +78,7 @@ def dcf_model(future_net_income, COE, PGR, shares_outstanding, market_price):
     return dcf_dictionary
 
 def dcf(future_net_income, ticker):
-    print(get_equity_risk_premium())
-    print(get_beta(ticker))
-    print
-    COE = coe(get_risk_free_rate, get_beta(ticker), get_equity_risk_premium())
-    print("Cost of Equity (CAPM):", COE * 100, "%")
+    COE = coe(get_risk_free_rate(), get_beta(ticker), get_equity_risk_premium())
     shares_outstanding = get_shares_outstanding(ticker)
     market_price = get_market_price(ticker)
     #needs formulae

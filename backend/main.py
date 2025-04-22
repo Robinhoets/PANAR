@@ -10,7 +10,7 @@ from models.dcf.dcf import dcf
 from pipelines.bls.bls import get_bls_data, create_chart_data, label_mapping
 from fastapi.middleware.cors import CORSMiddleware
 import json
-from models.ML_models.helper import run_neural_network
+from models.ML_models.helper import *
 import pandas as pd
 
 app = FastAPI()
@@ -43,9 +43,9 @@ async def test(ticker: Ticker):
     company_income_statement = get_income_statement(current_ticker)
     global future_net_income
     if(model_selection == "1"):
-        future_net_income = run_neural_network(current_ticker)
+        future_net_income = run_linear_regresion(current_ticker)
     elif(model_selection == "2"):
-        future_net_income = run_neural_network(current_ticker)
+        future_net_income = run_gradient_boost(current_ticker)
     elif(model_selection == "3"):
         future_net_income = run_neural_network(current_ticker)
     else:
