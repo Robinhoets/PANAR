@@ -25,12 +25,11 @@ class gradientBoost:
         self.dValidate = None
         self.input_x = None
         self.input_y = None
-        self.last_quarter = None
+        self.last_quarter = "2024Q4"
         self.parameter_num = None
         
     def train(self, all_data):      
         dataFrame = pd.read_csv(all_data)
-        self.last_quarter = dataFrame.iloc[-1]["YearAndQuarter"]
 
         #Create new year column for encoding
         dataFrame["year_ord"] = dataFrame["YearAndQuarter"].astype(str).str[:4]
