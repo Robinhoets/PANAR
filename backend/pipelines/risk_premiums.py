@@ -31,5 +31,5 @@ def get_equity_risk_premium():
         print("United States data not found in the dataset.")
     return equity_risk_premium
     '''
-    return 0.0547  # Placeholder value for the equity risk premium
+    return 0.0433  # Placeholder value for the equity risk premium
 

@@ -617,8 +617,8 @@ tickerDf = getCIKs()
 
 
 
-statement = get_income_statement("MA")
-print(statement)
+#statement = get_income_statement("MA")
+#print(statement)
 
 #ticker_csv_to_statements()
 
