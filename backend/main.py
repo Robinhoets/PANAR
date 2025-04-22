@@ -35,7 +35,6 @@ async def test(ticker: Ticker):
     current_ticker = ticker.tick
     model_selection = ticker.model
     model_selection = model_selection[-1]
-    print(model_selection)
     #global bea_data
     #bea_data = get_bea_data()
     #global bls_data
@@ -49,9 +48,8 @@ async def test(ticker: Ticker):
         future_net_income = run_neural_network(current_ticker)
     elif(model_selection == "3"):
         future_net_income = run_neural_network(current_ticker)
-    #future_net_income = run_neural_network(current_ticker)
-    #future_net_income.to_csv("data/future_net_income.csv")
-    future_net_income = pd.read_csv("data/future_net_income.csv")
+    else:
+        future_net_income = pd.read_csv("data/test_future_net_income.csv")
     global dcf_model_output
     dcf_model_output = dcf(future_net_income, current_ticker)
     return dcf_model_output

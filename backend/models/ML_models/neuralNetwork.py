@@ -1,7 +1,7 @@
 import tensorflow
 from tensorflow.keras.models import Sequential, load_model
 from tensorflow.keras.layers import LSTM, Dense, BatchNormalization
-from tensorflow.keras.optimizers import RMSprop
+from tensorflow.keras.optimizers import RMSprop, Adam
 #MAY NEED TO CHANGE DEPENDENCIES FROM KERAS._TF_KERAS TO TENSORFLOW FOR RUNNING APP
 #from keras._tf_keras.keras.models import Sequential, load_model
 #from keras._tf_keras.keras.layers import LSTM, Dense, BatchNormalization

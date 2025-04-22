@@ -64,7 +64,11 @@ def dcf_model(future_net_income, COE, PGR, shares_outstanding, market_price):
     return dcf_dictionary
 
 def dcf(future_net_income, ticker):
+    print(get_equity_risk_premium())
+    print(get_beta(ticker))
+    print
     COE = coe(get_risk_free_rate, get_beta(ticker), get_equity_risk_premium())
+    print("Cost of Equity (CAPM):", COE * 100, "%")
     shares_outstanding = get_shares_outstanding(ticker)
     market_price = get_market_price(ticker)
     #needs formulae
