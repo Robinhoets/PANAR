@@ -6,8 +6,11 @@ Model - Machine learning models create cash flow estimates for DCF model. DCF mo
 Frontend - Frontend will recieve jsons from server and display to user. Occasionally send back json containing user input
 
 
-Version Control Instructions:
+Run:
 
--Commit all working changes to dev when ready
+Frontend - npm install; npm run dev
 
--Dev will be occasionally merged with main 
+Backend - python -m venv panar_env;uvicorn main:app
+
+
+
